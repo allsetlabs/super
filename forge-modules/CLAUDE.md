@@ -1,6 +1,6 @@
 # Forge Modules
 
-Projects in this directory share the `forge` component library.
+All projects here use the `forge` component library (`@allsetlabs/reusable`).
 
 ## Component Library (`forge-modules/forge`)
 
@@ -10,7 +10,7 @@ Projects in this directory share the `forge` component library.
 
 ## Using Components
 
-All projects reference the library as `file:../forge` (or `file:../../forge` for nested packages like `seekr/web`).
+Reference as `file:../forge` in package.json (or `file:../../forge` for nested packages like `seekr/web`, `namma/web`, `why/web`).
 
 Edits to `forge-modules/forge/src/` are immediately live in all projects — no publishing needed.
 
@@ -33,3 +33,7 @@ tsconfig.json path alias for IDE support:
 | `seekr/` | allsetlabs/seekr | Vite + React + Python FastAPI |
 | `meme-vault/` | allsetlabs/meme-vault | Next.js |
 | `tn-crime/` | allsetlabs/tn-crime-analytics | Vite + React |
+| `namma/` | allsetlabs/namma-tvk | Vite + React (web + mobile + backend) |
+| `why/` | allsetlabs/why-tvk | Vite + React |
+| `manifesto/` | allsetlabs/tvk-manifesto | Astro + React |
+| `2026/` | allsetlabs/tvk-2026 | Vite + React |

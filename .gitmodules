@@ -46,3 +46,15 @@
 [submodule "forge-modules/tn-crime"]
 	path = forge-modules/tn-crime
 	url = https://github.com/allsetlabs/tn-crime-analytics.git
+[submodule "forge-modules/namma"]
+	path = forge-modules/namma
+	url = https://github.com/allsetlabs/namma-tvk.git
+[submodule "forge-modules/why"]
+	path = forge-modules/why
+	url = https://github.com/allsetlabs/why-tvk.git
+[submodule "forge-modules/manifesto"]
+	path = forge-modules/manifesto
+	url = https://github.com/allsetlabs/tvk-manifesto.git
+[submodule "forge-modules/2026"]
+	path = forge-modules/2026
+	url = https://github.com/allsetlabs/tvk-2026.git
