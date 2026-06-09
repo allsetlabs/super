@@ -31,6 +31,3 @@
 [submodule "tools/vscode-mkt"]
 	path = tools/vscode-mkt
 	url = https://github.com/allsetlabs/vscode-private-marketplace.git
-[submodule "content/cushionday"]
-	path = content/cushionday
-	url = https://github.com/allsetlabs/cushionday.git
