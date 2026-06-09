@@ -1,0 +1,36 @@
+[submodule "allset/ui"]
+	path = allset/ui
+	url = https://github.com/allsetlabs/component.git
+[submodule "allset/devbot"]
+	path = allset/devbot
+	url = https://github.com/allsetlabs/devbot.git
+[submodule "allset/portfolio"]
+	path = allset/portfolio
+	url = https://github.com/allsetlabs/portfolio.git
+[submodule "allset/seekr"]
+	path = allset/seekr
+	url = https://github.com/allsetlabs/seekr.git
+[submodule "allset/meme-vault"]
+	path = allset/meme-vault
+	url = https://github.com/allsetlabs/meme-vault.git
+[submodule "allset/tn-crime"]
+	path = allset/tn-crime
+	url = https://github.com/allsetlabs/tn-crime-analytics.git
+[submodule "tvk/namma"]
+	path = tvk/namma
+	url = https://github.com/allsetlabs/namma-tvk.git
+[submodule "tvk/why"]
+	path = tvk/why
+	url = https://github.com/allsetlabs/why-tvk.git
+[submodule "tvk/manifesto"]
+	path = tvk/manifesto
+	url = https://github.com/allsetlabs/tvk-manifesto.git
+[submodule "tvk/2026"]
+	path = tvk/2026
+	url = https://github.com/allsetlabs/tvk-2026.git
+[submodule "tools/vscode-mkt"]
+	path = tools/vscode-mkt
+	url = https://github.com/allsetlabs/vscode-private-marketplace.git
+[submodule "content/cushionday"]
+	path = content/cushionday
+	url = https://github.com/allsetlabs/cushionday.git
