@@ -1,38 +1,103 @@
 # Forge Modules
 
-All projects here use the `forge` component library (`@allsetlabs/reusable`).
+All projects here use the `forge` component library (`@allsetlabs/reusable`). This is enforced — no raw HTML elements, no third-party component libs.
 
 ## Grouping Rule
 
-**Always group related projects into a subcategory folder.** Flat entries are only for standalone projects with no siblings.
+Group related projects in subcategories. Flat = standalone only.  
+Current group: `tvk/` (TVK political sites).
 
-Current groups:
-- `tvk/` — TVK political/campaign sites
+---
 
-When adding a new project, ask: does it belong to an existing group, or does it form a new group with another module? If yes, create or use the subcategory.
+## Using Forge Components
 
-## Component Library (`forge-modules/forge`)
+**Docs:** `forge-modules/forge/how_to_use_this_library.md`  
+**Styles & colors:** `forge-modules/forge/src/styles/styles.md`  
+**Storybook:** `cd forge-modules/forge && make start`
 
-- Source: `forge-modules/forge/src/components/`
-- Storybook: `cd forge-modules/forge && npm run storybook`
-- Docs: `forge-modules/forge/how_to_use_this_library.md` and `forge-modules/forge/docs/`
-
-## Using Components
-
-Reference as `file:../forge` (flat), `file:../../forge` (one group deep), or `file:../../../forge` (nested package inside a group).
-
-Edits to `forge-modules/forge/src/` are immediately live — no publishing needed.
+### Installing the dep
 
 ```json
 "@allsetlabs/reusable": "file:../forge"
 ```
 
-tsconfig.json path alias:
+Adjust depth:
+- Flat project (`forge-modules/myapp`): `file:../forge`
+- Group project (`forge-modules/tvk/myapp`): `file:../../forge`
+- Nested package inside project (`forge-modules/myapp/web`): `file:../../forge`
+
+tsconfig.json path alias for IDE:
 ```json
-"@allsetlabs/reusable/*": ["../forge/src/*"]
+"baseUrl": ".",
+"paths": { "@allsetlabs/reusable/*": ["../forge/src/*"] }
 ```
 
-Adjust `../` depth to match your position relative to `forge-modules/`.
+### Importing components
+
+```tsx
+import { Button, Input, Card } from '@allsetlabs/reusable';
+```
+
+---
+
+## Strict Forge Rules
+
+### 1. Always use forge — never raw elements
+
+```tsx
+// BAD
+<button className="bg-blue-500 text-white px-4 py-2">Save</button>
+
+// GOOD
+import { Button } from '@allsetlabs/reusable';
+<Button variant="primary">Save</Button>
+```
+
+### 2. Need a component that doesn't exist? Create it in forge first
+
+```bash
+cd forge-modules/forge
+# Add component to src/components/
+# Export from src/index.ts
+```
+
+Then use it from `@allsetlabs/reusable`. This way all modules share it.
+
+### 3. Editing an existing forge component — isolation check
+
+**Before changing a forge component, ask:**
+
+> Which modules currently use this component?
+
+```bash
+grep -r "from '@allsetlabs/reusable'" forge-modules/ --include="*.tsx" -l
+```
+
+**Decision tree:**
+
+| Situation | Action |
+|-----------|--------|
+| Change is additive (new optional prop with a default) | Safe to edit — won't break existing usage |
+| Change alters existing behaviour / removes a prop | Create a NEW component or new variant instead |
+| Styling change affects all usages in an intentional way | Edit and confirm each affected module looks correct |
+| Only one module needs the change | Add an opt-in prop to isolate it |
+
+**Example — safe additive change:**
+```tsx
+// BEFORE
+function Button({ label }: { label: string }) { ... }
+
+// AFTER — adding optional prop with default = no breaking change
+function Button({ label, size = 'md' }: { label: string; size?: 'sm' | 'md' | 'lg' }) { ... }
+```
+
+**Example — isolating a breaking change:**
+```tsx
+// Instead of changing Button, create ButtonV2 or add a variant
+function Button({ label, variant = 'default', newBehavior = false }) { ... }
+```
+
+---
 
 ## Projects
 
