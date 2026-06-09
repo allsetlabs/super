@@ -27,9 +27,8 @@
 # Logs
 **/*.log
 
-# Job automation
-job-automation
-job_hunt
+# Storybook
+**/storybook-static
 
-# Grocery list
-modules/grosery-list
+# Astro build
+**/.astro
