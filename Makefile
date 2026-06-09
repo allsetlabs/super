@@ -68,7 +68,7 @@ help:
 	@echo "  make run-cs            - Run Component Storybook locally"
 	@echo "  make build-cs          - Build Component Storybook static site"
 	@echo ""
-	@echo "$(YELLOW)DevBot (run from allset/devbot/):$(NC)"
+	@echo "$(YELLOW)DevBot (run from forge-modules/devbot/):$(NC)"
 	@echo "  make install           - Install app + backend"
 	@echo "  make start             - Start all services in tmux"
 	@echo "  make stop              - Stop all services"
@@ -324,12 +324,12 @@ setup-seekr-env:
 	@echo "$(BLUE)🔧 Configuring Seekr Environment Variables...$(NC)"
 	@echo ""
 	@# Check if .env exists and read existing values
-	@if [ -f allset/seekr/.env ]; then \
+	@if [ -f forge-modules/seekr/.env ]; then \
 		echo "$(YELLOW)Found existing .env file. Reading current values...$(NC)"; \
-		EXISTING_ANTHROPIC=$$(grep "^ANTHROPIC_API_KEY=" allset/seekr/.env 2>/dev/null | cut -d= -f2); \
-		EXISTING_OPENAI=$$(grep "^OPENAI_API_KEY=" allset/seekr/.env 2>/dev/null | cut -d= -f2 | tr -d '"'); \
-		EXISTING_GOOGLE=$$(grep "^GOOGLE_CLIENT_ID=" allset/seekr/.env 2>/dev/null | cut -d= -f2); \
-		EXISTING_JWT=$$(grep "^JWT_SECRET_KEY=" allset/seekr/.env 2>/dev/null | cut -d= -f2); \
+		EXISTING_ANTHROPIC=$$(grep "^ANTHROPIC_API_KEY=" forge-modules/seekr/.env 2>/dev/null | cut -d= -f2); \
+		EXISTING_OPENAI=$$(grep "^OPENAI_API_KEY=" forge-modules/seekr/.env 2>/dev/null | cut -d= -f2 | tr -d '"'); \
+		EXISTING_GOOGLE=$$(grep "^GOOGLE_CLIENT_ID=" forge-modules/seekr/.env 2>/dev/null | cut -d= -f2); \
+		EXISTING_JWT=$$(grep "^JWT_SECRET_KEY=" forge-modules/seekr/.env 2>/dev/null | cut -d= -f2); \
 	else \
 		echo "$(YELLOW)No existing .env file found.$(NC)"; \
 		EXISTING_ANTHROPIC=""; \
@@ -387,23 +387,23 @@ setup-seekr-env:
 	fi; \
 	echo ""; \
 	\
-	echo "$(YELLOW)Writing to allset/seekr/.env file...$(NC)"; \
-	cat > allset/seekr/.env << EOF$(echo) && \
-	echo "# API Keys" >> allset/seekr/.env && \
-	echo "ANTHROPIC_API_KEY=$$ANTHROPIC_KEY" >> allset/seekr/.env && \
-	echo "OPENAI_API_KEY=\"$$OPENAI_KEY\"" >> allset/seekr/.env && \
-	echo "" >> allset/seekr/.env && \
-	echo "# Google OAuth Configuration" >> allset/seekr/.env && \
-	echo "# Get your Client ID from: https://console.cloud.google.com/apis/credentials" >> allset/seekr/.env && \
-	echo "GOOGLE_CLIENT_ID=$$GOOGLE_CLIENT" >> allset/seekr/.env && \
-	echo "" >> allset/seekr/.env && \
-	echo "# JWT Secret Key (generate a random secure key)" >> allset/seekr/.env && \
-	echo "# You can generate one using: openssl rand -hex 32" >> allset/seekr/.env && \
-	echo "JWT_SECRET_KEY=$$JWT_SECRET" >> allset/seekr/.env && \
-	echo "" >> allset/seekr/.env && \
-	echo "# Frontend Configuration (used by web app)" >> allset/seekr/.env && \
-	echo "VITE_GOOGLE_CLIENT_ID=$$GOOGLE_CLIENT" >> allset/seekr/.env && \
-	echo "$(GREEN)✅ Environment file configured at allset/seekr/.env$(NC)"
+	echo "$(YELLOW)Writing to forge-modules/seekr/.env file...$(NC)"; \
+	cat > forge-modules/seekr/.env << EOF$(echo) && \
+	echo "# API Keys" >> forge-modules/seekr/.env && \
+	echo "ANTHROPIC_API_KEY=$$ANTHROPIC_KEY" >> forge-modules/seekr/.env && \
+	echo "OPENAI_API_KEY=\"$$OPENAI_KEY\"" >> forge-modules/seekr/.env && \
+	echo "" >> forge-modules/seekr/.env && \
+	echo "# Google OAuth Configuration" >> forge-modules/seekr/.env && \
+	echo "# Get your Client ID from: https://console.cloud.google.com/apis/credentials" >> forge-modules/seekr/.env && \
+	echo "GOOGLE_CLIENT_ID=$$GOOGLE_CLIENT" >> forge-modules/seekr/.env && \
+	echo "" >> forge-modules/seekr/.env && \
+	echo "# JWT Secret Key (generate a random secure key)" >> forge-modules/seekr/.env && \
+	echo "# You can generate one using: openssl rand -hex 32" >> forge-modules/seekr/.env && \
+	echo "JWT_SECRET_KEY=$$JWT_SECRET" >> forge-modules/seekr/.env && \
+	echo "" >> forge-modules/seekr/.env && \
+	echo "# Frontend Configuration (used by web app)" >> forge-modules/seekr/.env && \
+	echo "VITE_GOOGLE_CLIENT_ID=$$GOOGLE_CLIENT" >> forge-modules/seekr/.env && \
+	echo "$(GREEN)✅ Environment file configured at forge-modules/seekr/.env$(NC)"
 
 # Complete system setup for macOS
 setup-mac:
@@ -487,49 +487,49 @@ install:
 # Install component library
 install-c:
 	@echo "$(BLUE)📦 Installing component library...$(NC)"
-	cd allset/ui && npm install
+	cd forge-modules/forge && npm install
 	@echo "$(GREEN)✅ Component library ready!$(NC)"
 
 # Install portfolio
 install-p:
 	@echo "$(BLUE)📦 Installing portfolio...$(NC)"
-	cd allset/portfolio && npm install
+	cd forge-modules/portfolio && npm install
 	@echo "$(GREEN)✅ Portfolio ready!$(NC)"
 
 # Install meme-vault
 install-mv:
 	@echo "$(BLUE)📦 Installing meme-vault...$(NC)"
-	cd allset/meme-vault && npm install
+	cd forge-modules/meme-vault && npm install
 	@echo "$(GREEN)✅ Meme-sounds ready!$(NC)"
 
 # Install Seekr web
 install-sw:
 	@echo "$(BLUE)📦 Installing Seekr web...$(NC)"
-	cd allset/seekr/web && npm install
+	cd forge-modules/seekr/web && npm install
 	@echo "$(GREEN)✅ Seekr web ready!$(NC)"
 
 # Install Seekr extension
 install-se:
 	@echo "$(BLUE)📦 Installing Seekr extension...$(NC)"
-	cd allset/seekr/extension && npm install
+	cd forge-modules/seekr/extension && npm install
 	@echo "$(GREEN)✅ Seekr extension ready!$(NC)"
 
 # Install Seekr desktop
 install-sd:
 	@echo "$(BLUE)📦 Installing Seekr desktop...$(NC)"
-	cd allset/seekr/desktop && npm install
+	cd forge-modules/seekr/desktop && npm install
 	@echo "$(GREEN)✅ Seekr desktop ready!$(NC)"
 
 # Install Seekr mobile
 install-sm:
 	@echo "$(BLUE)📦 Installing Seekr mobile...$(NC)"
-	cd allset/seekr/mobile && npm install
+	cd forge-modules/seekr/mobile && npm install
 	@echo "$(GREEN)✅ Seekr mobile ready!$(NC)"
 
 # Install Seekr backend (Python)
 install-sb:
 	@echo "$(BLUE)🐍 Installing Seekr Backend (Python 3.12)...$(NC)"
-	cd allset/seekr/backend && \
+	cd forge-modules/seekr/backend && \
 	python3.12 -m venv venv && \
 	. venv/bin/activate && \
 	pip install --upgrade pip && \
@@ -542,7 +542,7 @@ install-sb:
 
 # Install DevBot (app + backend)
 install-d:
-	cd allset/devbot && $(MAKE) install
+	cd forge-modules/devbot && $(MAKE) install
 
 # ============================================================================
 # RUN COMMANDS (local, no tmux)
@@ -553,42 +553,42 @@ run-p:
 	@echo "$(YELLOW)Killing process on port $(PORTFOLIO_PORT)...$(NC)"
 	@npx kill-port $(PORTFOLIO_PORT) 2>/dev/null || true
 	@echo "$(GREEN)🚀 Starting Portfolio on port $(PORTFOLIO_PORT)...$(NC)"
-	cd allset/portfolio && npm start -- --port=$(PORTFOLIO_PORT)
+	cd forge-modules/portfolio && npm start -- --port=$(PORTFOLIO_PORT)
 
 # Run meme-vault locally
 run-mv:
 	@echo "$(YELLOW)Killing process on port $(MEME_VAULT_PORT)...$(NC)"
 	@npx kill-port $(MEME_VAULT_PORT) 2>/dev/null || true
 	@echo "$(GREEN)🚀 Starting Meme-Sounds on port $(MEME_VAULT_PORT)...$(NC)"
-	cd allset/meme-vault && npm start -- --port=$(MEME_VAULT_PORT)
+	cd forge-modules/meme-vault && npm start -- --port=$(MEME_VAULT_PORT)
 
 # Run Seekr web locally
 run-sw:
 	@echo "$(YELLOW)Killing process on port $(SEEKR_WEB_PORT)...$(NC)"
 	@npx kill-port $(SEEKR_WEB_PORT) 2>/dev/null || true
 	@echo "$(GREEN)🚀 Starting Seekr Web on port $(SEEKR_WEB_PORT)...$(NC)"
-	cd allset/seekr/web && VITE_API_BASE_URL=$(API_BASE_URL) npm start -- --port=$(SEEKR_WEB_PORT)
+	cd forge-modules/seekr/web && VITE_API_BASE_URL=$(API_BASE_URL) npm start -- --port=$(SEEKR_WEB_PORT)
 
 # Run Seekr extension locally
 run-se:
 	@echo "$(YELLOW)Killing process on port $(SEEKR_EXTENSION_PORT)...$(NC)"
 	@npx kill-port $(SEEKR_EXTENSION_PORT) 2>/dev/null || true
 	@echo "$(GREEN)🚀 Starting Seekr Extension on port $(SEEKR_EXTENSION_PORT)...$(NC)"
-	cd allset/seekr/extension && npm run dev
+	cd forge-modules/seekr/extension && npm run dev
 
 # Run Seekr desktop locally
 run-sd:
 	@echo "$(YELLOW)Killing process on port $(SEEKR_DESKTOP_PORT)...$(NC)"
 	@npx kill-port $(SEEKR_DESKTOP_PORT) 2>/dev/null || true
 	@echo "$(GREEN)🚀 Starting Seekr Desktop on port $(SEEKR_DESKTOP_PORT)...$(NC)"
-	cd allset/seekr/desktop && npm run dev -- --port=$(SEEKR_DESKTOP_PORT)
+	cd forge-modules/seekr/desktop && npm run dev -- --port=$(SEEKR_DESKTOP_PORT)
 
 # Run Seekr mobile locally
 run-sm:
 	@echo "$(YELLOW)Killing process on port $(SEEKR_MOBILE_PORT)...$(NC)"
 	@npx kill-port $(SEEKR_MOBILE_PORT) 2>/dev/null || true
 	@echo "$(GREEN)🚀 Starting Seekr Mobile on port $(SEEKR_MOBILE_PORT)...$(NC)"
-	cd allset/seekr/mobile && npm run dev -- --port=$(SEEKR_MOBILE_PORT)
+	cd forge-modules/seekr/mobile && npm run dev -- --port=$(SEEKR_MOBILE_PORT)
 
 # Start PostgreSQL and create database if needed
 run-sdb:
@@ -623,7 +623,7 @@ run-sb:
 	@echo "$(GREEN)🚀 Starting Seekr Backend on port $(BACKEND_PORT)...$(NC)"
 	@echo "$(GREEN)🎯 Server: http://localhost:$(BACKEND_PORT)$(NC)"
 	@echo "$(GREEN)📚 API Docs: http://localhost:$(BACKEND_PORT)/docs$(NC)"
-	@cd allset/seekr/backend && \
+	@cd forge-modules/seekr/backend && \
 		. venv/bin/activate && \
 		DATABASE_URL=$(DATABASE_URL) \
 		BACKEND_HOST=$(BACKEND_HOST) \
@@ -637,13 +637,13 @@ run-cs:
 	@echo "$(YELLOW)Killing process on port $(STORYBOOK_PORT)...$(NC)"
 	@npx kill-port $(STORYBOOK_PORT) 2>/dev/null || true
 	@echo "$(GREEN)🚀 Starting Component Storybook on port $(STORYBOOK_PORT)...$(NC)"
-	cd allset/ui && npm run storybook
+	cd forge-modules/forge && npm run storybook
 
 # Build Component Storybook static site
 build-cs:
 	@echo "$(GREEN)🏗️  Building Component Storybook...$(NC)"
-	cd allset/ui && npm run build-storybook
-	@echo "$(GREEN)✅ Storybook built to allset/ui/storybook-static/$(NC)"
+	cd forge-modules/forge && npm run build-storybook
+	@echo "$(GREEN)✅ Storybook built to forge-modules/forge/storybook-static/$(NC)"
 
 
 # ============================================================================
@@ -751,17 +751,17 @@ remove-claude:
 # Clean all node_modules and Python venv
 clean:
 	@echo "$(YELLOW)🧹 Cleaning all node_modules and package-lock.json...$(NC)"
-	rm -rf allset/ui/node_modules allset/ui/package-lock.json
-	rm -rf allset/portfolio/node_modules allset/portfolio/package-lock.json
-	rm -rf allset/meme-vault/node_modules allset/meme-vault/package-lock.json
-	rm -rf allset/seekr/extension/node_modules allset/seekr/extension/package-lock.json
-	rm -rf allset/seekr/web/node_modules allset/seekr/web/package-lock.json
-	rm -rf allset/seekr/desktop/node_modules allset/seekr/desktop/package-lock.json
-	rm -rf allset/seekr/mobile/node_modules allset/seekr/mobile/package-lock.json
-	rm -rf allset/devbot/app/node_modules allset/devbot/app/package-lock.json
-	rm -rf allset/devbot/backend/node_modules allset/devbot/backend/package-lock.json
+	rm -rf forge-modules/forge/node_modules forge-modules/forge/package-lock.json
+	rm -rf forge-modules/portfolio/node_modules forge-modules/portfolio/package-lock.json
+	rm -rf forge-modules/meme-vault/node_modules forge-modules/meme-vault/package-lock.json
+	rm -rf forge-modules/seekr/extension/node_modules forge-modules/seekr/extension/package-lock.json
+	rm -rf forge-modules/seekr/web/node_modules forge-modules/seekr/web/package-lock.json
+	rm -rf forge-modules/seekr/desktop/node_modules forge-modules/seekr/desktop/package-lock.json
+	rm -rf forge-modules/seekr/mobile/node_modules forge-modules/seekr/mobile/package-lock.json
+	rm -rf forge-modules/devbot/app/node_modules forge-modules/devbot/app/package-lock.json
+	rm -rf forge-modules/devbot/backend/node_modules forge-modules/devbot/backend/package-lock.json
 	@echo "$(YELLOW)🧹 Cleaning Python venv...$(NC)"
-	rm -rf allset/seekr/backend/venv
+	rm -rf forge-modules/seekr/backend/venv
 	@echo "$(GREEN)✅ Cleanup complete!$(NC)"
 
 # Remove ALL system dependencies (Homebrew, nvm, Node, Python, PostgreSQL, tmux, .zshrc)
@@ -775,7 +775,7 @@ unsetup-mac:
 	@echo "  • Homebrew and ALL Homebrew packages (Git, Python 3.12, PostgreSQL, tmux)"
 	@echo "  • nvm and all Node.js versions"
 	@echo "  • .zshrc file (will be cleared completely)"
-	@echo "  • Seekr environment configuration (allset/seekr/.env)"
+	@echo "  • Seekr environment configuration (forge-modules/seekr/.env)"
 	@echo "  • All cache directories"
 	@echo ""
 	@echo "$(YELLOW)🗑️  Cleaning project dependencies...$(NC)"
@@ -828,7 +828,7 @@ unsetup-mac:
 	@echo "$(GREEN)✅ tmux config removed$(NC)"
 	@echo ""
 	@echo "$(YELLOW)🗑️  Removing Seekr environment file...$(NC)"
-	@rm -f allset/seekr/.env
+	@rm -f forge-modules/seekr/.env
 	@echo "$(GREEN)✅ Seekr .env file removed$(NC)"
 	@echo ""
 	@echo "$(YELLOW)🗑️  Cleaning cache directories...$(NC)"

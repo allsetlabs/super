@@ -12,17 +12,15 @@ Then navigate to that module directory before making any changes.
 
 | Path | Project |
 |------|---------|
-| `allset/ui` | `@allsetlabs/reusable` component library |
-| `allset/devbot` | DevBot personal assistant app |
-| `allset/portfolio` | Personal portfolio website |
-| `allset/seekr` | Seekr product suite |
-| `allset/meme-vault` | Meme creation platform |
-| `allset/tn-crime` | TN crime analytics dashboard |
+| `forge-modules/forge` | `forge` component library (`@allsetlabs/reusable`) |
+| `forge-modules/devbot` | DevBot personal assistant app |
+| `forge-modules/portfolio` | Personal portfolio website |
+| `forge-modules/seekr` | Seekr product suite |
+| `forge-modules/meme-vault` | Meme creation platform |
+| `forge-modules/tn-crime` | TN crime analytics dashboard |
 | `tvk/namma` | Namma TVK website |
 | `tvk/why` | Why TVK website |
 | `tvk/manifesto` | TVK manifesto site |
 | `tvk/2026` | TVK 2026 campaign site |
-| `tools/vscode-mkt` | Self-hosted VS Code extension marketplace |
-| `content/cushionday` | Cushion Day brand content |
 
 See `README.md` for descriptions of each module.

@@ -2,16 +2,16 @@
 
 All projects as git submodules. No code lives here.
 
-## allset/ — Component-based projects
+## forge-modules/ — Forge component-based projects
 
 | Module | Description |
 |--------|-------------|
-| [allset/ui](allset/ui) | Shared React component library (`@allsetlabs/reusable`) — used by all allset projects |
-| [allset/devbot](allset/devbot) | Personal assistant mobile app; Claude Code terminal proxy via xterm.js + tmux |
-| [allset/portfolio](allset/portfolio) | Personal portfolio website |
-| [allset/seekr](allset/seekr) | Seekr product suite — web, Chrome extension, Electron desktop, mobile, Python backend |
-| [allset/meme-vault](allset/meme-vault) | Meme creation and distribution platform (Next.js) |
-| [allset/tn-crime](allset/tn-crime) | Tamil Nadu crime analytics dashboard |
+| [forge-modules/forge](forge-modules/forge) | `forge` — shared React component library (`@allsetlabs/reusable`), used by all forge-modules projects |
+| [forge-modules/devbot](forge-modules/devbot) | DevBot personal assistant app; Claude Code terminal proxy via xterm.js + tmux |
+| [forge-modules/portfolio](forge-modules/portfolio) | Personal portfolio website |
+| [forge-modules/seekr](forge-modules/seekr) | Seekr product suite — web, Chrome extension, Electron desktop, mobile, Python backend |
+| [forge-modules/meme-vault](forge-modules/meme-vault) | Meme creation and distribution platform (Next.js) |
+| [forge-modules/tn-crime](forge-modules/tn-crime) | Tamil Nadu crime analytics dashboard |
 
 ## tvk/ — TVK political projects
 
@@ -21,18 +21,6 @@ All projects as git submodules. No code lives here.
 | [tvk/why](tvk/why) | Why TVK — informational website |
 | [tvk/manifesto](tvk/manifesto) | TVK manifesto site (Astro) |
 | [tvk/2026](tvk/2026) | TVK 2026 election campaign site |
-
-## tools/ — Standalone tools
-
-| Module | Description |
-|--------|-------------|
-| [tools/vscode-mkt](tools/vscode-mkt) | Self-hosted VS Code extension marketplace (Docker + Caddy + Kubernetes) |
-
-## content/ — Content & media
-
-| Module | Description |
-|--------|-------------|
-| [content/cushionday](content/cushionday) | Cushion Day brand knowledge base — Norwegian home décor DTC brand |
 
 ## Setup
 

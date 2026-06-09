@@ -1,20 +1,20 @@
-[submodule "allset/ui"]
-	path = allset/ui
+[submodule "reusable-mods/reusable"]
+	path = reusable-mods/reusable
 	url = https://github.com/allsetlabs/component.git
-[submodule "allset/devbot"]
-	path = allset/devbot
+[submodule "reusable-mods/devbot"]
+	path = reusable-mods/devbot
 	url = https://github.com/allsetlabs/devbot.git
-[submodule "allset/portfolio"]
-	path = allset/portfolio
+[submodule "reusable-mods/portfolio"]
+	path = reusable-mods/portfolio
 	url = https://github.com/allsetlabs/portfolio.git
-[submodule "allset/seekr"]
-	path = allset/seekr
+[submodule "reusable-mods/seekr"]
+	path = reusable-mods/seekr
 	url = https://github.com/allsetlabs/seekr.git
-[submodule "allset/meme-vault"]
-	path = allset/meme-vault
+[submodule "reusable-mods/meme-vault"]
+	path = reusable-mods/meme-vault
 	url = https://github.com/allsetlabs/meme-vault.git
-[submodule "allset/tn-crime"]
-	path = allset/tn-crime
+[submodule "reusable-mods/tn-crime"]
+	path = reusable-mods/tn-crime
 	url = https://github.com/allsetlabs/tn-crime-analytics.git
 [submodule "tvk/namma"]
 	path = tvk/namma
@@ -28,6 +28,21 @@
 [submodule "tvk/2026"]
 	path = tvk/2026
 	url = https://github.com/allsetlabs/tvk-2026.git
-[submodule "tools/vscode-mkt"]
-	path = tools/vscode-mkt
-	url = https://github.com/allsetlabs/vscode-private-marketplace.git
+[submodule "forge-modules/forge"]
+	path = forge-modules/forge
+	url = https://github.com/allsetlabs/component.git
+[submodule "forge-modules/devbot"]
+	path = forge-modules/devbot
+	url = https://github.com/allsetlabs/devbot.git
+[submodule "forge-modules/portfolio"]
+	path = forge-modules/portfolio
+	url = https://github.com/allsetlabs/portfolio.git
+[submodule "forge-modules/seekr"]
+	path = forge-modules/seekr
+	url = https://github.com/allsetlabs/seekr.git
+[submodule "forge-modules/meme-vault"]
+	path = forge-modules/meme-vault
+	url = https://github.com/allsetlabs/meme-vault.git
+[submodule "forge-modules/tn-crime"]
+	path = forge-modules/tn-crime
+	url = https://github.com/allsetlabs/tn-crime-analytics.git
