@@ -70,7 +70,7 @@ Only Claude-mechanics-dependent commands remain here; everything else was migrat
 | `/orchestrate`   | Feature development workflow (analysis → plan → execute) |
 | `/cleanup-tasks` | Archive or remove old task directories                   |
 
-Former commands now living in `.agents/skills/`: architect, code-duplication-analysis, db-upgrade, dedup, delete-meme, discover-skills, docker-clean, fix-auto-fixable-standards, fix-coding-standards, product-ideas, sync-api, sync-coding-standards, sync-docs, tailor-resume, update-component-docs.
+Former commands now living in `.agents/skills/`: architect, db-upgrade, dedup (includes `--report` mode, absorbed code-duplication-analysis), discover-skills, docker-clean, fix-auto-fixable-standards, fix-coding-standards, product-ideas, sync-api, sync-coding-standards, sync-docs, tailor-resume. Module-specific ones moved into their module skill: delete-meme → meme-vault, update-component-docs → forge.
 
 ## Skills
 

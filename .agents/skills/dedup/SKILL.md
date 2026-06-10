@@ -1,12 +1,12 @@
 ---
 name: dedup
-description: Analyze code for duplicacy, create reusable utils, and refactor files to reduce duplication
+description: Analyze code for duplication and reuse opportunities, create reusable utils, and refactor files to reduce duplication. Use --report for an all-modules analysis report without making changes.
 model: opus
 ---
 
 # Dedup - Code Deduplication Command
 
-Analyze source files for duplicate code patterns, extract reusable utilities, and refactor files to use them.
+Analyze source files for duplicate code patterns, extract reusable utilities, and refactor files to use them. With `--report`, scan all modules and produce a prioritized reuse report without changing anything.
 
 ## CRITICAL RULES
 
@@ -25,9 +25,9 @@ Analyze source files for duplicate code patterns, extract reusable utilities, an
 ### If module is specified in arguments:
 
 ```
-/dedup devbot/app        -> $MODULE = "modules/devbot/app"
-/dedup seekr/web             -> $MODULE = "modules/seekr/web"
-/dedup component             -> $MODULE = "modules/component"
+/dedup devbot/app        -> $MODULE = "forge-modules/devbot/app"
+/dedup seekr/web             -> $MODULE = "forge-modules/seekr/web"
+/dedup component             -> $MODULE = "forge-modules/forge"
 ```
 
 Set `$MODULE` and skip to Phase 1.
@@ -38,7 +38,7 @@ Use AskUserQuestion: "Which module should I analyze for duplicate code?"
 
 ```bash
 # Show available modules
-find ./modules -maxdepth 3 -type f \( -name "package.json" -o -name "pyproject.toml" \) | xargs -I {} dirname {} | sort -u
+find ./forge-modules -maxdepth 3 -type f \( -name "package.json" -o -name "pyproject.toml" \) | xargs -I {} dirname {} | sort -u
 ```
 
 ---
@@ -49,7 +49,7 @@ Scan the module's source directory for analyzable files.
 
 ```bash
 # Find all TypeScript/JavaScript source files (exclude node_modules, dist, tests, stories)
-Glob: "modules/$MODULE/src/**/*.{ts,tsx,js,jsx}" (exclude node_modules, dist, .test., .spec., .stories.)
+Glob: "forge-modules/$MODULE/src/**/*.{ts,tsx,js,jsx}" (exclude node_modules, dist, .test., .spec., .stories.)
 ```
 
 Group files by type:
@@ -248,10 +248,10 @@ For each file that contained duplicates:
 
 ```bash
 # Lint check
-cd modules/$MODULE && npm run lint 2>&1 | tail -20
+cd forge-modules/$MODULE && npm run lint 2>&1 | tail -20
 
 # Type check
-cd modules/$MODULE && npm run type-check 2>&1 | tail -20
+cd forge-modules/$MODULE && npm run type-check 2>&1 | tail -20
 ```
 
 ### 6.2 Fix Issues
@@ -315,7 +315,57 @@ Output final report:
 /dedup devbot/app --types-only       # Only find duplicate type definitions
 /dedup devbot/app --hooks-only       # Only find duplicate hook patterns
 /dedup devbot/app --utils-only       # Only find duplicate utility functions
+/dedup --report                      # All-modules analysis report, NO changes
 ```
+
+---
+
+## Report Mode (`--report`)
+
+Scan **every workspace** (not just one module) and output a prioritized report instead of refactoring. Run Phases 1–2 per workspace, then score and report — skip Phases 3–7.
+
+### Scoring
+
+For each duplicated pattern found:
+
+1. **Similarity score** — percentage of structural overlap (0–100%)
+2. **Impact** — estimated lines saved by extracting a shared abstraction
+3. **Effort** — estimated complexity of the refactor (low/medium/high)
+4. **Priority** — HIGH (>80% similar, >100 lines saved), MEDIUM (>60% similar, >50 lines saved), LOW (other)
+
+Also check cross-module patterns: identical helper functions or API-client setup duplicated across modules (candidates for the forge library or a shared package).
+
+### Report Format
+
+```
+## Code Duplication Analysis
+
+**Last analyzed:** YYYY-MM-DD
+
+### HIGH PRIORITY (Refactor Now)
+
+#### [Pattern Name] — [similarity]% similar, ~[lines] lines saved
+**Files:** [file:lines] — [function/pattern name]
+**Recommendation:** [What to create and where]
+**Example:** [code block]
+
+### MEDIUM PRIORITY (Refactor Soon)
+...
+
+### LOW PRIORITY (Consider Later)
+...
+
+### Established Patterns (Already Good)
+- [pattern]: [where it lives] — [how many files use it]
+
+### Anti-Patterns Detected
+- [anti-pattern]: [files affected] — [severity]
+
+### Architecture Insights
+- [observation about codebase structure]
+```
+
+Every recommendation must include a code example and concrete file:line references. Acknowledge patterns that are already well-extracted.
 
 ---
 
