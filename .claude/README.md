@@ -21,35 +21,22 @@ AI agent system for this monorepo. Agents are specialized for different modules 
 │   └── whole-prompt-analyzer.md   # Conversation analysis
 ├── commands/                  # Claude-only slash commands (orchestrate, cleanup-tasks)
 ├── skills/ → ../.agents/skills/   # Symlink — skills live in .agents/skills (cross-tool)
-│   ├── component-google-oauth-auth/  # Google OAuth authentication flow
+│   │
+│   │   # Module skills (one per module; SKILL.md indexes topic files)
+│   ├── devbot/                # backend.md, crud-patterns.md, worker-patterns.md, plugin-install.md, create-project.md
+│   ├── seekr/                 # Video/meme toolkit: download, caption, GIF, thumbnail, uploads, create-meme
+│   ├── meme-vault/            # delete-meme.md
+│   ├── forge/                 # Component/CSS standards + google-oauth.md, update-docs.md
+│   │
+│   │   # Generic skills (apply to every module)
+│   ├── coding-standards/      # Rules + clean-code guides (typescript, react, pagination, ios)
+│   ├── code-review-checklist/ # 120+ review checks
+│   ├── git-workflow/          # Branch protection, naming, commit standards
+│   ├── page-size-guard/       # 200-line component limit
 │   ├── context/               # Personal context (resume, work, family)
-│   ├── devbot-backend/        # DevBot backend API reference
-│   ├── devbot-commit/         # Git commit workflow
-│   ├── remotion-best-practices/  # Remotion video creation with React (symlink)
-│   ├── seekr-add-caption-to-video/  # Burn captions into video
-│   ├── seekr-create-meme/     # Complete meme pipeline (download → upload)
-│   ├── seekr-download-yt-video/  # Download YouTube videos
-│   ├── seekr-upload-github-meme-vault-clip/  # Upload clips to GitHub
-│   ├── seekr-upload-instagram-meme-vault-clip/  # Upload clips to Instagram
-│   ├── seekr-video-to-gif/    # Convert video to GIF
-│   ├── seekr-video-to-thumbnail/  # Extract thumbnail from video
-│   ├── deploy-to-vercel/     # Vercel deployment automation
-│   ├── devbot-backend-crud-patterns/  # CRUD route pattern enforcement
-│   ├── devbot-css-standards/  # CSS/component library enforcement
-│   ├── devbot-plugin-install/  # Plugin installation from GitHub/local
-│   ├── devbot-supabase-safety/  # Supabase query error checking
-│   ├── devbot-page-size-guard/  # 200-line component limit guard
-│   ├── devbot-worker-patterns/  # Claude CLI worker process patterns
-│   ├── devbot-capacitor-best-practices/  # Capacitor mobile best practices
-│   ├── devbot-code-review/  # Comprehensive code review checklist
-│   ├── tanstack-query-best-practices/  # TanStack Query patterns
-│   ├── tanstack-router-best-practices/  # TanStack Router patterns
-│   ├── tanstack-start-best-practices/  # TanStack Start patterns
-│   ├── tanstack-integration-best-practices/  # TanStack integration
-│   ├── vercel-composition-patterns/  # React composition patterns
-│   ├── vercel-react-best-practices/  # React/Next.js performance
-│   ├── vercel-react-native-skills/  # React Native/Expo best practices
-│   └── web-design-guidelines/  # Web Interface Guidelines compliance
+│   │
+│   │   # Downloaded skills (skills-lock.json — do not edit)
+│   └── deploy-to-vercel/, tanstack-*/, vercel-*/, web-design-guidelines/, remotion-best-practices/
 └── tasks/                     # Task execution workspace
 ```
 
@@ -92,26 +79,16 @@ Skills are auto-discovered by Claude and used when relevant. Unlike slash comman
 | Skill                                    | Description                                                           | Trigger                                  |
 | ---------------------------------------- | --------------------------------------------------------------------- | ---------------------------------------- |
 | `context`                                | Personal context (resume, work, family info)                          | Session needs user background info       |
-| `devbot-commit`                          | Git commit workflow with proper formatting                            | User wants to commit changes             |
-| `devbot-backend`                         | DevBot backend API reference for sessions, chats, uploads             | User needs to interact with DevBot APIs  |
-| `component-google-oauth-auth`            | Google OAuth authentication flow                                      | User needs Google OAuth login            |
+| `coding-standards`                       | Generic coding rules + clean-code guides (TS, React, pagination, iOS) | Writing or reviewing code anywhere       |
+| `git-workflow`                           | Git workflow: branch protection, naming, commit standards             | Any git operation                        |
+| `code-review-checklist`                  | 120+ checks across security, bugs, perf, TS, React, Node, DB          | Reviewing PRs or completing features     |
+| `page-size-guard`                        | Warns when pages/components exceed 200-line limit, guides extraction  | Editing pages/components in any module   |
+| `forge`                                  | Forge component/CSS standards + Google OAuth + component docs         | Editing .tsx files in any module         |
+| `devbot`                                 | DevBot module: backend API, CRUD/worker patterns, plugins, projects   | Working in forge-modules/devbot          |
+| `seekr`                                  | Seekr video/meme toolkit: download, caption, GIF, thumbnail, upload   | Any video processing or meme task        |
+| `meme-vault`                             | Meme Vault management (delete memes from Supabase/GitHub/Instagram)   | Working in forge-modules/meme-vault      |
 | `remotion-best-practices`                | Remotion video creation with React (animations, compositions, timing) | User is working with Remotion code       |
-| `seekr-create-meme`                      | Complete meme pipeline: download → caption → GIF → thumbnail → upload | User wants to create a meme from YouTube |
-| `seekr-download-yt-video`                | Download full videos or segments from YouTube                         | User wants to download YouTube video     |
-| `seekr-add-caption-to-video`             | Burn text captions into video files                                   | User wants to add captions to video      |
-| `seekr-video-to-gif`                     | Convert video to animated GIF                                         | User wants to convert video to GIF       |
-| `seekr-video-to-thumbnail`               | Extract thumbnail from video                                          | User wants thumbnail from video          |
-| `seekr-upload-github-meme-vault-clip`    | Upload clip assets to GitHub                                          | User wants to upload clip to GitHub      |
-| `seekr-upload-instagram-meme-vault-clip` | Upload video as Instagram Reel                                        | User wants to post to Instagram          |
 | `deploy-to-vercel`                       | Deploy applications and websites to Vercel                            | User requests deployment to Vercel       |
-| `devbot-backend-crud-patterns`           | Enforces consistent CRUD route patterns in DevBot backend             | Editing routes in devbot/backend         |
-| `devbot-css-standards`                   | Enforces no raw HTML, no default Tailwind colors, component lib usage | Editing .tsx files in devbot/app         |
-| `devbot-plugin-install`                  | Install DevBot plugins from GitHub URL or local path                  | User wants to install a DevBot plugin    |
-| `devbot-supabase-safety`                 | Enforces error checking on all Supabase .from() queries               | Editing .ts files in devbot/backend      |
-| `devbot-page-size-guard`                 | Warns when pages/components exceed 200-line limit, guides extraction  | Editing pages/components in devbot/app   |
-| `devbot-worker-patterns`                 | Enforces Claude CLI worker process patterns (spawn, parse, persist)   | Editing worker files in devbot/backend   |
-| `devbot-capacitor-best-practices`        | Capacitor mobile best practices (safe areas, keyboard, network)       | Editing files in devbot/app              |
-| `devbot-code-review`                     | 120+ checks across security, bugs, perf, TS, React, Node, Supabase    | Reviewing PRs or completing features     |
 | `tanstack-query-best-practices`          | TanStack Query caching, mutations, and server state patterns          | Building data-driven React apps          |
 | `tanstack-router-best-practices`         | Type-safe routing, data loading, search params                        | React apps with complex routing          |
 | `tanstack-start-best-practices`          | Full-stack React with server functions, SSR, middleware               | Full-stack TanStack Start apps           |
@@ -121,9 +98,9 @@ Skills are auto-discovered by Claude and used when relevant. Unlike slash comman
 | `vercel-react-native-skills`             | React Native/Expo best practices for performant mobile apps           | Building React Native components         |
 | `web-design-guidelines`                  | Review UI code for Web Interface Guidelines compliance                | UI review, accessibility audit           |
 
-### seekr-create-meme
+### seekr (create-meme pipeline)
 
-**Location:** `.claude/skills/seekr-create-meme/`
+**Location:** `.agents/skills/seekr/` (see `create-meme.md`)
 
 Complete meme creation pipeline from YouTube URL. All steps are mandatory:
 
@@ -147,7 +124,7 @@ Complete meme creation pipeline from YouTube URL. All steps are mandatory:
 **Run directly:**
 
 ```bash
-cd modules/meme-vault && npx tsx independent_node_skills/create-meme.ts \
+cd forge-modules/meme-vault && npx tsx independent_node_skills/create-meme.ts \
   --url "https://youtube.com/watch?v=xxx" --start 10 --stop 25 --caption "Ennada!"
 ```
 
@@ -168,16 +145,16 @@ cd my-video && npm install && npm run dev
 
 **Update:** `npx remotion skills update`
 
-### Individual Skills
+### seekr Topic Files
 
-Each skill in `.claude/skills/` has a `SKILL.md` file with usage instructions. Key skills:
+The `seekr` skill (`.agents/skills/seekr/`) indexes one topic file per task:
 
-- **seekr-download-yt-video**: Download YouTube videos with optional segment extraction
-- **seekr-add-caption-to-video**: Burn text captions into videos
-- **seekr-video-to-gif**: High-quality GIF conversion with palette optimization
-- **seekr-video-to-thumbnail**: Extract frame at specific timestamp
-- **seekr-upload-github-meme-vault-clip**: Upload to meme-vault GitHub repo
-- **seekr-upload-instagram-meme-vault-clip**: Post as Instagram Reel
+- **download-yt-video.md**: Download YouTube videos with optional segment extraction
+- **add-caption-to-video.md**: Burn text captions into videos
+- **video-to-gif.md**: High-quality GIF conversion with palette optimization
+- **video-to-thumbnail.md**: Extract frame at specific timestamp
+- **upload-github-meme-vault-clip.md**: Upload to meme-vault GitHub repo
+- **upload-instagram-meme-vault-clip.md**: Post as Instagram Reel
 
 **Dependencies:**
 

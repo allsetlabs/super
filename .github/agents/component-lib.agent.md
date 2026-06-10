@@ -66,7 +66,7 @@ description: ONLY for modules/component - the shared React component library. Ch
 **MUST RUN after ANY changes inside ./src:**
 
 ```bash
-/update-component-docs sync-changes
+use forge skill update-docs.md: sync-changes
 ```
 
 ### 3. Component API Consistency
@@ -365,7 +365,7 @@ export const Disabled: Story = {
 - [ ] Component has unit tests
 - [ ] All tests pass
 - [ ] No breaking changes to existing components
-- [ ] Documentation updated via `/update-component-docs sync-changes`
+- [ ] Documentation updated via the forge skill (update-docs.md) with `sync-changes`
 - [ ] Type checks pass
 - [ ] Lint passes
 

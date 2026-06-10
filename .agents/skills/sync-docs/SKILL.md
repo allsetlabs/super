@@ -14,7 +14,7 @@ Sync all documentation files with actual codebase structure.
 2. **Update `docs/`** - Sync all module documentation
 3. **Update `CLAUDE.md`** - Sync module structure and commands
 4. **Update `Makefile`** - Sync module commands with actual modules
-5. **Run `/update-component-docs resync`** - Sync component library docs
+5. **Run the forge skill `update-docs.md` (regenerate-all or sync-changes)** - Sync component library docs
 
 ## Execution
 
@@ -39,11 +39,11 @@ For each module doc file:
 | ----------------------------- | ------------------------------------------------------------------ |
 | `docs/doc-component.md`       | `ls modules/component/src/` + `cat modules/component/package.json` |
 | `docs/doc-portfolio.md`       | `ls modules/portfolio/src/`                                        |
-| `docs/doc-seekr-web.md`       | `ls modules/seekr/web/src/`                                        |
-| `docs/doc-seekr-extension.md` | `ls modules/seekr/extension/src/`                                  |
-| `docs/doc-seekr-desktop.md`   | `ls modules/seekr/desktop/src/`                                    |
-| `docs/doc-seekr-mobile.md`    | `ls modules/seekr/mobile/src/`                                     |
-| `docs/doc-seekr-backend.md`   | `ls modules/seekr/backend/`                                        |
+| `docs/doc-seekr-web.md`       | `ls forge-modules/seekr/web/src/`                                        |
+| `docs/doc-seekr-extension.md` | `ls forge-modules/seekr/extension/src/`                                  |
+| `docs/doc-seekr-desktop.md`   | `ls forge-modules/seekr/desktop/src/`                                    |
+| `docs/doc-seekr-mobile.md`    | `ls forge-modules/seekr/mobile/src/`                                     |
+| `docs/doc-seekr-backend.md`   | `ls forge-modules/seekr/backend/`                                        |
 
 - Read the doc file
 - Run the comparison commands
@@ -66,7 +66,7 @@ grep -E "^(install-|run-)[a-z]+:" Makefile
 
 ```bash
 ls modules/
-ls modules/seekr/
+ls forge-modules/seekr/
 grep -E "^(install-|run-)[a-z]+:" Makefile
 ```
 
@@ -74,7 +74,7 @@ grep -E "^(install-|run-)[a-z]+:" Makefile
 
 1. **Remove commands for non-existent modules:**
    - Extract all `install-*` and `run-*` targets from Makefile
-   - Check if corresponding module directory exists in `modules/` or `modules/seekr/`
+   - Check if corresponding module directory exists in `modules/` or `forge-modules/seekr/`
    - If module doesn't exist, remove the install and run targets
 
 2. **Add missing run commands:**
@@ -85,11 +85,11 @@ grep -E "^(install-|run-)[a-z]+:" Makefile
      | `modules/component` | `install-c` | (none - library only) |
      | `modules/portfolio` | `install-p` | `run-p` |
      | `modules/meme-vault` | `install-mv` | `run-mv` |
-     | `modules/seekr/web` | `install-sw` | `run-sw` |
-     | `modules/seekr/extension` | `install-se` | `run-se` |
-     | `modules/seekr/desktop` | `install-sd` | `run-sd` |
-     | `modules/seekr/mobile` | `install-sm` | `run-sm` |
-     | `modules/seekr/backend` | `install-sb` | `run-sb` |
+     | `forge-modules/seekr/web` | `install-sw` | `run-sw` |
+     | `forge-modules/seekr/extension` | `install-se` | `run-se` |
+     | `forge-modules/seekr/desktop` | `install-sd` | `run-sd` |
+     | `forge-modules/seekr/mobile` | `install-sm` | `run-sm` |
+     | `forge-modules/seekr/backend` | `install-sb` | `run-sb` |
    - If a module exists but its run command is missing, add the target
 
 3. **Update `start` target:**
@@ -101,7 +101,7 @@ grep -E "^(install-|run-)[a-z]+:" Makefile
 
 ### Step 5: Sync Component Library Docs
 
-Run: `/update-component-docs resync`
+Run the forge skill `update-docs.md` with `sync-changes`
 
 ### Step 6: Sync Storybook Stories
 

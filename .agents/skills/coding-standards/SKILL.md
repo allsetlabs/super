@@ -110,3 +110,16 @@ Fix lint errors automatically with `--fix`. Report remaining type errors.
 3. **Auto-fix everything possible** — fix every violation that can be fixed without ambiguity. Only report without fixing if the change could break functionality.
 4. **Count matters** — report total violation count per rule so severity is clear
 5. **Project-specific overrides win** — if the project's root `CLAUDE.md` or a project-local skill contradicts a rule here, follow the project.
+
+---
+
+## Detailed Clean Code Guides
+
+Load the guide matching the task:
+
+| Guide | File | When to load |
+|-------|------|--------------|
+| TypeScript clean code | [typescript.md](typescript.md) | Variables, functions, classes, SOLID, error handling, TS best practices |
+| React clean code | [react.md](react.md) | Component/hook patterns, API integration, state management, anti-patterns |
+| Pagination & filtering | [pagination.md](pagination.md) | Building any list view — pagination strategy, URL-param filters |
+| iOS patterns | [ios-patterns.md](ios-patterns.md) | iOS Safari / Capacitor WebView quirks (date/time pickers, etc.) |

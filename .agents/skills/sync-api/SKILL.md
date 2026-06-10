@@ -1,11 +1,11 @@
 ---
 name: sync-api
-description: Read all DevBot backend route files and update the devbot-backend skill to match the current API.
+description: Read all DevBot backend route files and update the devbot skill backend reference to match the current API.
 ---
 
 # Sync DevBot Backend API Skill
 
-Reads all backend route files and updates the `devbot-backend` skill to match the current API.
+Reads all backend route files and updates `.agents/skills/devbot/backend.md` to match the current API.
 
 ## Steps
 
@@ -25,7 +25,7 @@ Read every route file in `modules/devbot/backend/src/routes/` and extract:
 
 ### Step 2: Read current skill
 
-Read `.agents/skills/devbot-backend/skill.md`
+Read `.agents/skills/devbot/backend.md`
 
 ### Step 3: Compare and update
 
