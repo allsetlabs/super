@@ -2,6 +2,8 @@
 
 AI agent system for this monorepo. Agents are specialized for different modules and tasks.
 
+> This directory is the **Claude Code adapter**. Canonical instructions live in the root `AGENTS.md` (CLAUDE.md is a symlink), and all skills live in `.agents/skills/` so Codex, Copilot CLI, and Kimi CLI can use them too. Copilot mirrors of the subagents live in `.github/agents/` — when editing an agent here, update the mirror.
+
 ## Structure
 
 ```
@@ -17,8 +19,8 @@ AI agent system for this monorepo. Agents are specialized for different modules 
 │   ├── implementation-planner.md  # Task breakdown & planning
 │   ├── seekr-web-tester.md    # Browser testing with Playwright
 │   └── whole-prompt-analyzer.md   # Conversation analysis
-├── commands/                  # Slash commands (user-invoked)
-├── skills/                    # Skills (Claude auto-discovers and uses)
+├── commands/                  # Claude-only slash commands (orchestrate, cleanup-tasks)
+├── skills/ → ../.agents/skills/   # Symlink — skills live in .agents/skills (cross-tool)
 │   ├── component-google-oauth-auth/  # Google OAuth authentication flow
 │   ├── context/               # Personal context (resume, work, family)
 │   ├── devbot-backend/        # DevBot backend API reference
@@ -74,21 +76,14 @@ AI agent system for this monorepo. Agents are specialized for different modules 
 
 ## Slash Commands
 
-| Command                  | Description                                                                       |
-| ------------------------ | --------------------------------------------------------------------------------- |
-| `/architect`             | Create implementation plan for a feature                                          |
-| `/cleanup-tasks`         | Archive or remove old task directories                                            |
-| `/dedup`                 | Analyze code for duplicacy, create reusable utils, refactor to reduce duplication |
-| `/delete-meme`           | Delete a meme from Meme Vault (Supabase, GitHub, Instagram)                       |
-| `/discover-skills`       | Discover public Claude Code skills and improvements for code quality              |
-| `/db-upgrade`            | Apply pending Supabase migrations to DevBot DB without data loss                  |
-| `/docker-clean`          | Clean up Docker containers, images, volumes, and networks                         |
-| `/orchestrate`           | Feature development workflow (analysis → plan → execute)                          |
-| `/product-ideas`         | Analyze module, search web for improvements, save plans to Plans route            |
-| `/sync-api`              | Read backend routes and update devbot-backend skill to match current API          |
-| `/sync-docs`             | Deep analyze codebase and sync all documentation (CLAUDE.md, agents, commands)    |
-| `/tailor-resume`         | Generate tailored resume for job applications                                     |
-| `/update-component-docs` | Sync component library documentation after changes                                |
+Only Claude-mechanics-dependent commands remain here; everything else was migrated to `.agents/skills/` so all AI CLIs can run them (in Claude they're still invoked as `/name`).
+
+| Command          | Description                                              |
+| ---------------- | -------------------------------------------------------- |
+| `/orchestrate`   | Feature development workflow (analysis → plan → execute) |
+| `/cleanup-tasks` | Archive or remove old task directories                   |
+
+Former commands now living in `.agents/skills/`: architect, code-duplication-analysis, db-upgrade, dedup, delete-meme, discover-skills, docker-clean, fix-auto-fixable-standards, fix-coding-standards, product-ideas, sync-api, sync-coding-standards, sync-docs, tailor-resume, update-component-docs.
 
 ## Skills
 
