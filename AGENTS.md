@@ -13,7 +13,7 @@ If the user hasn't already said which project they're working on, ask. Navigate 
 ## Rules
 
 1. **Adding a module** — when the user asks to clone, add, or submodule a repo: **NEVER clone or copy code into this repo — always `git submodule add`.** Read `.agents/skills/super/how-to-organize-module.md` first to categorize and place it.
-   1. Once the module is added, onboard it: apply `.agents/skills/super/module-standards-to-follow.md`, then run the `super` skill operations `sync-api`, `sync-coding-standards`, and `sync-docs` scoped to that module.
+   1. Once the module is added, onboard it: apply `.agents/skills/super/module-standards-to-follow.md`, run `/fix-coding-standards` scoped to that module, then run the `super` skill operations `sync-api` and `sync-docs` scoped to it.
 2. **Before any git operation** (commit, push, branch, merge) — read and follow the `git-workflow` skill at `.agents/skills/git-workflow/SKILL.md`.
 3. **NEVER commit or push directly to `main`** — always work on a branch and open a PR.
 4. **Coding standards** — all rules live in `.agents/skills/coding-standards/`. Run `/fix-coding-standards` to auto-fix.

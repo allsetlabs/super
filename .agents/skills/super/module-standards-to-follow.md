@@ -1,6 +1,6 @@
 # module-standards-to-follow — What Every Module Must Have
 
-Apply this when onboarding a new module and when auditing existing ones (sync-coding-standards checks these too).
+Apply this when onboarding a new module and when auditing existing ones (the `/fix-auto-fixable-standards` command checks these too).
 
 ## Makefile with 3 targets
 

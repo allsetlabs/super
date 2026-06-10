@@ -1,6 +1,6 @@
 ---
 name: super
-description: Super-repo maintenance skill — organize/onboard git submodules, enforce module standards, and keep the super repo in sync with all modules. Operations, sync-docs (per-module docs under docs/), sync-api (AI-readable API reference for every module with a backend), sync-coding-standards (audit and auto-fix standards across all modules). Reference, how-to-organize-module (adding/categorizing submodules), module-standards-to-follow (what every module must have). Use when the user says "sync docs", "sync api", "sync coding standards", "add a module/submodule", "/super", or when running scheduled super-repo syncs.
+description: Super-repo maintenance skill — organize/onboard git submodules, enforce module standards, and keep the super repo in sync with all modules. Operations, sync-docs (per-module docs under docs/), sync-api (AI-readable API reference for every module with a backend). Reference, how-to-organize-module (adding/categorizing submodules), module-standards-to-follow (what every module must have). Use when the user says "sync docs", "sync api", "add a module/submodule", "/super", or when running scheduled super-repo syncs.
 model: opus
 ---
 
@@ -8,7 +8,7 @@ model: opus
 
 Keeps the super repo and its modules organized and in sync.
 
-**Invoked with no operation?** Ask the user which one to run (AskUserQuestion) with options: `sync-api`, `sync-coding-standards`, `sync-docs`, `all`. Do not guess. Only when running unattended (scheduled, no user to ask) does a bare invocation mean `all`. `all` runs the three in this order: **sync-coding-standards → sync-api → sync-docs** (docs last so they describe the fixed code).
+**Invoked with no operation?** Ask the user which one to run (AskUserQuestion) with options: `sync-api`, `sync-docs`, `all`. Do not guess. Only when running unattended (scheduled, no user to ask) does a bare invocation mean `all`. `all` runs **sync-api → sync-docs** (docs last so they describe the current code). Coding-standard auditing is not a sync operation — use the `/fix-coding-standards` command.
 
 ## Operations
 
@@ -16,7 +16,6 @@ Keeps the super repo and its modules organized and in sync.
 |-----------|---------------|--------------|
 | `sync-docs` | [sync-docs.md](sync-docs.md) | Create/update per-module documentation in `docs/<module-directory-path>/index.md` from module code + commit history. Incremental via last-synced commit SHA. |
 | `sync-api` | [sync-api.md](sync-api.md) | Ensure every module with a backend has an up-to-date AI-readable API reference doc, generated from route files. |
-| `sync-coding-standards` | [sync-coding-standards.md](sync-coding-standards.md) | Audit every module against the `coding-standards` skill and module standards, auto-fix violations. |
 
 Read the procedure file for the operation before executing it.
 
