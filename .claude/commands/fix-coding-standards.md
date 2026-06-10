@@ -1,5 +1,4 @@
 ---
-name: fix-coding-standards
 description: Auto-fix coding standard violations across all modules
 model: opus
 ---

@@ -1,5 +1,4 @@
 ---
-name: fix-auto-fixable-standards
 description: Auto-fix CLAUDE.md, Makefile, and coding standard violations across all modules
 model: opus
 ---

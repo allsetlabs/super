@@ -19,7 +19,7 @@ AI agent system for this monorepo. Agents are specialized for different modules 
 │   ├── implementation-planner.md  # Task breakdown & planning
 │   ├── seekr-web-tester.md    # Browser testing with Playwright
 │   └── whole-prompt-analyzer.md   # Conversation analysis
-├── commands/                  # Claude-only slash commands (orchestrate, cleanup-tasks)
+├── commands/                  # Claude-only slash commands (fix-coding-standards, fix-auto-fixable-standards)
 ├── skills/ → ../.agents/skills/   # Symlink — skills live in .agents/skills (cross-tool)
 │   │
 │   │   # Module skills (one per module; SKILL.md indexes topic files)
@@ -35,7 +35,7 @@ AI agent system for this monorepo. Agents are specialized for different modules 
 │   ├── context/               # Personal context (resume, work, family)
 │   │
 │   │   # Downloaded skills (skills-lock.json — do not edit)
-│   └── deploy-to-vercel/, tanstack-*/, vercel-*/, web-design-guidelines/, remotion-best-practices/
+│   └── deploy-to-vercel/, tanstack-*/, vercel-*/, remotion-best-practices/
 └── tasks/                     # Task execution workspace
 ```
 
@@ -64,12 +64,12 @@ AI agent system for this monorepo. Agents are specialized for different modules 
 
 Only Claude-mechanics-dependent commands remain here; everything else was migrated to `.agents/skills/` so all AI CLIs can run them (in Claude they're still invoked as `/name`).
 
-| Command          | Description                                              |
-| ---------------- | -------------------------------------------------------- |
-| `/orchestrate`   | Feature development workflow (analysis → plan → execute) |
-| `/cleanup-tasks` | Archive or remove old task directories                   |
+| Command                      | Description                                                    |
+| ---------------------------- | -------------------------------------------------------------- |
+| `/fix-coding-standards`      | Auto-fix coding standard violations across all modules         |
+| `/fix-auto-fixable-standards`| Auto-fix CLAUDE.md, Makefile, and standard violations          |
 
-Former commands now living in `.agents/skills/`: architect, db-upgrade, dedup (includes `--report` mode, absorbed code-duplication-analysis), discover-skills, docker-clean, fix-auto-fixable-standards, fix-coding-standards, product-ideas, sync-api, sync-coding-standards, sync-docs, tailor-resume. Module-specific ones moved into their module skill: delete-meme → meme-vault, update-component-docs → forge.
+Former commands now living in `.agents/skills/`: architect, db-upgrade, dedup (includes `--report` mode, absorbed code-duplication-analysis), discover-skills, docker-clean, product-ideas, tailor-resume. The sync commands (sync-api, sync-coding-standards, sync-docs) are now operations of the `super` skill. Module-specific ones moved into their module skill: delete-meme → meme-vault, update-component-docs → forge.
 
 ## Skills
 
@@ -94,7 +94,6 @@ Skills are auto-discovered by Claude and used when relevant. Unlike slash comman
 | `vercel-composition-patterns`            | React composition patterns for scalable component APIs                | Refactoring components, building libs    |
 | `vercel-react-best-practices`            | React/Next.js performance optimization from Vercel Engineering        | Writing/reviewing React/Next.js code     |
 | `vercel-react-native-skills`             | React Native/Expo best practices for performant mobile apps           | Building React Native components         |
-| `web-design-guidelines`                  | Review UI code for Web Interface Guidelines compliance                | UI review, accessibility audit           |
 
 ### seekr (create-meme pipeline)
 
@@ -174,9 +173,8 @@ Use subagent_type="component-lib" for shared components
 ### Run Slash Command
 
 ```
-/orchestrate add user authentication to Seekr web
-/cleanup-tasks
-/clip-youtube https://youtube.com/watch?v=xxx 30 60
+/fix-coding-standards
+/fix-auto-fixable-standards
 ```
 
 ## Quick Reference
