@@ -45,7 +45,7 @@ Read and follow ALL rules below before performing any git operation.
 
 - Always lowercase with hyphens: `feat/my-feature` (not `feat/My_Feature`)
 - Keep names short but descriptive
-- Include module name when needed: `feat/devbot-add-chat`
+- Include module name when needed: `feat/<module>-add-chat`
 - Match commit prefix to branch prefix: `feat/` branch -> `feat:` commit
 
 ## Commit Message Format
@@ -60,7 +60,7 @@ Co-Authored-By: <AI tool and model, e.g. Claude Fable 5 <noreply@anthropic.com>>
 
 **Types** (match branch prefix): `feat`, `fix`, `hotfix`, `refactor`, `chore`, `docs`, `test`, `style`, `perf`, `ci`
 
-**Scope** = module name (`devbot`, `seekr`, `portfolio`, `meme-vault`, `forge`, `tn-crime`, `tvk`). Omit scope for cross-module changes.
+**Scope** = module name (the submodule's directory name, e.g. the `<module>` in `forge-modules/<module>`). Omit scope for cross-module changes.
 
 ## Execution Steps
 

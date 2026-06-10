@@ -1,8 +1,3 @@
----
-name: db-upgrade
-description: Apply pending Supabase migrations to the local DevBot database without resetting or losing data.
----
-
 # DevBot Database Upgrade
 
 Apply pending Supabase migrations to the local DevBot database **without resetting or losing existing data**.

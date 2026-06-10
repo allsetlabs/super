@@ -32,8 +32,4 @@ iOS renders native date and time pickers that are wider than their Android/deskt
 
 ### Reference implementations
 
-| Pattern           | File                                                      | Lines      |
-| ----------------- | --------------------------------------------------------- | ---------- |
-| Constrained width | `forge-modules/devbot/app/src/components/BabyProfileDrawer.tsx` | ~170-185   |
-| Constrained width | `forge-modules/devbot/app/src/pages/BabyLogs.tsx`               | ~1614-1629 |
-| datetime-local    | `forge-modules/devbot/app/src/pages/BabyLogs.tsx`               | ~1917-1922 |
+To find existing examples in the codebase, grep for `datetime-local` or `showPicker` across modules.

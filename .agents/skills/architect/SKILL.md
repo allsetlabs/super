@@ -30,16 +30,15 @@ First, check if the user's prompt already mentions a module name:
 
 ```
 User prompt examples that SKIP this phase:
-- "/design add dark mode to portfolio" → $MODULE = "portfolio"
-- "/design implement TTS for seekr/web" → $MODULE = "seekr/web"
-- "/design new button component" → $MODULE = "component"
-- "/design backend API for user auth" → $MODULE = "seekr/backend"
+- "/design add dark mode to <module>" → $MODULE = "<module>"
+- "/design implement TTS for <module>/web" → $MODULE = "<module>/web"
+- "/design backend API for user auth in <module>" → $MODULE = "<module>/backend"
 ```
 
 **If module is clearly identified in the user's prompt:**
 
-1. Set `$MODULE` to the detected module
-2. Confirm: "Detected module: **{$MODULE}** (modules/{$MODULE})"
+1. Set `$MODULE` to the detected module (discover valid modules via `git submodule status`)
+2. Confirm: "Detected module: **{$MODULE}**"
 3. **SKIP to Phase 1**
 
 **If module is NOT clear from the prompt:** Continue to Step 1.

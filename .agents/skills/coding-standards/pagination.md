@@ -16,7 +16,7 @@ Never fetch or render an entire collection at once. Choose one strategy:
 | **Infinite scroll** | Mobile-first or feed-style lists where the user scrolls naturally      |
 | **Page numbers**    | Desktop tables or admin views where jumping to a specific page matters |
 
-Default to **infinite scroll** for mobile (DevBot mobile, Seekr mobile).
+Default to **infinite scroll** for mobile apps.
 Default to **page numbers** for desktop/web tables.
 
 ### 2. Persist filters in URL query params

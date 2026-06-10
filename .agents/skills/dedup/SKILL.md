@@ -25,10 +25,11 @@ Analyze source files for duplicate code patterns, extract reusable utilities, an
 ### If module is specified in arguments:
 
 ```
-/dedup devbot/app        -> $MODULE = "forge-modules/devbot/app"
-/dedup seekr/web             -> $MODULE = "forge-modules/seekr/web"
-/dedup component             -> $MODULE = "forge-modules/forge"
+/dedup <module>             -> $MODULE = "<category>/<module>" (e.g. forge-modules/<module>)
+/dedup <module>/<workspace> -> $MODULE = "<category>/<module>/<workspace>"
 ```
+
+Resolve the argument against `git submodule status` to find the actual module path.
 
 Set `$MODULE` and skip to Phase 1.
 
@@ -308,14 +309,14 @@ Output final report:
 ## Options
 
 ```bash
-/dedup devbot/app                    # Analyze full module
-/dedup devbot/app --dry-run          # Show plan without making changes
-/dedup devbot/app --path=src/pages   # Analyze specific subdirectory only
-/dedup devbot/app --min=2            # Flag duplicates with 2+ occurrences (default: 3)
-/dedup devbot/app --types-only       # Only find duplicate type definitions
-/dedup devbot/app --hooks-only       # Only find duplicate hook patterns
-/dedup devbot/app --utils-only       # Only find duplicate utility functions
-/dedup --report                      # All-modules analysis report, NO changes
+/dedup <module>                    # Analyze full module
+/dedup <module> --dry-run          # Show plan without making changes
+/dedup <module> --path=src/pages   # Analyze specific subdirectory only
+/dedup <module> --min=2            # Flag duplicates with 2+ occurrences (default: 3)
+/dedup <module> --types-only       # Only find duplicate type definitions
+/dedup <module> --hooks-only       # Only find duplicate hook patterns
+/dedup <module> --utils-only       # Only find duplicate utility functions
+/dedup --report                    # All-modules analysis report, NO changes
 ```
 
 ---
