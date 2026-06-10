@@ -1,11 +1,7 @@
----
-name: page-size-guard
-description: Enforces the 200-line limit for React components and pages in every module. Guides extraction of oversized files into smaller, focused components. Auto-triggers when editing .tsx page or component files in any forge-modules project.
----
 
-# Page Size Guard
+# Page Size Guard (200-Line Limit)
 
-## When This Skill Activates
+## When To Apply
 
 Auto-trigger when editing any `.tsx` file in a module's `src/pages/` or `src/components/` directory.
 

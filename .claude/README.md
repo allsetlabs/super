@@ -32,7 +32,6 @@ AI agent system for this monorepo. Agents are specialized for different modules 
 │   ├── coding-standards/      # Rules + clean-code guides (typescript, react, pagination, ios)
 │   ├── code-review-checklist/ # 120+ review checks
 │   ├── git-workflow/          # Branch protection, naming, commit standards
-│   ├── page-size-guard/       # 200-line component limit
 │   ├── context/               # Personal context (resume, work, family)
 │   │
 │   │   # Downloaded skills (skills-lock.json — do not edit)
@@ -82,7 +81,6 @@ Skills are auto-discovered by Claude and used when relevant. Unlike slash comman
 | `coding-standards`                       | Generic coding rules + clean-code guides (TS, React, pagination, iOS) | Writing or reviewing code anywhere       |
 | `git-workflow`                           | Git workflow: branch protection, naming, commit standards             | Any git operation                        |
 | `code-review-checklist`                  | 120+ checks across security, bugs, perf, TS, React, Node, DB          | Reviewing PRs or completing features     |
-| `page-size-guard`                        | Warns when pages/components exceed 200-line limit, guides extraction  | Editing pages/components in any module   |
 | `forge`                                  | Forge component/CSS standards + Google OAuth + component docs         | Editing .tsx files in any module         |
 | `devbot`                                 | DevBot module: backend API, CRUD/worker patterns, plugins, projects   | Working in forge-modules/devbot          |
 | `seekr`                                  | Seekr video/meme toolkit: download, caption, GIF, thumbnail, upload   | Any video processing or meme task        |
