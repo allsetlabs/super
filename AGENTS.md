@@ -17,5 +17,5 @@ If the user hasn't already said which project they're working on, ask. Navigate 
 2. **Before any git operation** (commit, push, branch, merge) — read and follow the `git-workflow` skill at `.agents/skills/git-workflow/SKILL.md`.
 3. **NEVER commit or push directly to `main`** — always work on a branch and open a PR.
 4. **Coding standards** — all rules live in `.agents/skills/coding-standards/`. Run `/fix-coding-standards` to auto-fix.
-5. **On every code change** — run `npm run lint && npm run type-check` before considering the change done.
+5. **On every code change** — run the relevant module's available validation commands before considering the change done. Linting is centralized at the super repo root (`npm run lint`); many modules intentionally do not have a local `npm run lint`.
 6. **Visual testing** — if the change has a visual component (web app, UI), open the page with Chrome MCP tools (`mcp__claude-in-chrome__*`), test it visually, and check the console. If anything looks odd, errors in the console, or doesn't work, fix and re-test — iterate until the goal is reached.
