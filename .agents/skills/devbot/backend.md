@@ -61,7 +61,7 @@ Recurring tasks that run Claude Code prompts at intervals. The scheduler worker 
 curl -X POST \
   -H "X-API-Key: $API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"prompt":"/sync-docs","intervalMinutes":1440}' \
+  -d '{"prompt":"/super sync-docs","intervalMinutes":1440}' \
   http://0.0.0.0:3100/api/schedulers
 ```
 

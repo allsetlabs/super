@@ -5,7 +5,7 @@ description: DevBot module skill — backend API reference, CRUD route patterns,
 
 # DevBot
 
-Entry point for everything DevBot. Load only the topic file you need:
+Entry point for everything DevBot. Load only the topic file you need. If invoked directly (e.g. `/devbot`) with no task or topic, ask the user which topic to load (AskUserQuestion with the options below) — do not guess.
 
 | Topic | File | When to load |
 |-------|------|--------------|

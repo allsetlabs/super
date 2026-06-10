@@ -55,7 +55,7 @@ Read and follow ALL rules below before performing any git operation.
 
 <optional body>
 
-Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
+Co-Authored-By: <AI tool and model, e.g. Claude Fable 5 <noreply@anthropic.com>>
 ```
 
 **Types** (match branch prefix): `feat`, `fix`, `hotfix`, `refactor`, `chore`, `docs`, `test`, `style`, `perf`, `ci`
@@ -97,7 +97,7 @@ git commit -m "$(cat <<'EOF'
 
 <optional body>
 
-Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
+Co-Authored-By: <AI tool and model, e.g. Claude Fable 5 <noreply@anthropic.com>>
 EOF
 )"
 ```

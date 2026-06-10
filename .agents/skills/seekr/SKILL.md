@@ -5,7 +5,7 @@ description: Seekr video and meme toolkit — download YouTube videos, burn capt
 
 # Seekr
 
-Entry point for all Seekr video/meme tooling. Load only the topic file you need:
+Entry point for all Seekr video/meme tooling. Load only the topic file you need. If invoked directly (e.g. `/seekr`) with no task or topic, ask the user which operation to run (AskUserQuestion with the options below) — do not guess.
 
 | Topic | File | When to load |
 |-------|------|--------------|
