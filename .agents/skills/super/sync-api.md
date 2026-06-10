@@ -4,9 +4,9 @@ Every module that has a backend must have a single API reference document that a
 
 ## Doc Location Rule
 
-- **Default:** `<module-directory-path>/docs/api.md` inside the module repo (the doc must live with the code so an AI working inside the module can find it).
-- **Link it:** the module's `AGENTS.md` must reference the doc (e.g. under `## Architecture`: "API reference: `docs/api.md`"). Add the link if missing.
-- **Existing doc wins:** if the module already has a canonical API reference elsewhere (referenced from its `AGENTS.md`, or maintained as a module skill file under `.agents/skills/<module>/`), update that file instead of creating a duplicate.
+- **The API doc lives in the module's skill:** `.agents/skills/<module>/api.md` in the super repo — never `docs/api.md` (or any other doc file) inside the module repo.
+- **Module skill exists:** read its `api.md` first, then edit it. If the skill exists but has no `api.md`, create it and register it in the skill's `SKILL.md` topic table.
+- **Module skill doesn't exist:** create `.agents/skills/<module>/` with a `SKILL.md` (frontmatter `name: <module>` + a `description` saying when to load it, following the existing module skills' format) and `api.md`, and register `api.md` in the `SKILL.md` topic table.
 
 ## Steps
 
@@ -34,7 +34,7 @@ If the backend has a database, read migration/schema files and document tables, 
 
 ### Step 3: Compare and update the doc
 
-Read the module's existing API doc (or create it if missing). Update if any of these differ:
+Read the module's existing `api.md` in its skill (or create it if missing, per the Doc Location Rule). Update if any of these differ:
 
 - **Missing endpoints** — new routes added to any file
 - **Missing fields** — new request/response fields on existing endpoints
@@ -57,9 +57,9 @@ Params / request body / response shape / constraints + one curl example
 
 For an **existing** doc, preserve its format and section ordering; update curl examples to use current field names.
 
-### Step 4: Link from AGENTS.md
+### Step 4: Register in SKILL.md
 
-Verify the module's `AGENTS.md` references the API doc. Add the reference if missing.
+Verify the module skill's `SKILL.md` topic table has a row for `api.md` (e.g. `| API reference | [api.md](api.md) | Calling or integrating with the module's backend APIs |`). Add the row if missing, and mention the API reference in the skill's frontmatter `description` so it auto-triggers.
 
 ## Rules
 
@@ -75,7 +75,7 @@ Verify the module's `AGENTS.md` references the API doc. Add the reference if mis
 **Last synced:** [current date in YYYY-MM-DD format]
 
 ### Backends found
-- [module]: [doc path] (updated | already in sync | created)
+- [module]: .agents/skills/[module]/api.md (updated | already in sync | created | skill created)
 
 ### Updated
 - [module] → [section]: [what changed]
