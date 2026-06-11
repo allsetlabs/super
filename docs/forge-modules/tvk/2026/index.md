@@ -12,7 +12,7 @@ Frontend-only SPA tracking TVK (Tamilaga Vettri Kazhagam) results for the Tamil 
 
 ## Tech Stack
 
-Vite + React + TypeScript + React Router (HashRouter for GitHub Pages), `@allsetlabs/reusable` from `../../forge`.
+Vite + React + TypeScript + React Router (HashRouter for GitHub Pages), `@allsetlabs/forge` from `../../forge`.
 
 ## Architecture
 

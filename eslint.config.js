@@ -21,7 +21,6 @@ export default tseslint.config(
       '**/storybook-static',
       '**/.storybook',
       '**/remotion.config.ts',
-      'forge-modules/devbot/reusables/**',
     ],
   },
   {

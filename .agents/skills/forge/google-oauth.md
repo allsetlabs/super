@@ -23,7 +23,7 @@ Frontend                          Backend API                    Database
 
 1. **Google Cloud Console**: Create OAuth 2.0 credentials at https://console.cloud.google.com/apis/credentials
 2. **Supabase**: Enable Google provider in Authentication > Providers > Google
-3. **Component Library**: Must use `@subbiah/reusable` with `InitializeReusableChunks`
+3. **Component Library**: Must use `@allsetlabs/forge` with `InitializeForgeChunks`
 
 ## Required Environment Variables
 
@@ -75,7 +75,7 @@ skip_nonce_check = true
 ```typescript
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
-import type { AuthTokenResponse } from '@subbiah/reusable/types/auth';
+import type { AuthTokenResponse } from '@allsetlabs/forge/types/auth';
 
 const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_ANON_KEY!);
 
@@ -144,7 +144,7 @@ export async function POST(request: NextRequest) {
 **Option A: With AuthGuard (protected app)**
 
 ```typescript
-<InitializeReusableChunks
+<InitializeForgeChunks
   applyToBody
   auth={{
     googleClientId: GOOGLE_CLIENT_ID,
@@ -154,15 +154,15 @@ export async function POST(request: NextRequest) {
   }}
 >
   {children}
-</InitializeReusableChunks>
+</InitializeForgeChunks>
 ```
 
 **Option B: Without AuthGuard (public app with optional login)**
 
 ```typescript
-<InitializeReusableChunks applyToBody auth={{ googleClientId: GOOGLE_CLIENT_ID }}>
+<InitializeForgeChunks applyToBody auth={{ googleClientId: GOOGLE_CLIENT_ID }}>
   {children}
-</InitializeReusableChunks>
+</InitializeForgeChunks>
 ```
 
 ### 5. Login Page: `/login/page.tsx` (for Option B)
@@ -171,9 +171,9 @@ export async function POST(request: NextRequest) {
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { AuthLogin } from '@subbiah/reusable/components/auth-login';
-import { useAuth } from '@subbiah/reusable/statefulComponents/auth/context';
-import type { AuthTokenResponse } from '@subbiah/reusable/types/auth';
+import { AuthLogin } from '@allsetlabs/forge/components/auth-login';
+import { useAuth } from '@allsetlabs/forge/statefulComponents/auth/context';
+import type { AuthTokenResponse } from '@allsetlabs/forge/types/auth';
 
 async function googleLogin(credential: string): Promise<AuthTokenResponse> {
   const response = await fetch('/api/auth/google-login', {
@@ -213,7 +213,7 @@ export default function LoginPage() {
 ### 6. Using Auth State: `useAuth()`
 
 ```typescript
-import { useAuth } from '@subbiah/reusable/statefulComponents/auth/context';
+import { useAuth } from '@allsetlabs/forge/statefulComponents/auth/context';
 
 function Component() {
   const { isAuthenticated, user, login, logout } = useAuth();

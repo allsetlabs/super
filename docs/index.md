@@ -4,7 +4,7 @@ One docs folder per module, mirroring its path in the super repo. Synced by the 
 
 | Module | Description | Docs |
 |--------|-------------|------|
-| forge | Shared React component library (`@allsetlabs/reusable`) — single source of UI for all modules | [index](forge-modules/forge/index.md) |
+| forge | Shared React component library (`@allsetlabs/forge`) — single source of UI for all modules | [index](forge-modules/forge/index.md) |
 | devbot | Claude Code terminal proxy + scheduler/chat backend with plugin system | [index](forge-modules/devbot/index.md) |
 | meme-vault | YouTube meme clip pipeline → GitHub + Instagram, Next.js + Supabase | [index](forge-modules/meme-vault/index.md) |
 | portfolio | Personal portfolio site (React + Vite), GitHub Pages | [index](forge-modules/portfolio/index.md) |

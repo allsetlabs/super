@@ -5,7 +5,7 @@ description: Forge component library skill — enforces component and CSS standa
 
 # Forge Component & CSS Standards
 
-All modules under `forge-modules/` use the forge component library (`@allsetlabs/reusable`; some modules alias it as `@subbiah/reusable`). These rules apply to every `.tsx` file in every module.
+All modules under `forge-modules/` use the forge component library (`@allsetlabs/forge`; some modules alias it as `@allsetlabs/forge`). These rules apply to every `.tsx` file in every module.
 
 **Library docs:** `forge-modules/forge/how_to_use_this_library.md` · **Colors/styles:** `forge-modules/forge/src/styles/styles.md`
 
@@ -45,7 +45,7 @@ CORRECT: border-border, border-input
 
 ### 3. No dark: Prefixes
 
-Theme switching is handled automatically by `InitializeReusableChunks` in `App.tsx`. Never use `dark:` Tailwind prefixes.
+Theme switching is handled automatically by `InitializeForgeChunks` in `App.tsx`. Never use `dark:` Tailwind prefixes.
 
 ```
 FORBIDDEN: dark:bg-gray-900, dark:text-white

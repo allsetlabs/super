@@ -12,7 +12,7 @@ Single-page dashboard exposing Tamil Nadu crime trends under the DMK government 
 
 ## Tech Stack
 
-Vite + React + TypeScript + Tailwind CSS, `@allsetlabs/reusable` from `../forge`.
+Vite + React + TypeScript + Tailwind CSS, `@allsetlabs/forge` from `../forge`.
 
 ## Architecture
 
@@ -24,7 +24,7 @@ src/
 └── main.tsx
 ```
 
-No routing — single page with tabs. Dark mode forced by adding `dark` class to `#reusables-app-root`.
+No routing — single page with tabs. Dark mode forced by adding `dark` class to `#forge-app-root`.
 
 ## How to Run
 

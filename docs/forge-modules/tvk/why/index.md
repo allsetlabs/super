@@ -12,7 +12,7 @@ Data-driven manifesto platform explaining why TVK is the right choice for Tamil 
 
 ## Tech Stack
 
-React + Vite + TypeScript, GSAP (ScrollTrigger), Three.js / React Three Fiber, Recharts/D3, react-i18next, `@allsetlabs/reusable` from `../../forge`. Brand: TVK Blue `#1B4FD8`, Gold `#F5C518`, red fire accents.
+React + Vite + TypeScript, GSAP (ScrollTrigger), Three.js / React Three Fiber, Recharts/D3, react-i18next, `@allsetlabs/forge` from `../../forge`. Brand: TVK Blue `#1B4FD8`, Gold `#F5C518`, red fire accents.
 
 ## Architecture
 
