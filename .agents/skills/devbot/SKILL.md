@@ -16,4 +16,4 @@ Entry point for everything DevBot. Load only the topic file you need. If invoked
 | Database upgrade | [db-upgrade.md](db-upgrade.md) | Applying pending Supabase migrations to the local DevBot database without losing data |
 | Create company project | [create-project.md](create-project.md) | Scaffolding a new AI-agent-managed company project with CEO agent and scheduler |
 
-Module docs live in `forge-modules/devbot/AGENTS.md` (architecture, database rules, autonomy rules) and in the super repo at `docs/forge-modules/devbot/`.
+Module docs live in `forge-modules/devbot/AGENTS.md` (architecture, database rules, autonomy rules).

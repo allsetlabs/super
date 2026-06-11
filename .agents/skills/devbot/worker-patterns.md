@@ -3,7 +3,7 @@
 
 ## When This Skill Activates
 
-Auto-trigger when creating or editing any `*-worker.ts` file in `forge-modules/devbot/backend/src/lib/`.
+Auto-trigger when creating or editing any `*-worker.ts` file in `backend/src/lib/`.
 
 ## Context
 
@@ -28,7 +28,7 @@ const claudeProcess = spawn(
   'claude',
   ['-p', prompt, '--output-format', 'stream-json', '--verbose', '--dangerously-skip-permissions'],
   {
-    cwd: '/Users/subbiahchandramouli/Documents/GitHub/personal',
+    cwd: DEVBOT_PROJECTS_DIR,
     env: { ...process.env },
   }
 );

@@ -9,11 +9,11 @@ The DevBot backend is a Node.js Express server that manages terminal sessions, s
 | ------------------ | ------------------------------------------------------ |
 | **Base URL**       | `http://0.0.0.0:3100`                                  |
 | **Auth Header**    | `X-API-Key`                                            |
-| **API Key**        | Found in `forge-modules/devbot/.env` under `API_KEY`         |
-| **Supabase URL**   | Found in `forge-modules/devbot/.env` under `SUPABASE_URL`    |
-| **Work Directory** | Found in `forge-modules/devbot/.env` under `CLAUDE_WORK_DIR` |
+| **API Key**        | Found in `.env` under `API_KEY`         |
+| **Supabase URL**   | Found in `.env` under `SUPABASE_URL`    |
+| **Work Directory** | Found in `.env` under `DEVBOT_PROJECTS_DIR` |
 
-Always read `forge-modules/devbot/.env` for current values. Never hardcode secrets.
+Always read `.env` for current values. Never hardcode secrets.
 
 ## Apps Overview
 
@@ -29,9 +29,9 @@ Terminal sessions with Claude Code via tmux + WebSocket. Each session spawns a t
 | `DELETE` | `/api/sessions/:id`        | Stop and delete session                    |
 | `POST`   | `/api/sessions/:id/rename` | Rename session (`{ name }`)                |
 
-**Create body:** `{ terminalType?: 'xterm' | 'mosh' }` (defaults to `'mosh'`, falls back to `'xterm'` if mosh unavailable)
+**Create body:** `{}` (no parameters required)
 
-**Response shape:** `{ id, terminalType, port, wsUrl, name, createdAt, status }`
+**Response shape:** `{ id, port, wsUrl, name, createdAt, status }`
 
 ### 2. Schedulers (`/api/schedulers`)
 
@@ -658,12 +658,12 @@ Manages Remotion video records tied to interactive chats. Supports CRUD operatio
 ```bash
 # Create a video record
 curl -X POST -H "X-API-Key: $API_KEY" -H "Content-Type: application/json" \
-  -d '{"name":"My Video","chatId":"abc12345","videoPath":"forge-modules/devbot/intro-video/out/my-video.mp4"}' \
+  -d '{"name":"My Video","chatId":"abc12345","videoPath":"intro-video/out/my-video.mp4"}' \
   http://0.0.0.0:3100/api/remotion-videos
 
 # Update status
 curl -X PATCH -H "X-API-Key: $API_KEY" -H "Content-Type: application/json" \
-  -d '{"status":"completed","videoPath":"forge-modules/devbot/intro-video/out/my-video.mp4"}' \
+  -d '{"status":"completed","videoPath":"intro-video/out/my-video.mp4"}' \
   http://0.0.0.0:3100/api/remotion-videos/<id>
 ```
 
@@ -918,7 +918,7 @@ Upload images for text extraction; extracted text is saved alongside the image u
 make run-dbb
 
 # Or manually
-cd forge-modules/devbot/backend && npx vite-node --watch src/index.ts
+cd backend && npx vite-node --watch src/index.ts
 
 # Kill and restart if port is stuck
 lsof -ti:3100 | xargs kill -9
