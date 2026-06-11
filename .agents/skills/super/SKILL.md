@@ -12,10 +12,8 @@ Keeps the super repo and its modules organized and in sync.
 
 ## Operations
 
-| Operation | Procedure file | What it does |
-|-----------|---------------|--------------|
-| `sync-docs` | [sync-docs.md](sync-docs.md) | Create/update per-module documentation in `docs/<module-directory-path>/index.md` from module code + commit history. Incremental via last-synced commit SHA. |
-| `sync-api` | [sync-api.md](sync-api.md) | Ensure every module with a backend has an up-to-date AI-readable API reference doc, generated from route files. |
+- **`sync-docs`** — [sync-docs.md](sync-docs.md). Create/update per-module documentation in `docs/<module-directory-path>/index.md` from module code + commit history. Incremental via last-synced commit SHA.
+- **`sync-api`** — [sync-api.md](sync-api.md). Ensure every module with a backend has an up-to-date AI-readable API reference doc, generated from route files.
 
 Read the procedure file for the operation before executing it.
 
@@ -23,17 +21,9 @@ Every operation accepts an optional **module scope** (e.g. `sync-docs <module-di
 
 ## Reference
 
-| Topic | File | When to load |
-|-------|------|--------------|
-| Organize / add modules | [standards/how-to-organize-module.md](standards/how-to-organize-module.md) | Adding a submodule, cloning a repo into the super repo, categorizing or moving modules |
-| Makefile standard | [standards/makefile.md](standards/makefile.md) | Onboarding a new module or auditing an existing one |
-| AGENTS.md that teaches judgment | [standards/agents-md.md](standards/agents-md.md) | Creating or updating any `AGENTS.md`/`CLAUDE.md`, in this repo or any module |
-| Decision records | [standards/decision-records.md](standards/decision-records.md) | Recording an ADR, or the pre-commit check for whether one is needed |
+These are the **Standards** referenced from the super repo's `AGENTS.md`: compliance criteria that define what makes a module "part of the super repo" — distinct from that file's **Rules**, which are behavioral directives for what the agent does during a session. Onboarding (Rule 1.1) and the ADR check (Rule 5.2) point back here as "the Standards above."
 
-## Shared Rules (apply to every operation)
-
-1. **Discover modules, never hardcode** — the module list is `git submodule status` from the super repo root. Untracked directories are not modules; skip them.
-2. **Git safety** — follow the `git-workflow` skill. Changes inside module repos and the super repo go on branches with PRs, never direct to main. Mandatory when run unattended (scheduled).
-3. **Minimal changes** — only update what actually differs from reality.
-4. **Submodule pointers** — if an operation commits inside a module repo, the super-repo PR must include the corresponding submodule pointer bump.
-5. **Report** — every operation ends with its report block so scheduled runs leave a readable trail.
+- **Organize / add modules** — [standards/how-to-organize-module.md](standards/how-to-organize-module.md). Adding a submodule, cloning a repo into the super repo, categorizing or moving modules.
+- **Makefile standard** — [standards/makefile.md](standards/makefile.md). Onboarding a new module or auditing an existing one.
+- **AGENTS.md that teaches judgment** — [standards/agents-md.md](standards/agents-md.md). Creating or updating any `AGENTS.md`/`CLAUDE.md`, in this repo or any module.
+- **Decision records** — [standards/decision-records.md](standards/decision-records.md). Recording an ADR, or the pre-commit check for whether one is needed.
