@@ -12,7 +12,7 @@ Bilingual (Tamil/English) political manifesto website presenting data-backed gov
 
 ## Tech Stack
 
-React + Vite + TypeScript, GSAP (ScrollTrigger), Three.js, react-i18next, `@allsetlabs/reusable` from `../../forge`.
+React + Vite + TypeScript, GSAP (ScrollTrigger), Three.js, react-i18next, `@allsetlabs/forge` from `../../forge`.
 
 ## Architecture
 

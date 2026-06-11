@@ -12,7 +12,7 @@ Next.js app for collecting, processing, and publishing meme clips from YouTube t
 
 ## Tech Stack
 
-Next.js (app router) + React + TypeScript + Tailwind CSS, `@allsetlabs/reusable` from `../forge`, Supabase (DB + auth + storage), GitHub API, Instagram Graph API, ffmpeg/yt-dlp via standalone Node scripts.
+Next.js (app router) + React + TypeScript + Tailwind CSS, `@allsetlabs/forge` from `../forge`, Supabase (DB + auth + storage), GitHub API, Instagram Graph API, ffmpeg/yt-dlp via standalone Node scripts.
 
 ## Architecture
 

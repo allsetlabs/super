@@ -12,7 +12,7 @@ Personal career autopilot — automates the job search lifecycle: application tr
 
 ## Tech Stack
 
-- **Frontends:** React 19 + Vite + TypeScript (+ Electron for desktop, Capacitor for mobile, Manifest V3 for extension); all use `@allsetlabs/reusable` from `../../forge`
+- **Frontends:** React 19 + Vite + TypeScript (+ Electron for desktop, Capacitor for mobile, Manifest V3 for extension); all use `@allsetlabs/forge` from `../../forge`
 - **Backend:** Python 3.12 + FastAPI + SQLAlchemy + PostgreSQL (`seekr_db`); Anthropic API for resume AI; multi-provider TTS/STT (edge, openai, elevenlabs, google, wispr)
 
 ## Architecture

@@ -8,7 +8,7 @@ model: opus
 
 Keeps the super repo and its modules organized and in sync.
 
-**Invoked with no operation?** Ask the user which one to run (AskUserQuestion) with options: `sync-api`, `sync-docs`, `all`. Do not guess. Only when running unattended (scheduled, no user to ask) does a bare invocation mean `all`. `all` runs **sync-api → sync-docs** (docs last so they describe the current code). Coding-standard auditing is not a sync operation — use the `/fix-coding-standards` command.
+**Invoked with no operation?** Ask the user which one to run (AskUserQuestion) with options: `sync-api`, `sync-docs`, `all`. Do not guess. Only when running unattended (scheduled, no user to ask) does a bare invocation mean `all`. `all` runs **sync-api → sync-docs** (docs last so they describe the current code).
 
 ## Operations
 

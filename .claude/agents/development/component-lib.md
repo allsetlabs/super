@@ -25,7 +25,7 @@ model: sonnet
 
 - "shared component", "component library", "reusable component"
 - "update Button", "modify Card", "new component for library"
-- "@subbiah/reusable", "shared UI"
+- "@allsetlabs/forge", "shared UI"
 
 ### File Patterns
 

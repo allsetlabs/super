@@ -1,6 +1,6 @@
 # Forge Modules
 
-All projects here use the `forge` component library (`@allsetlabs/reusable`). This is enforced — no raw HTML elements, no third-party component libs.
+All projects here use the `forge` component library (`@allsetlabs/forge`). This is enforced — no raw HTML elements, no third-party component libs.
 
 ## Grouping Rule
 
@@ -18,7 +18,7 @@ Current group: `tvk/` (TVK political sites).
 ### Installing the dep
 
 ```json
-"@allsetlabs/reusable": "file:../forge"
+"@allsetlabs/forge": "file:../forge"
 ```
 
 Adjust depth:
@@ -29,13 +29,13 @@ Adjust depth:
 tsconfig.json path alias for IDE:
 ```json
 "baseUrl": ".",
-"paths": { "@allsetlabs/reusable/*": ["../forge/src/*"] }
+"paths": { "@allsetlabs/forge/*": ["../forge/src/*"] }
 ```
 
 ### Importing components
 
 ```tsx
-import { Button, Input, Card } from '@allsetlabs/reusable';
+import { Button, Input, Card } from '@allsetlabs/forge';
 ```
 
 ---
@@ -49,7 +49,7 @@ import { Button, Input, Card } from '@allsetlabs/reusable';
 <button className="bg-blue-500 text-white px-4 py-2">Save</button>
 
 // GOOD
-import { Button } from '@allsetlabs/reusable';
+import { Button } from '@allsetlabs/forge';
 <Button variant="primary">Save</Button>
 ```
 
@@ -61,7 +61,7 @@ cd forge-modules/forge
 # Export from src/index.ts
 ```
 
-Then use it from `@allsetlabs/reusable`. This way all modules share it.
+Then use it from `@allsetlabs/forge`. This way all modules share it.
 
 ### 3. Editing an existing forge component — isolation check
 
@@ -70,7 +70,7 @@ Then use it from `@allsetlabs/reusable`. This way all modules share it.
 > Which modules currently use this component?
 
 ```bash
-grep -r "from '@allsetlabs/reusable'" forge-modules/ --include="*.tsx" -l
+grep -r "from '@allsetlabs/forge'" forge-modules/ --include="*.tsx" -l
 ```
 
 **Decision tree:**

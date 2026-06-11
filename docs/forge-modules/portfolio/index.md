@@ -12,7 +12,7 @@ Personal portfolio site for Subbiah Chandramouli showcasing work experience, pro
 
 ## Tech Stack
 
-React + Vite + TypeScript + Tailwind CSS + Framer Motion + React Router v7, React Hook Form + Zod for forms. Uses `@allsetlabs/reusable` from `../forge`.
+React + Vite + TypeScript + Tailwind CSS + Framer Motion + React Router v7, React Hook Form + Zod for forms. Uses `@allsetlabs/forge` from `../forge`.
 
 ## Architecture
 

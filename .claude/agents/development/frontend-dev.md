@@ -62,7 +62,7 @@ model: sonnet
 
 ```tsx
 // ✅ Good - using shared components
-import { Button, Card, Input } from '@subbiah/reusable';
+import { Button, Card, Input } from '@allsetlabs/forge';
 
 function ContactForm() {
   return (
@@ -308,7 +308,7 @@ function UserList() {
 
 ```tsx
 import { useState } from 'react';
-import { Input, Button } from '@subbiah/reusable';
+import { Input, Button } from '@allsetlabs/forge';
 
 interface ContactFormData {
   name: string;
@@ -388,7 +388,7 @@ function ContactForm() {
 
 ```tsx
 import { useState } from 'react';
-import { Button, Card } from '@subbiah/reusable';
+import { Button, Card } from '@allsetlabs/forge';
 
 interface ModalProps {
   isOpen: boolean;
