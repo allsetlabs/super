@@ -3,7 +3,7 @@
 
 ## When This Skill Activates
 
-Auto-trigger when creating or editing any `.ts` file in `forge-modules/devbot/backend/src/routes/`.
+Auto-trigger when creating or editing any `.ts` file in `backend/src/routes/`.
 
 ## Context
 
@@ -134,7 +134,7 @@ setTimeout(callback, POLL_INTERVAL_MS);
 
 ### 5. Route Registration in index.ts
 
-When adding a new route file, register it in `forge-modules/devbot/backend/src/index.ts`:
+When adding a new route file, register it in `backend/src/index.ts`:
 
 ```typescript
 import newRoutes from './routes/new-resource';
