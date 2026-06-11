@@ -6,7 +6,7 @@ model: opus
 
 # Discover Skills & Improvements
 
-Analyze the DevBot codebase — all routes, apps, components, workers, and utilities — for coding standard improvements, CSS/styling standard improvements, and reusability improvements. Search the web for public Claude Code skills. Report findings and install approved skills.
+Analyze a module's codebase — routes, apps, components, workers, and utilities — for coding standard improvements, CSS/styling standard improvements, and reusability improvements. Search the web for public Claude Code skills. Report findings and install approved skills.
 
 ## CRITICAL RULES
 
@@ -18,264 +18,106 @@ Analyze the DevBot codebase — all routes, apps, components, workers, and utili
 
 ---
 
-## DevBot Architecture Reference
+## Phase 0: Pick the Target Module
 
-Use this as context when auditing. Do NOT re-discover this — it's already known.
+Check `$ARGUMENTS` for `--module <name>`. If not given, ask which module to audit (list valid modules via `git submodule status`). Set `$MODULE` to the module's directory path.
 
-### Backend (`modules/devbot/backend/`)
+Build context before auditing — do not guess the architecture:
 
-**Tech:** Express 4.21 + TypeScript + Supabase + node-pty + ws + multer
-**Build:** vite-node --watch
-
-| Route File            | Base Path                | Endpoints                                                                                                                                                                       | Purpose                                    |
-| --------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| `sessions.ts`         | `/api/sessions`          | GET / GET :id / POST / DELETE :id / POST :id/rename                                                                                                                             | Terminal sessions (tmux + xterm WebSocket) |
-| `schedulers.ts`       | `/api/schedulers`        | GET / GET :id / POST / PUT :id / DELETE :id / GET :id/runs / GET :id/latest-run / GET :id/runs/:runId / GET :id/runs/:runId/messages                                            | Recurring Claude Code task scheduler       |
-| `interactive-chat.ts` | `/api/interactive-chats` | GET / GET /archived / GET :id / POST / DELETE :id / POST :id/send / POST :id/stop / GET :id/status / GET :id/messages / POST :id/rename / POST :id/archive / POST :id/unarchive | Interactive Claude chat                    |
-| `plans.ts`            | `/api/plans`             | GET / GET /count / GET :id / POST / PUT :id / DELETE :id                                                                                                                        | Module improvement plans                   |
-| `baby-profiles.ts`    | `/api/baby-profiles`     | GET / GET :id / POST / PATCH :id / DELETE :id                                                                                                                                   | Baby profile CRUD                          |
-| `baby-logs.ts`        | `/api/baby-logs`         | GET (paginated, type filter) / GET :id / POST / PATCH :id / DELETE :id                                                                                                          | Baby log tracking                          |
-| `birth-times.ts`      | `/api/birth-times`       | GET / POST / PATCH :id / DELETE :id                                                                                                                                             | Birth time entries                         |
-| `lawn-profiles.ts`    | `/api/lawn-profiles`     | GET / GET :id / POST / PATCH :id / DELETE :id                                                                                                                                   | Lawn profile CRUD                          |
-| `lawn-plans.ts`       | `/api/lawn-plans`        | GET / GET :id / GET :id/status / POST /generate / DELETE :id                                                                                                                    | Lawn care plan generation                  |
-| `remotion-videos.ts`  | `/api/remotion-videos`   | GET / GET :id / POST / PATCH :id / DELETE :id / GET :id/stream                                                                                                                  | Remotion video records                     |
-| `upload.ts`           | `/api/upload`            | POST /                                                                                                                                                                          | File upload (multer, 20MB)                 |
-| `logs.ts`             | `/api/logs`              | GET / DELETE /                                                                                                                                                                  | Tail/clear backend/frontend logs           |
-
-**Workers (lib/):**
-
-| File                         | Lines | Purpose                                                                |
-| ---------------------------- | ----- | ---------------------------------------------------------------------- |
-| `scheduler-worker.ts`        | 417   | FCFS queue, spawns Claude CLI for scheduled tasks, stream-json parsing |
-| `interactive-chat-worker.ts` | 395   | Spawns Claude CLI for interactive chats, auto-names chats              |
-| `lawn-plan-worker.ts`        | 290   | Generates lawn plans via interactive chat + JSON extraction            |
-| `stream-parser.ts`           | 106   | Parses Claude stream-json output into DB messages                      |
-| `supabase.ts`                | 186   | Client + 13 TypeScript interfaces for all DB row types                 |
-| `tmux.ts`                    | 75    | Create/kill/list tmux sessions                                         |
-| `xterm-ws.ts`                | 144   | WebSocket server for xterm terminal emulation                          |
-| `session-recovery.ts`        | 76    | Restarts xterm WS servers on backend startup                           |
-
-### Mobile (`modules/devbot/app/`)
-
-**Tech:** React 19 + Vite + TypeScript + TanStack Query + TanStack Virtual + Tailwind 3.4 + Capacitor 6 + xterm.js 5.5
-**UI:** `@subbiah/reusable` shared component library (custom colors, no default Tailwind)
-
-**Pages (13 files, ~7,375 lines):**
-
-| Page                      | Lines | Purpose                         | Known Issues            |
-| ------------------------- | ----- | ------------------------------- | ----------------------- |
-| `BabyLogs.tsx`            | 2,323 | Baby log tracking + CRUD        | WAY over 200-line limit |
-| `BabyAnalytics.tsx`       | 1,203 | Baby metrics dashboards         | WAY over 200-line limit |
-| `LawnCare.tsx`            | 821   | Lawn profiles + plan generation | WAY over 200-line limit |
-| `EventsTimer.tsx`         | 500   | Events/timers                   | Over 200-line limit     |
-| `InteractiveChatView.tsx` | 497   | Chat with Claude                | Over 200-line limit     |
-| `PlansPage.tsx`           | 419   | Module plans management         | Over 200-line limit     |
-| `InteractiveChatList.tsx` | 341   | Active/archived chat list       | Over 200-line limit     |
-| `RemotionVideos.tsx`      | 324   | Video records + streaming       | Over 200-line limit     |
-| `SchedulerView.tsx`       | 263   | Task detail + run messages      | Over 200-line limit     |
-| `ChatView.tsx`            | 243   | Terminal session view           | Over 200-line limit     |
-| `SchedulerList.tsx`       | 180   | Task list                       | OK                      |
-| `LogsPage.tsx`            | 135   | Log viewer                      | OK                      |
-| `ChatList.tsx`            | 126   | Session list                    | OK                      |
-
-**Components (14 files, ~2,025 lines):**
-
-| Component                     | Lines | Purpose                                |
-| ----------------------------- | ----- | -------------------------------------- |
-| `BabyProfileDrawer.tsx`       | 333   | Baby profile form                      |
-| `ChatMessage.tsx`             | 251   | Message renderer (user/assistant/tool) |
-| `SchedulerSettingsDrawer.tsx` | 203   | Edit task settings                     |
-| `SchedulerForm.tsx`           | 191   | Create task modal                      |
-| `MarkdownRenderer.tsx`        | 143   | Markdown with syntax highlighting      |
-| `SchedulerItem.tsx`           | 139   | Task list item                         |
-| `XtermTerminal.tsx`           | 118   | Terminal emulator                      |
-| `SlideNav.tsx`                | 115   | Sidebar navigation                     |
-| `TextSelectionProvider.tsx`   | 104   | Text selection context                 |
-| `MessageList.tsx`             | 100   | Virtual scrolling messages             |
-| `RunSelector.tsx`             | 94    | Run dropdown selector                  |
-| `ScrollControl.tsx`           | 88    | Terminal scroll buttons                |
-| `KeyBar.tsx`                  | 85    | Keyboard shortcut buttons              |
-| `ChatItem.tsx`                | 61    | Chat list item                         |
-
-**Hooks (2 files):** `useXtermWs.ts` (275 lines), `useDragAndDrop.ts` (45 lines)
-**Libs (4 files):** `api.ts` (459 lines), `clipboard.ts` (18 lines), `format.ts` (10 lines), `constants.ts` (7 lines)
+1. Read the module's `AGENTS.md`/`CLAUDE.md` and its docs (`docs/$MODULE/index.md` if synced).
+2. Load the module's own skill from `.agents/skills/` if one exists.
+3. Glob the module's workspaces (`backend/`, `app/`, `web/`, etc.) to map routes, pages, components, hooks, and libs. Note file sizes — flag any `.tsx` page/component over the 200-line limit.
 
 ---
 
 ## Phase 1: Deep Codebase Audit
 
-Audit the DevBot module across 4 dimensions: coding standards, CSS/styling standards, reusability, and route/app quality.
+Audit the module across 4 dimensions: coding standards, CSS/styling standards, reusability, and route/app quality. Run the detection checks from the `coding-standards` skill; the greps below are the core set (scope them to `$MODULE/`, exclude `node_modules`).
 
 ### 1.1 Coding Standards Audit
 
 ```bash
-# TypeScript: Find `any` types
-Grep: ": any\b" in modules/devbot/ --include="*.ts" --include="*.tsx" (exclude node_modules)
+# TypeScript: `any` types and `as any` casts
+Grep: ": any\b|as any" in $MODULE/ --include="*.ts" --include="*.tsx"
 
-# TypeScript: Find `as any` casts
-Grep: "as any" in modules/devbot/ --include="*.ts" --include="*.tsx"
-
-# TypeScript: Find non-null assertions (!)
-Grep: "\w+!" in modules/devbot/ --include="*.ts" --include="*.tsx"
-
-# TypeScript: Find missing return types on exported functions
-Grep: "export (const|function) \w+ = " in modules/devbot/ --include="*.ts"
+# TypeScript: non-null assertions (!)
+Grep: "\w+!" in $MODULE/ --include="*.ts" --include="*.tsx"
 
 # Console.log left in code
-Grep: "console\.log" in modules/devbot/*/src/ --include="*.ts" --include="*.tsx"
+Grep: "console\.log" in $MODULE/*/src/ --include="*.ts" --include="*.tsx"
 
 # TODO/FIXME/HACK
-Grep: "TODO|FIXME|HACK|XXX" in modules/devbot/*/src/
+Grep: "TODO|FIXME|HACK|XXX" in $MODULE/*/src/
 
-# Error handling: bare catch blocks
-Grep: "catch\s*\(" in modules/devbot/ --include="*.ts" --include="*.tsx"
-# Then check if they log or swallow errors
+# Error handling: bare catch blocks (check if they log or swallow errors)
+Grep: "catch\s*\(" in $MODULE/ --include="*.ts" --include="*.tsx"
 
-# Magic numbers/strings (hardcoded values that should be constants)
-Grep: "1500|5000|30000|7750|7799|20971520" in modules/devbot/ --include="*.ts"
+# Magic numbers (hardcoded timeouts, ports, size limits that should be constants)
 
-# Unused imports (check after reading files)
-# Run: cd modules/devbot/app && npm run lint 2>&1 | grep "unused"
+# Unused imports
+# Run: cd $MODULE/<workspace> && npm run lint 2>&1 | grep "unused"
 
-# Backend: Check if all routes have consistent error handling
-# Read each route file and verify try/catch + proper status codes
-
-# Backend: Check if all Supabase queries check for errors
-Grep: "\.from\(" in modules/devbot/backend/src/ --include="*.ts"
-# Then verify each has error checking
+# Backend: every route file has try/catch + proper status codes,
+# and every DB query checks for errors
 ```
 
 ### 1.2 CSS & Styling Standards Audit
 
+(Applies when the project defines a palette / component library — see `coding-standards` and `forge` skills.)
+
 ```bash
-# Find any default Tailwind colors (FORBIDDEN)
-Grep: "bg-blue|bg-red|bg-green|bg-yellow|bg-gray|bg-slate|bg-zinc|bg-stone|bg-orange|bg-amber|bg-lime|bg-emerald|bg-teal|bg-cyan|bg-sky|bg-indigo|bg-violet|bg-purple|bg-fuchsia|bg-pink|bg-rose" in modules/devbot/app/src/ --include="*.tsx"
+# Default Tailwind colors (FORBIDDEN when a palette exists)
+Grep: "bg-blue|bg-red|bg-green|bg-yellow|bg-gray|bg-slate|bg-zinc|text-blue|text-red|text-gray|border-blue|border-red|border-gray" in $MODULE/ --include="*.tsx"
 
-Grep: "text-blue|text-red|text-green|text-yellow|text-gray|text-slate|text-zinc" in modules/devbot/app/src/ --include="*.tsx"
+# Arbitrary color values (FORBIDDEN)
+Grep: "\[#[0-9a-fA-F]" in $MODULE/ --include="*.tsx"
 
-Grep: "border-blue|border-red|border-green|border-gray|border-slate" in modules/devbot/app/src/ --include="*.tsx"
+# Raw HTML elements (FORBIDDEN - must use component library)
+Grep: "<button |<input |<select |<textarea |<dialog " in $MODULE/ --include="*.tsx"
 
-# Find arbitrary color values (FORBIDDEN)
-Grep: "\[#[0-9a-fA-F]" in modules/devbot/app/src/ --include="*.tsx"
+# Inline styles (should use Tailwind)
+Grep: "style=\{" in $MODULE/ --include="*.tsx"
 
-# Find raw HTML elements (FORBIDDEN - must use component library)
-Grep: "<button |<input |<select |<textarea |<dialog " in modules/devbot/app/src/ --include="*.tsx"
+# dark: prefixes (theme belongs in the component library)
+Grep: "dark:" in $MODULE/ --include="*.tsx"
 
-# Find inline styles (should use Tailwind)
-Grep: "style=\{" in modules/devbot/app/src/ --include="*.tsx"
-
-# Find inconsistent spacing patterns
-Grep: "p-[0-9]|px-[0-9]|py-[0-9]|m-[0-9]|mx-[0-9]|my-[0-9]|gap-[0-9]" in modules/devbot/app/src/ --include="*.tsx"
-# Check for consistency: are similar components using similar spacing?
-
-# Find duplicate className strings across files
-Grep: "className=\"" in modules/devbot/app/src/ --include="*.tsx"
-# Look for repeated class combinations that should be extracted
-
-# Find dark: prefixes (theme should be handled by component library)
-Grep: "dark:" in modules/devbot/app/src/ --include="*.tsx"
-
-# Check if Tailwind config extends shared config correctly
-Read: modules/devbot/app/tailwind.config.js
+# Repeated className combinations that should be extracted
 ```
 
 ### 1.3 Reusability Audit
 
-This is the most important audit. Look for patterns duplicated across DevBot's routes and apps.
+This is the most important audit. Look for patterns duplicated across the module's routes and apps.
 
 ```bash
-# Backend: Find repeated CRUD patterns across routes
-# Read ALL 12 route files and identify:
-# - Identical error handling patterns
-# - Repeated Supabase query patterns (select/insert/update/delete)
-# - Repeated request validation patterns
-# - Repeated response formatting
+# Backend: read ALL route files and identify repeated error handling,
+# query, validation, and response-formatting patterns — candidates for
+# a reusable CRUD factory/helper
 
-# Specifically check for a reusable CRUD factory:
-# Many routes do: router.get('/', ...) -> supabase.from(table).select() -> res.json()
-# This pattern repeats across baby-profiles, baby-logs, birth-times, lawn-profiles, lawn-plans, remotion-videos, plans
+# Backend: compare worker/job files for duplicated spawn/parse/persist logic
 
-# Backend: Find repeated worker patterns
-# scheduler-worker.ts and interactive-chat-worker.ts both:
-# - Spawn Claude CLI processes
-# - Parse stream-json output
-# - Save messages to DB
-# - Track execution state
-# Check how much is shared vs duplicated
+# Frontend: find pages that follow the same useQuery + list + modal + CRUD
+# shape — could they share a generic list page component?
 
-# Mobile: Find repeated page patterns
-# Many pages follow: useQuery + list + create modal + delete + edit
-# Check: InteractiveChatList, SchedulerList, ChatList, PlansPage
-# Could these share a generic list page component?
+# Frontend: compare forms for shared validation/layout/state patterns
 
-# Mobile: Find repeated form patterns
-# SchedulerForm, BabyProfileDrawer, SchedulerSettingsDrawer
-# Do they share validation, layout, or state management patterns?
+# Query/mutation consistency
+Grep: "queryKey|useMutation|refetchInterval" in $MODULE/ --include="*.tsx" --include="*.ts"
 
-# Mobile: Find repeated API patterns
-# Read api.ts - are there repeated fetch/error/parse patterns?
-# Could a generic API helper reduce the 459-line api.ts?
-
-# Mobile: Find repeated query key patterns
-Grep: "queryKey" in modules/devbot/app/src/ --include="*.tsx" --include="*.ts"
-
-# Mobile: Find repeated polling patterns
-Grep: "refetchInterval" in modules/devbot/app/src/ --include="*.tsx"
-# Are all polling intervals consistent? Are they configurable?
-
-# Mobile: Find repeated mutation patterns
-Grep: "useMutation" in modules/devbot/app/src/ --include="*.tsx"
-# How many mutations? Are invalidation patterns consistent?
-
-# Cross-module: Check component library usage
-Grep: "from '@subbiah/reusable'" in modules/devbot/app/src/ --include="*.tsx"
-# Which components are used? Which are available but not used?
-
-# Check for components that exist in component library but are reimplemented locally
-Grep: "import.*Button|import.*Dialog|import.*Input|import.*Select|import.*Textarea|import.*Drawer" in modules/devbot/app/src/ --include="*.tsx"
+# Component library usage: which shared components are used, which are
+# reimplemented locally instead of imported?
 ```
 
 ### 1.4 Route & App Quality Audit
 
 ```bash
-# Backend: Check API consistency
-# For each route file, verify:
-# - Consistent HTTP status codes (201 for create, 200 for update, etc.)
-# - Consistent error response format ({ error: string })
-# - Consistent use of try/catch
-# - Consistent parameter validation
-# - Consistent naming (camelCase vs snake_case in responses)
+# Backend: consistent status codes, error response format, parameter
+# validation, auth middleware applied consistently, retry/cleanup in workers
 
-# Backend: Check for missing middleware
-# - Is there rate limiting?
-# - Is there request logging?
-# - Is there input sanitization?
-# - Is auth (X-API-Key) applied consistently?
+# Frontend: every useQuery has loading, error, and empty states
+Grep: "isLoading|isPending|isError" in $MODULE/ --include="*.tsx"
 
-# Backend: Check worker robustness
-# - Do workers handle crashes gracefully?
-# - Is there retry logic?
-# - Are there memory leaks (event listener cleanup)?
-# - Do workers log errors consistently?
-
-# Mobile: Check for missing loading states
-Grep: "isLoading|isPending" in modules/devbot/app/src/pages/ --include="*.tsx"
-# Every useQuery should have a loading state
-
-# Mobile: Check for missing error states
-Grep: "isError|error" in modules/devbot/app/src/pages/ --include="*.tsx"
-# Every useQuery should have an error state
-
-# Mobile: Check for missing empty states
-# When a list is empty, is there a user-friendly message?
-
-# Mobile: Check for oversized pages (200-line rule)
-# Already known from architecture reference above - flag all pages > 200 lines
-# Suggest specific extraction targets for each
-
-# Mobile: Check for missing TypeScript interfaces
-# Are API response types defined? Or using `any`?
-Grep: "as \w+\[\]|as \w+Row" in modules/devbot/app/src/ --include="*.tsx"
+# Pages over the 200-line limit (from Phase 0 file-size map):
+# suggest specific extraction targets for each
 ```
 
 ### 1.5 Audit Summary Format
@@ -283,48 +125,37 @@ Grep: "as \w+\[\]|as \w+Row" in modules/devbot/app/src/ --include="*.tsx"
 After running all checks, produce:
 
 ```markdown
-## DevBot Audit Results
+## $MODULE Audit Results
 
 ### Coding Standards
 
 | Issue       | Severity | Count | Files        | Example       |
 | ----------- | -------- | ----- | ------------ | ------------- |
 | `any` types | High     | N     | file1, file2 | line:N `code` |
-| console.log | Medium   | N     | ...          | ...           |
-| ...         | ...      | ...   | ...          | ...           |
 
 ### CSS/Styling Standards
 
 | Issue                   | Severity | Count | Files | Example                    |
 | ----------------------- | -------- | ----- | ----- | -------------------------- |
 | Default Tailwind colors | Critical | N     | ...   | `bg-blue-500` in file:line |
-| Raw HTML elements       | Critical | N     | ...   | `<button>` in file:line    |
-| ...                     | ...      | ...   | ...   | ...                        |
 
 ### Reusability
 
 | Pattern            | Occurrences | Files        | Extraction Target           |
 | ------------------ | ----------- | ------------ | --------------------------- |
 | CRUD route handler | N           | routes/\*.ts | `createCrudRouter()` helper |
-| Polling useQuery   | N           | pages/\*.tsx | `usePollingQuery()` hook    |
-| ...                | ...         | ...          | ...                         |
 
 ### Route/App Quality
 
-| Issue                     | Severity | Scope    | Fix           |
-| ------------------------- | -------- | -------- | ------------- |
-| Missing error handling    | High     | 3 routes | Add try/catch |
-| Inconsistent status codes | Medium   | ...      | Standardize   |
-| ...                       | ...      | ...      | ...           |
+| Issue                  | Severity | Scope    | Fix           |
+| ---------------------- | -------- | -------- | ------------- |
+| Missing error handling | High     | 3 routes | Add try/catch |
 
 ### Pages Over 200-Line Limit
 
-| Page              | Lines | Suggested Extractions                                                                             |
-| ----------------- | ----- | ------------------------------------------------------------------------------------------------- |
-| BabyLogs.tsx      | 2,323 | Split into BabyLogList, BabyLogForm, BabyLogFilters, BabyDiaperLog, BabyFeedingLog, BabyGrowthLog |
-| BabyAnalytics.tsx | 1,203 | Split into FeedingAnalytics, DiaperAnalytics, GrowthAnalytics, AnalyticsSummary                   |
-| LawnCare.tsx      | 821   | Split into LawnProfileList, LawnPlanView, LawnPlanGenerator                                       |
-| ...               | ...   | ...                                                                                               |
+| Page   | Lines | Suggested Extractions |
+| ------ | ----- | --------------------- |
+| [page] | N     | [component list]      |
 ```
 
 ---
@@ -336,7 +167,7 @@ After running all checks, produce:
 Use WebSearch for ALL of these:
 
 ```
-1. "claude code" skills repository github 2025 2026
+1. "claude code" skills repository github <current year>
 2. "claude code" ".claude/commands" OR ".claude/skills" github
 3. site:github.com ".claude" skills "SKILL.md"
 4. "claude code" custom commands examples community
@@ -345,49 +176,25 @@ Use WebSearch for ALL of these:
 7. anthropic claude code community skills registry
 ```
 
-### 2.2 DevBot Stack-Specific Skills
+### 2.2 Stack-Specific Skills
 
-```
-# Express backend
-1. "claude code" express api route generator skill
-2. "claude code" express middleware security audit
-3. "claude code" node.js error handling best practices skill
-4. "claude code" supabase migration skill
-5. "claude code" supabase query optimization
+Derive queries from the module's tech stack mapped in Phase 0. Pattern: `"claude code" <framework/tool> <concern> skill`. Cover each layer:
 
-# React mobile
-6. "claude code" react component splitting refactor skill
-7. "claude code" react performance optimization virtual scroll
-8. "claude code" tanstack query best practices skill
-9. "claude code" react hook extraction skill
-
-# TypeScript
-10. "claude code" typescript strict mode skill
-11. "claude code" typescript type narrowing skill
-12. "claude code" zod validation express typescript
-
-# Tailwind CSS
-13. "claude code" tailwind css audit duplicate classes skill
-14. "claude code" tailwind component extraction reusable
-15. "claude code" tailwind design system consistency
-
-# Capacitor mobile
-16. "claude code" capacitor ios android testing skill
-17. "claude code" capacitor performance optimization
-
-# Code quality
-18. "claude code" code review checklist skill automated
-19. "claude code" eslint custom rules skill
-20. "claude code" bundle size analysis skill
-```
+- Backend framework (route generation, middleware/security audit, error handling)
+- Database/ORM (migrations, query optimization)
+- Frontend framework (component splitting, performance, data-fetching best practices)
+- TypeScript (strict mode, type narrowing, validation)
+- Styling (CSS audit, component extraction, design system consistency)
+- Platform (mobile/extension/desktop testing and performance, if applicable)
+- Code quality (review checklists, lint rules, bundle analysis)
 
 ### 2.3 Reusability & Architecture Skills
 
 ```
 1. "claude code" refactor extract component skill
 2. "claude code" dry principle automation skill
-3. "claude code" express crud factory pattern
-4. "claude code" react generic list page pattern
+3. "claude code" crud factory pattern
+4. "claude code" generic list page pattern
 5. "claude code" api client generator typescript
 ```
 
@@ -415,7 +222,7 @@ Use WebFetch on:
 | **Coding Standard Skill** | Auto-triggered skill to enforce TypeScript/React standards           |
 | **CSS/Styling Skill**     | Auto-triggered skill to enforce Tailwind/component library standards |
 | **Reusability Skill**     | Auto-triggered skill to prevent duplication                          |
-| **Backend Pattern**       | Reusable Express/Supabase pattern to extract                         |
+| **Backend Pattern**       | Reusable backend pattern to extract                                  |
 | **Tool/Dependency**       | npm package or CLI tool                                              |
 
 ### 3.2 Score (1-5)
@@ -435,7 +242,6 @@ Use WebFetch on:
 ```bash
 ls .claude/commands/
 ls .agents/skills/
-ls .claude/skills/
 ```
 
 Skip anything we already have.
@@ -445,12 +251,10 @@ Skip anything we already have.
 ## Phase 4: Present Report
 
 ```markdown
-## DevBot Skill Discovery Report
+## $MODULE Skill Discovery Report
 
 **Date**: [date]
-**Backend Routes Audited**: 12
-**Mobile Pages Audited**: 13
-**Mobile Components Audited**: 14
+**Workspaces Audited**: [list]
 **Web Sources Checked**: [count]
 
 ---
@@ -467,12 +271,12 @@ Skip anything we already have.
 
 - **Source**: [URL]
 - **What it does**: [description]
-- **DevBot benefit**: [specific files/routes it helps]
+- **Module benefit**: [specific files/routes it helps]
 - **Install**: [command]
 
 ---
 
-### New Skills to Create (for DevBot)
+### New Skills to Create
 
 #### 1. [name] - [score]/5
 
@@ -492,17 +296,7 @@ Skip anything we already have.
 
 ---
 
-### Code Quality Fixes
-
-#### 1. [fix-name] - [score]/5
-
-- **Issue**: [from audit]
-- **Files**: [count + examples]
-- **Fix**: [specific approach]
-
----
-
-### CSS/Styling Fixes
+### Code Quality / CSS Fixes
 
 #### 1. [fix-name] - [score]/5
 
@@ -542,38 +336,26 @@ mkdir -p .agents/skills/[skill-name]
 # Write SKILL.md
 ```
 
-### 5.2 Create DevBot-Specific Skills
+### 5.2 Create Module-Specific Skills
 
-Write auto-triggered skills to `.agents/skills/[name]/SKILL.md`:
-
-```yaml
----
-name: devbot-[name]
-description: [description for auto-discovery]
----
-```
+Module-specific knowledge goes into the module's own skill (`.agents/skills/<module>/`) as a topic file, indexed from its `SKILL.md`. Only create a new standalone skill for cross-module concerns.
 
 ### 5.3 Create New Commands
 
-Write to `.claude/commands/[name].md` with:
-
-- YAML frontmatter (`description`, `model`)
-- Phased structure
-- DevBot-specific context
+Write to `.claude/commands/[name].md` with YAML frontmatter (`description`, `model`) and a phased structure — only for Claude-mechanics-dependent workflows; otherwise prefer a skill.
 
 ### 5.4 Save Findings as Plans
 
-For items that need code changes (reusability extractions, code quality fixes):
+For items that need code changes (reusability extractions, code quality fixes), save each as a plan via the DevBot Plans API:
 
 ```bash
-# Save each as a plan via DevBot API
 curl -X POST http://0.0.0.0:3100/api/plans \
   -H "Content-Type: application/json" \
   -H "X-API-Key: $API_KEY" \
   -d '{
     "title": "[fix/extraction name]",
     "description": "[detailed description with files and approach]",
-    "route": "devbot",
+    "route": "[module name]",
     "priority": "high|medium|low",
     "status": "pending"
   }'
@@ -581,7 +363,6 @@ curl -X POST http://0.0.0.0:3100/api/plans \
 
 ### 5.5 Update Documentation
 
-- Update `.claude/README.md` with new skills/commands
 - Run: `npm run lint && npm run type-check` if any code changed
 
 ---
@@ -600,9 +381,9 @@ curl -X POST http://0.0.0.0:3100/api/plans \
 
 ### Plans Created (for code changes)
 
-| Plan   | Priority | Route  | Description |
-| ------ | -------- | ------ | ----------- |
-| [name] | high     | devbot | [summary]   |
+| Plan   | Priority | Route    | Description |
+| ------ | -------- | -------- | ----------- |
+| [name] | high     | [module] | [summary]   |
 
 ### Skipped
 
@@ -610,7 +391,7 @@ curl -X POST http://0.0.0.0:3100/api/plans \
 
 ### Next Run
 
-Scheduled every 12 hours. New discoveries will be compared against existing plans to avoid duplicates.
+Scheduled runs compare new discoveries against existing plans to avoid duplicates.
 ```
 
 ---
@@ -618,11 +399,10 @@ Scheduled every 12 hours. New discoveries will be compared against existing plan
 ## Options
 
 ```bash
-/discover-skills                        # Full discovery (audit + web search + report)
+/discover-skills --module <name>        # Target module (asked if omitted)
 /discover-skills --audit-only           # Only run codebase audit (Phase 1)
 /discover-skills --search-only          # Only search web for skills (Phase 2)
 /discover-skills --install [name]       # Install a specific previously-found skill
-/discover-skills --module devbot        # Focus on DevBot module (default)
 /discover-skills --coding-standards     # Only audit coding standards
 /discover-skills --css-standards        # Only audit CSS/styling standards
 /discover-skills --reusability          # Only audit reusability

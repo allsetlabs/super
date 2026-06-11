@@ -11,11 +11,11 @@ You are a product strategist and developer. Your job is to deeply understand a m
 
 ## Phase 1: Identify Target Module
 
-**Check `$ARGUMENTS` first.** If the user specified a module (e.g., `devbot`, `seekr`, `portfolio`, `meme-vault`), use that.
+**Check `$ARGUMENTS` first.** If the user specified a module, use that.
 
-If not specified, ask which module to analyze.
+If not specified, ask which module to analyze (list valid modules via `git submodule status`).
 
-**Set `$MODULE` to the chosen module path under `modules/`.**
+**Set `$MODULE` to the chosen module's directory path.**
 
 ---
 
@@ -24,8 +24,8 @@ If not specified, ask which module to analyze.
 ### Step 1: Read Module Documentation
 
 ```bash
-# Read the module's doc file
-cat ./docs/doc-$MODULE.md 2>/dev/null || echo "No doc found"
+# Read the module's doc file (synced by the super skill's sync-docs operation)
+cat ./docs/$MODULE/index.md 2>/dev/null || echo "No doc found"
 ```
 
 ### Step 2: Analyze the Codebase
@@ -71,29 +71,12 @@ Use WebSearch to find:
 3. **User expectations** - What users expect from this type of product in 2025-2026
 4. **Best practices** - UX/UI best practices for this product type
 
-**Example search queries (adapt based on module):**
+**Derive search queries from the product summary built in Phase 2** — use the product category, target user, and platform. Patterns:
 
-For DevBot (personal assistant/terminal proxy):
-
-- "best personal assistant apps 2025 features"
-- "mobile terminal apps features"
-- "AI assistant app must-have features"
-- "home automation personal dashboard features"
-
-For Seekr (product suite):
-
-- "best productivity tools 2025"
-- "chrome extension must-have features"
-
-For Portfolio:
-
-- "best developer portfolio features 2025"
-- "portfolio website trends"
-
-For Meme Vault:
-
-- "meme creation tools features"
-- "viral content creation app features"
+- "best <product category> apps <current year> features"
+- "<product category> must-have features"
+- "<platform, e.g. chrome extension / mobile app / dashboard> feature trends"
+- "<target user> expectations <product category>"
 
 ### Step 2: Search for Specific Improvement Areas
 
@@ -126,7 +109,7 @@ For each viable idea, create a plan with:
    - Why it's valuable (user benefit)
    - How it fits into the existing product
    - High-level implementation approach
-3. **Route** - Which part of the codebase it affects (e.g., `devbot/app`, `devbot/backend`, `seekr/web`)
+3. **Route** - Which part of the codebase it affects (e.g., `<module>/app`, `<module>/backend`, `<module>/web`)
 4. **Source** - Where the idea came from (e.g., "Competitor Analysis - Todoist")
 5. **Source URL** - URL of the source article/product
 6. **Priority** - `low`, `medium`, or `high` based on:
@@ -163,7 +146,7 @@ For each viable idea, create a plan with:
 
 ```bash
 # Get API key and port from .env
-source modules/devbot/.env 2>/dev/null
+source forge-modules/devbot/.env 2>/dev/null
 echo "API_KEY=$API_KEY"
 echo "BACKEND_PORT=${BACKEND_PORT:-3100}"
 ```

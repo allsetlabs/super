@@ -1,33 +1,3 @@
-[submodule "reusable-mods/reusable"]
-	path = reusable-mods/reusable
-	url = https://github.com/allsetlabs/component.git
-[submodule "reusable-mods/devbot"]
-	path = reusable-mods/devbot
-	url = https://github.com/allsetlabs/devbot.git
-[submodule "reusable-mods/portfolio"]
-	path = reusable-mods/portfolio
-	url = https://github.com/allsetlabs/portfolio.git
-[submodule "reusable-mods/seekr"]
-	path = reusable-mods/seekr
-	url = https://github.com/allsetlabs/seekr.git
-[submodule "reusable-mods/meme-vault"]
-	path = reusable-mods/meme-vault
-	url = https://github.com/allsetlabs/meme-vault.git
-[submodule "reusable-mods/tn-crime"]
-	path = reusable-mods/tn-crime
-	url = https://github.com/allsetlabs/tn-crime-analytics.git
-[submodule "tvk/namma"]
-	path = tvk/namma
-	url = https://github.com/allsetlabs/namma-tvk.git
-[submodule "tvk/why"]
-	path = tvk/why
-	url = https://github.com/allsetlabs/why-tvk.git
-[submodule "tvk/manifesto"]
-	path = tvk/manifesto
-	url = https://github.com/allsetlabs/tvk-manifesto.git
-[submodule "tvk/2026"]
-	path = tvk/2026
-	url = https://github.com/allsetlabs/tvk-2026.git
 [submodule "forge-modules/forge"]
 	path = forge-modules/forge
 	url = https://github.com/allsetlabs/component.git

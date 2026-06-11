@@ -12,7 +12,7 @@ The single source of truth for general-purpose coding rules, forbidden patterns,
 ## Non-Negotiable Rules
 
 - **TypeScript strict** — No `any` types. If a value's type is genuinely unknown, use `unknown` and narrow.
-- **Components < 200 lines** — If a `.tsx` file exceeds 200 lines, split it into smaller focused components.
+- **Components < 200 lines** — If a `.tsx` file exceeds 200 lines, split it into smaller focused components. Extraction playbook: [page-size.md](page-size.md).
 - **Exact package versions** — No `^` or `~` prefixes in `package.json` dependency versions.
 - **No barrel exports** — Never re-export from `index.ts`/`index.tsx` files. Import directly from the source file where the component/function is defined. Delete barrel files (`index.ts` that only import and re-export).
 - **No default exports** — Always use named exports (`export function`, `export const`). Never use `export default`. This applies even for lazy loading — use `React.lazy(() => import('./Foo').then(m => ({ default: m.Foo })))` if needed.
@@ -110,3 +110,17 @@ Fix lint errors automatically with `--fix`. Report remaining type errors.
 3. **Auto-fix everything possible** — fix every violation that can be fixed without ambiguity. Only report without fixing if the change could break functionality.
 4. **Count matters** — report total violation count per rule so severity is clear
 5. **Project-specific overrides win** — if the project's root `CLAUDE.md` or a project-local skill contradicts a rule here, follow the project.
+
+---
+
+## Detailed Clean Code Guides
+
+Load the guide matching the task:
+
+| Guide | File | When to load |
+|-------|------|--------------|
+| TypeScript clean code | [typescript.md](typescript.md) | Variables, functions, classes, SOLID, error handling, TS best practices |
+| React clean code | [react.md](react.md) | Component/hook patterns, API integration, state management, anti-patterns |
+| Pagination & filtering | [pagination.md](pagination.md) | Building any list view — pagination strategy, URL-param filters |
+| iOS patterns | [ios-patterns.md](ios-patterns.md) | iOS Safari / Capacitor WebView quirks (date/time pickers, etc.) |
+| Page size (200-line limit) | [page-size.md](page-size.md) | A page/component exceeds 200 lines — extraction strategies |
