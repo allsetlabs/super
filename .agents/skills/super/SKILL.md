@@ -27,6 +27,7 @@ Every operation accepts an optional **module scope** (e.g. `sync-docs <module-di
 |-------|------|--------------|
 | Organize / add modules | [how-to-organize-module.md](how-to-organize-module.md) | Adding a submodule, cloning a repo into the super repo, categorizing or moving modules |
 | Module standards | [module-standards-to-follow.md](module-standards-to-follow.md) | Onboarding a new module or auditing an existing one (Makefile targets, AGENTS.md headings, symlink) |
+| Decision records | [decision-records.md](decision-records.md) | Recording an ADR, or the pre-commit check for whether one is needed |
 
 ## Shared Rules (apply to every operation)
 
