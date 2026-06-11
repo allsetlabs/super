@@ -1,18 +1,6 @@
-# module-standards-to-follow — What Every Module Must Have
+# agents-md — AGENTS.md That Teaches Judgment
 
-Apply this when onboarding a new module and when auditing existing ones (the `/fix-auto-fixable-standards` command checks these too).
-
-## Makefile with 3 targets
-
-| Target | Purpose |
-|--------|---------|
-| `make setup` | System-level deps (Node, Python, tmux). Idempotent — check before installing. |
-| `make install` | Project-level deps (`npm install`, `pip install`, etc.) |
-| `make start` | Start all services in a tmux session. Single entry point. |
-
-Hardcode ports as Makefile variables at the top. Never in `.env` files.
-
-## AGENTS.md that teaches judgment
+Read this before creating or updating an `AGENTS.md` (or its `CLAUDE.md` symlink) in this repo or any module/subdirectory.
 
 Every module must have an `AGENTS.md` that helps an AI agent make good decisions in that module. It should document **intent, conventions, commands, and danger zones** — not a complete inventory of files the agent can discover with `rg`/`find`.
 
@@ -58,11 +46,8 @@ Avoid:
 - Stale progress logs, roadmaps, or TODO dumps. Put plans in the project tracker/docs instead.
 - Repeating rules from the super repo root `AGENTS.md`.
 - Generic advice like "write clean code" unless it maps to a concrete local convention.
+- Tables for rules and guidance — use a numbered or bulleted list instead; lists are easier for humans to scan.
 
 Plus a `CLAUDE.md` symlink pointing to it (`ln -s AGENTS.md CLAUDE.md`).
 
-Keep it lean — every line consumes context on every chat in that module. No duplicate info from the super repo's root AGENTS.md.
-
-## If the module has a backend
-
-It must have an AI-readable API reference doc — see [sync-api.md](sync-api.md) for location and format.
+Keep it lean — every line consumes context on every chat in that module. No duplicate info from the super repo's root `AGENTS.md`.

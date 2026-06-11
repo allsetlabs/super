@@ -24,7 +24,7 @@ The super repo holds no code of its own. Every project is a **git submodule**. T
    ```bash
    git submodule add <remote-url> <category>/<path>
    ```
-4. **Onboard it** — apply the standards in [module-standards-to-follow.md](module-standards-to-follow.md) (Makefile targets, AGENTS.md, CLAUDE.md symlink), run the `/fix-coding-standards` command scoped to the new module, then run the sync operations scoped to it: [sync-api.md](sync-api.md), [sync-docs.md](sync-docs.md).
+4. **Onboard it** — apply the Standards from the super repo root `AGENTS.md` (Makefile, AGENTS.md/CLAUDE.md symlink, decision records, API reference if it has a backend), run the `/fix-coding-standards` command scoped to the new module, then run the sync operations scoped to it: [sync-api.md](sync-api.md), [sync-docs.md](sync-docs.md).
 5. **Commit via branch + PR** per the `git-workflow` skill — never directly to main.
 
 ## Reorganizing / Moving a Module

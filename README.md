@@ -18,4 +18,4 @@ git submodule update --init --recursive
 
 ## Adding a module
 
-Never clone code into this repo — always `git submodule add`. See `.agents/skills/super/how-to-organize-module.md` for categorization and placement, then onboard the module per `.agents/skills/super/module-standards-to-follow.md`.
+Onboard the module per the Standards section in this repo's root `AGENTS.md`.

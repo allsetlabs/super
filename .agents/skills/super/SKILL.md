@@ -1,6 +1,6 @@
 ---
 name: super
-description: Super-repo maintenance skill — organize/onboard git submodules, enforce module standards, and keep the super repo in sync with all modules. Operations, sync-docs (per-module docs under docs/), sync-api (AI-readable API reference for every module with a backend). Reference, how-to-organize-module (adding/categorizing submodules), module-standards-to-follow (what every module must have). Use when the user says "sync docs", "sync api", "add a module/submodule", "/super", or when running scheduled super-repo syncs.
+description: Super-repo maintenance skill — organize/onboard git submodules, enforce module standards, and keep the super repo in sync with all modules. Operations, sync-docs (per-module docs under docs/), sync-api (AI-readable API reference for every module with a backend). Reference, how-to-organize-module (adding/categorizing submodules), standards/ (what every module must have — Makefile, AGENTS.md, decision records, API reference). Use when the user says "sync docs", "sync api", "add a module/submodule", "/super", or when running scheduled super-repo syncs.
 model: opus
 ---
 
@@ -25,9 +25,10 @@ Every operation accepts an optional **module scope** (e.g. `sync-docs <module-di
 
 | Topic | File | When to load |
 |-------|------|--------------|
-| Organize / add modules | [how-to-organize-module.md](how-to-organize-module.md) | Adding a submodule, cloning a repo into the super repo, categorizing or moving modules |
-| Module standards | [module-standards-to-follow.md](module-standards-to-follow.md) | Onboarding a new module or auditing an existing one (Makefile targets, AGENTS.md headings, symlink) |
-| Decision records | [decision-records.md](decision-records.md) | Recording an ADR, or the pre-commit check for whether one is needed |
+| Organize / add modules | [standards/how-to-organize-module.md](standards/how-to-organize-module.md) | Adding a submodule, cloning a repo into the super repo, categorizing or moving modules |
+| Makefile standard | [standards/makefile.md](standards/makefile.md) | Onboarding a new module or auditing an existing one |
+| AGENTS.md that teaches judgment | [standards/agents-md.md](standards/agents-md.md) | Creating or updating any `AGENTS.md`/`CLAUDE.md`, in this repo or any module |
+| Decision records | [standards/decision-records.md](standards/decision-records.md) | Recording an ADR, or the pre-commit check for whether one is needed |
 
 ## Shared Rules (apply to every operation)
 
