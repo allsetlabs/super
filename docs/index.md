@@ -14,6 +14,7 @@ One docs folder per module, mirroring its path in the super repo. Synced by the 
 | tvk/manifesto | TVK manifesto static site (Astro + GSAP + Three.js), scheduler-developed | [index](forge-modules/tvk/manifesto/index.md) |
 | tvk/namma | Bilingual TVK manifesto site, agent-managed (board workflow) | [index](forge-modules/tvk/namma/index.md) |
 | tvk/why | "Why TVK" data-backed manifesto site, agent-managed | [index](forge-modules/tvk/why/index.md) |
+| journal | Private daily journal — conversational capture, frontmatter metadata for AI recall | [index](journal/index.md) |
 
 ## Decisions
 
