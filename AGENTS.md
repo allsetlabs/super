@@ -19,6 +19,8 @@ Generic super repo: every project is a **git submodule** organized under categor
 
 If the user hasn't already said which project they're working on, ask. Navigate to that module directory before making any changes.
 
+If that module has a same-named agent under `.claude/agents/` (e.g. `journal/` → `journal` agent), delegate the work to that agent via the Agent tool instead of handling it directly. Pick the agent by module, not by task type — a module's agent handles all work in that module, regardless of what kind of task it is.
+
 ## Rules
 
 1. **Adding a module** — when the user asks to clone, add, or submodule a repo: **NEVER clone or copy code into this repo — always `git submodule add`.** Categorize and place it per the Standards above.
