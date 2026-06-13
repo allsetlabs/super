@@ -40,3 +40,6 @@
 [submodule "forge-modules/tvk/2026"]
 	path = forge-modules/tvk/2026
 	url = https://github.com/allsetlabs/tvk-2026.git
+[submodule "artifacts"]
+	path = artifacts
+	url = https://github.com/allsetlabs/artifacts.git
