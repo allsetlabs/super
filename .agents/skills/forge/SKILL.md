@@ -11,10 +11,10 @@ All modules under `forge-modules/` use the forge component library (`@allsetlabs
 
 ## Topic Files
 
-| Topic | File | When to load |
-|-------|------|--------------|
-| Google OAuth | [google-oauth.md](google-oauth.md) | Adding Google OAuth authentication to an app via the forge pattern |
-| Component docs | [update-docs.md](update-docs.md) | Creating or syncing usage documentation for forge library exports |
+| Topic          | File                               | When to load                                                       |
+| -------------- | ---------------------------------- | ------------------------------------------------------------------ |
+| Google OAuth   | [google-oauth.md](google-oauth.md) | Adding Google OAuth authentication to an app via the forge pattern |
+| Component docs | [update-docs.md](update-docs.md)   | Creating or syncing usage documentation for forge library exports  |
 
 ## Rules (Non-Negotiable)
 

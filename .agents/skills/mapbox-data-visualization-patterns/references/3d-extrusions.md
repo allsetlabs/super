@@ -10,7 +10,9 @@
 map.on('load', () => {
   // Insert the layer beneath any symbol layer for proper ordering
   const layers = map.getStyle().layers;
-  const labelLayerId = layers.find((layer) => layer.type === 'symbol' && layer.layout['text-field']).id;
+  const labelLayerId = layers.find(
+    (layer) => layer.type === 'symbol' && layer.layout['text-field']
+  ).id;
 
   // Add 3D buildings from basemap
   map.addLayer(
@@ -24,10 +26,26 @@ map.on('load', () => {
       paint: {
         'fill-extrusion-color': '#aaa',
         // Smoothly transition height on zoom
-        'fill-extrusion-height': ['interpolate', ['linear'], ['zoom'], 15, 0, 15.05, ['get', 'height']],
-        'fill-extrusion-base': ['interpolate', ['linear'], ['zoom'], 15, 0, 15.05, ['get', 'min_height']],
-        'fill-extrusion-opacity': 0.6
-      }
+        'fill-extrusion-height': [
+          'interpolate',
+          ['linear'],
+          ['zoom'],
+          15,
+          0,
+          15.05,
+          ['get', 'height'],
+        ],
+        'fill-extrusion-base': [
+          'interpolate',
+          ['linear'],
+          ['zoom'],
+          15,
+          0,
+          15.05,
+          ['get', 'min_height'],
+        ],
+        'fill-extrusion-opacity': 0.6,
+      },
     },
     labelLayerId
   );
@@ -45,7 +63,7 @@ map.on('load', () => {
   // Add your own buildings data
   map.addSource('custom-buildings', {
     type: 'geojson',
-    data: 'https://example.com/buildings.geojson'
+    data: 'https://example.com/buildings.geojson',
   });
 
   // Add 3D buildings layer
@@ -70,10 +88,10 @@ map.on('load', () => {
         100,
         '#e64a45',
         200,
-        '#a63e3e'
+        '#a63e3e',
       ],
-      'fill-extrusion-opacity': 0.9
-    }
+      'fill-extrusion-opacity': 0.9,
+    },
   });
 });
 ```

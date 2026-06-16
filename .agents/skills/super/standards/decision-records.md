@@ -9,7 +9,7 @@ Every module — including the super repo itself — has a `docs/decisions/` dir
 
 ## Format
 
-- One file per decision: `NNNN-short-title.md` — 4-digit zero-padded sequence number + short kebab-case title. The filename *is* the title; the context, decision, rationale, and how it's maintained go in the file body, not the filename.
+- One file per decision: `NNNN-short-title.md` — 4-digit zero-padded sequence number + short kebab-case title. The filename _is_ the title; the context, decision, rationale, and how it's maintained go in the file body, not the filename.
 - `index.md` lists all decisions in that directory: number, title (linked), date — newest first.
 
 ## When to record one

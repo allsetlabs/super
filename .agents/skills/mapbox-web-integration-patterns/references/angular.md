@@ -13,7 +13,7 @@ import { environment } from '../../environments/environment';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss']
+  styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit, OnDestroy {
   @ViewChild('mapContainer', { static: false })
@@ -43,7 +43,7 @@ export class MapComponent implements OnInit, OnDestroy {
       accessToken: environment.mapboxAccessToken,
       container: this.mapContainer.nativeElement,
       center: [-71.05953, 42.3629],
-      zoom: 13
+      zoom: 13,
     });
 
     // Handle map errors

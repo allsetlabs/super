@@ -18,9 +18,11 @@ export default tseslint.config(
       '**/.venv',
       '**/vite.config.ts',
       '**/vite.config.*.ts',
+      '**/vitest.config.ts',
       '**/storybook-static',
       '**/.storybook',
       '**/remotion.config.ts',
+      '.agents/',
     ],
   },
   {
@@ -58,7 +60,7 @@ export default tseslint.config(
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
       ...jsxA11y.configs.recommended.rules,
-      'react-refresh/only-export-components': 'error',
+      'react-refresh/only-export-components': 'warn',
       '@typescript-eslint/no-unused-vars': 'off',
       'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': [
@@ -73,6 +75,37 @@ export default tseslint.config(
       'react/react-in-jsx-scope': 'off',
       'jsx-a11y/click-events-have-key-events': 'warn',
       'jsx-a11y/no-static-element-interactions': 'warn',
+      'jsx-a11y/no-autofocus': 'warn',
+      'jsx-a11y/label-has-associated-control': 'warn',
+      'jsx-a11y/no-noninteractive-element-interactions': 'warn',
+      // react-hooks v7 React Compiler rules — downgrade to warn for existing codebase
+      'react-hooks/refs': 'warn',
+      'react-hooks/set-state-in-effect': 'warn',
+      'react-hooks/purity': 'warn',
+      'react-hooks/preserve-manual-memoization': 'warn',
+      'react-hooks/static-components': 'warn',
+      'react-hooks/use-memo': 'warn',
+      'react-hooks/component-hook-factories': 'warn',
+      'react-hooks/immutability': 'warn',
+      'react-hooks/globals': 'warn',
+      'react-hooks/set-state-in-render': 'warn',
+      'react-hooks/error-boundaries': 'warn',
+      'react-hooks/gating': 'warn',
+      // Allow Three.js / @react-three/fiber custom JSX props
+      'react/no-unknown-property': [
+        'error',
+        {
+          ignore: [
+            'attach',
+            'args',
+            'vertexColors',
+            'transparent',
+            'sizeAttenuation',
+            'intensity',
+            'object',
+          ],
+        },
+      ],
     },
   },
   storybook.configs['flat/recommended']

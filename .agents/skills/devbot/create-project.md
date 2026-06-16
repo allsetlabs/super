@@ -1,4 +1,3 @@
-
 # Create Company Project
 
 You are creating a new company project managed by autonomous AI agents. Parse the arguments from the user prompt:
@@ -71,6 +70,7 @@ This is the **single source of truth** for all agent behavior. Individual agent.
 All `.board/` files are JSON. Every document follows these structures:
 
 **companyboard.json:**
+
 ```json
 {
   "document": "companyboard",
@@ -96,6 +96,7 @@ All `.board/` files are JSON. Every document follows these structures:
 **Task statuses flow:** `pending` → `in-progress` → `completed` → `testing` → `test-success` / `test-failed`
 
 **user-feedback.json / investor-feedback.json:**
+
 ```json
 {
   "document": "user-feedback",
@@ -125,6 +126,7 @@ All `.board/` files are JSON. Every document follows these structures:
 ### Skills
 
 All agents can discover and install skills at the project level:
+
 - Use `/find-skills` to discover useful Claude Code skills
 - Install with `npx @anthropic-ai/claude-code-skills add` at the project root
 
@@ -139,6 +141,7 @@ Write the CEO agent definition with these sections:
 **Project Idea:** (insert the --idea text here verbatim)
 
 **Characteristics:**
+
 - Strategic thinker with long-term vision
 - Decisive but open to pivoting when data suggests it
 - Delegates effectively — hires the right people for the right jobs
@@ -146,6 +149,7 @@ Write the CEO agent definition with these sections:
 - Balances innovation with pragmatism
 
 **Every Run Responsibilities:**
+
 1. Follow ALL conventions in `.agents/CONVENTIONS.md` (read it first)
 2. Read `.board/user-feedback.json` and `.board/investor-feedback.json` — acknowledge new feedback entries (update their status), create corresponding tasks in companyboard.json if actionable
 3. Read `.board/companyboard.json` — review task statuses, update feedback documents to reflect progress, add new strategic tasks based on research
@@ -161,9 +165,11 @@ When no employee agents exist yet (check if `.agents/` only has `ceo/` and `CONV
 - **Marketing** — interval: 1440 minutes (daily). Creates marketing content for the project. Can use skills like Remotion for video content.
 
 **How to Create a Sub-Agent:**
+
 1. Create directory `.agents/{role}/` with subdirectories: `memory/`, `knowledge/`, `mistakes/`, `current-path/`, `characteristics/`
 2. Write `.agents/{role}/agent.md` with: role description, characteristics (aligned with YOUR CEO style), specific responsibilities, what tools they should use, which board documents to read/update
 3. Create a DevBot scheduler. The `workingDir` MUST be the project directory so that `@agent-name` resolves correctly:
+
 ```bash
 curl -X POST http://localhost:3100/api/schedulers \
   -H "Content-Type: application/json" \
@@ -171,6 +177,7 @@ curl -X POST http://localhost:3100/api/schedulers \
 ```
 
 **Model Selection:** The CEO chooses the model for each sub-agent based on the complexity of their work:
+
 - **opus** — for high-stakes roles requiring deep reasoning (developer, tester, architect)
 - **sonnet** — for analytical/research roles (analyst, strategist, reviewer)
 - **haiku** — for lightweight/repetitive roles (marketing content, changelog, notifications)
@@ -180,6 +187,7 @@ curl -X POST http://localhost:3100/api/schedulers \
 **Agent Naming Requirement:** Every sub-agent MUST be given a human-friendly first name. If the project has a regional/cultural context, use names from that culture. The name goes in the agent.md header and is used in all board document entries (e.g., `"updatedBy": "Arjun (developer)"`).
 
 **Firing:** If an agent consistently underperforms (review their `mistakes/` and `memory/` directories):
+
 1. Delete their DevBot scheduler: `curl -X DELETE http://localhost:3100/api/schedulers/{id}`
 2. Archive their `.agents/{role}/` directory (rename to `.agents/_archived-{role}/`)
 3. Create a replacement agent with different characteristics or skills
@@ -191,6 +199,7 @@ curl -X POST http://localhost:3100/api/schedulers \
 ## Step 5: Write Board JSON Files
 
 **companyboard.json:**
+
 ```json
 {
   "document": "companyboard",
@@ -201,6 +210,7 @@ curl -X POST http://localhost:3100/api/schedulers \
 ```
 
 **user-feedback.json:**
+
 ```json
 {
   "document": "user-feedback",
@@ -209,6 +219,7 @@ curl -X POST http://localhost:3100/api/schedulers \
 ```
 
 **investor-feedback.json:**
+
 ```json
 {
   "document": "investor-feedback",
@@ -263,6 +274,7 @@ Replace `{dir}` with the actual --dir value.
 ## Step 9: Report Success
 
 Output a clear summary:
+
 - Project created at: {dir}
 - Structure: web/, mobile/, backend/, .agents/, .board/
 - CEO agent defined at: .agents/ceo/agent.md

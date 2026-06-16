@@ -5,8 +5,6 @@ All projects here use the `forge` component library (`@allsetlabs/forge`). This 
 ## Grouping Rule
 
 Group related projects in subcategories. Flat = standalone only.  
-Current group: `tvk/` (TVK political sites).
-
 ---
 
 ## Using Forge Components
@@ -22,11 +20,13 @@ Current group: `tvk/` (TVK political sites).
 ```
 
 Adjust depth:
+
 - Flat project (`forge-modules/myapp`): `file:../forge`
-- Group project (`forge-modules/tvk/myapp`): `file:../../forge`
+- Group project (`forge-modules/group/myapp`): `file:../../forge`
 - Nested package inside project (`forge-modules/myapp/web`): `file:../../forge`
 
 tsconfig.json path alias for IDE:
+
 ```json
 "baseUrl": ".",
 "paths": { "@allsetlabs/forge/*": ["../forge/src/*"] }
@@ -46,11 +46,11 @@ import { Button, Input, Card } from '@allsetlabs/forge';
 
 ```tsx
 // BAD
-<button className="bg-blue-500 text-white px-4 py-2">Save</button>
+<button className="bg-blue-500 px-4 py-2 text-white">Save</button>;
 
 // GOOD
 import { Button } from '@allsetlabs/forge';
-<Button variant="primary">Save</Button>
+<Button variant="primary">Save</Button>;
 ```
 
 ### 2. Need a component that doesn't exist? Create it in forge first
@@ -75,14 +75,15 @@ grep -r "from '@allsetlabs/forge'" forge-modules/ --include="*.tsx" -l
 
 **Decision tree:**
 
-| Situation | Action |
-|-----------|--------|
-| Change is additive (new optional prop with a default) | Safe to edit — won't break existing usage |
-| Change alters existing behaviour / removes a prop | Create a NEW component or new variant instead |
+| Situation                                               | Action                                              |
+| ------------------------------------------------------- | --------------------------------------------------- |
+| Change is additive (new optional prop with a default)   | Safe to edit — won't break existing usage           |
+| Change alters existing behaviour / removes a prop       | Create a NEW component or new variant instead       |
 | Styling change affects all usages in an intentional way | Edit and confirm each affected module looks correct |
-| Only one module needs the change | Add an opt-in prop to isolate it |
+| Only one module needs the change                        | Add an opt-in prop to isolate it                    |
 
 **Example — safe additive change:**
+
 ```tsx
 // BEFORE
 function Button({ label }: { label: string }) { ... }
@@ -92,6 +93,7 @@ function Button({ label, size = 'md' }: { label: string; size?: 'sm' | 'md' | 'l
 ```
 
 **Example — isolating a breaking change:**
+
 ```tsx
 // Instead of changing Button, create ButtonV2 or add a variant
 function Button({ label, variant = 'default', newBehavior = false }) { ... }
@@ -101,15 +103,10 @@ function Button({ label, variant = 'default', newBehavior = false }) { ... }
 
 ## Projects
 
-| Dir | Repo | Stack |
-|-----|------|-------|
-| `forge/` | allsetlabs/component | React + Storybook |
-| `devbot/` | allsetlabs/devbot | Vite + React + Node.js |
-| `portfolio/` | allsetlabs/portfolio | Vite + React |
-| `seekr/` | allsetlabs/seekr | Vite + React + Python FastAPI |
-| `meme-vault/` | allsetlabs/meme-vault | Next.js |
-| `tn-crime/` | allsetlabs/tn-crime-analytics | Vite + React |
-| `tvk/namma` | allsetlabs/namma-tvk | Vite + React (web + mobile + backend) |
-| `tvk/why` | allsetlabs/why-tvk | Vite + React |
-| `tvk/manifesto` | allsetlabs/tvk-manifesto | Astro + React |
-| `tvk/2026` | allsetlabs/tvk-2026 | Vite + React |
+| Dir             | Repo                          | Stack                                 |
+| --------------- | ----------------------------- | ------------------------------------- |
+| `forge/`        | allsetlabs/component          | React + Storybook                     |
+| `devbot/`       | allsetlabs/devbot             | Vite + React + Node.js                |
+| `portfolio/`    | allsetlabs/portfolio          | Vite + React                          |
+| `seekr/`        | allsetlabs/seekr              | Vite + React + Python FastAPI         |
+| `meme-vault/`   | allsetlabs/meme-vault         | Next.js                               |

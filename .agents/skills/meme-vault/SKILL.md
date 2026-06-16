@@ -7,9 +7,9 @@ description: Meme Vault module skill — manage memes stored across Supabase, Gi
 
 Entry point for Meme Vault management tasks. Load only the topic file you need:
 
-| Topic | File | When to load |
-|-------|------|--------------|
-| Delete meme | [delete-meme.md](delete-meme.md) | Removing a meme from Supabase, GitHub assets, and Instagram |
-| API reference | [api.md](api.md) | Calling or integrating with the Meme Vault APIs (clips CRUD, job queue, Google login) |
+| Topic         | File                             | When to load                                                                          |
+| ------------- | -------------------------------- | ------------------------------------------------------------------------------------- |
+| Delete meme   | [delete-meme.md](delete-meme.md) | Removing a meme from Supabase, GitHub assets, and Instagram                           |
+| API reference | [api.md](api.md)                 | Calling or integrating with the Meme Vault APIs (clips CRUD, job queue, Google login) |
 
-Meme *creation* tooling (download, caption, GIF, upload) lives in the [seekr](../seekr/SKILL.md) skill.
+Meme _creation_ tooling (download, caption, GIF, upload) lives in the [seekr](../seekr/SKILL.md) skill.

@@ -1,16 +1,15 @@
-
 # DevBot Backend API
 
 The DevBot backend is a Node.js Express server that manages terminal sessions, scheduled tasks, interactive chats, companies, baby logs/profiles, lawn profiles/plans/photos, weather data, remotion videos, file browse/read/write, uploads, OCR documents, plans, logs, birth times, working directories, git worktrees/status, and Claude Code configuration (CLAUDE.md, hooks, keybindings, MCP servers, memories). It uses Drizzle + SQLite for persistence and spawns Claude Code CLI processes for AI tasks.
 
 ## Connection Details
 
-| Setting            | Value                                                  |
-| ------------------ | ------------------------------------------------------ |
-| **Base URL**       | `http://0.0.0.0:3100`                                  |
-| **Auth Header**    | `X-API-Key`                                            |
-| **API Key**        | Found in `.env` under `API_KEY`         |
-| **Supabase URL**   | Found in `.env` under `SUPABASE_URL`    |
+| Setting            | Value                                       |
+| ------------------ | ------------------------------------------- |
+| **Base URL**       | `http://0.0.0.0:3100`                       |
+| **Auth Header**    | `X-API-Key`                                 |
+| **API Key**        | Found in `.env` under `API_KEY`             |
+| **Supabase URL**   | Found in `.env` under `SUPABASE_URL`        |
 | **Work Directory** | Found in `.env` under `DEVBOT_PROJECTS_DIR` |
 
 Always read `.env` for current values. Never hardcode secrets.
@@ -118,8 +117,8 @@ Multi-turn conversations with Claude Code. Supports sending messages, stopping e
 
 #### Messaging
 
-| Method | Endpoint                              | Description                                                      |
-| ------ | ------------------------------------- | ---------------------------------------------------------------- |
+| Method | Endpoint                                    | Description                                                                   |
+| ------ | ------------------------------------------- | ----------------------------------------------------------------------------- |
 | `POST` | `/api/interactive-chats/:id/send`           | Send message (`{ prompt, branch? }`) — stops current execution if running     |
 | `POST` | `/api/interactive-chats/:id/stop`           | Stop execution                                                                |
 | `POST` | `/api/interactive-chats/:id/pause`          | Pause execution (`{ success, wasPaused }`)                                    |
@@ -136,33 +135,33 @@ Messages belong to a branch (`branch_id`, default `main`). Branching copies hist
 
 | Method | Endpoint                              | Description                                                                                     |
 | ------ | ------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `GET`  | `/api/interactive-chats/:id/branches` | List branch ids for a chat                                                                       |
+| `GET`  | `/api/interactive-chats/:id/branches` | List branch ids for a chat                                                                      |
 | `POST` | `/api/interactive-chats/:id/branch`   | Create branch (`{ fromSequence, branchName?, sourceBranch? }`) → `{ branchId, messagesCopied }` |
 
 #### Message Queue
 
 Queue prompts while a chat is busy, then send them individually or combined.
 
-| Method   | Endpoint                                         | Description                                                                     |
-| -------- | ------------------------------------------------ | ------------------------------------------------------------------------------- |
-| `GET`    | `/api/interactive-chats/:id/queue`               | List queued messages (`{ id, chatId, branchId, prompt, position, createdAt }`)  |
-| `POST`   | `/api/interactive-chats/:id/queue`               | Queue a message (`{ prompt, branch? }`)                                          |
-| `DELETE` | `/api/interactive-chats/:id/queue/:queueId`      | Remove a queued message                                                          |
-| `POST`   | `/api/interactive-chats/:id/queue/:queueId/send` | Send one queued message immediately (stops current execution)                    |
-| `POST`   | `/api/interactive-chats/:id/queue/send-all`      | Combine all queued messages into one prompt and send (400 if empty)              |
+| Method   | Endpoint                                         | Description                                                                    |
+| -------- | ------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `GET`    | `/api/interactive-chats/:id/queue`               | List queued messages (`{ id, chatId, branchId, prompt, position, createdAt }`) |
+| `POST`   | `/api/interactive-chats/:id/queue`               | Queue a message (`{ prompt, branch? }`)                                        |
+| `DELETE` | `/api/interactive-chats/:id/queue/:queueId`      | Remove a queued message                                                        |
+| `POST`   | `/api/interactive-chats/:id/queue/:queueId/send` | Send one queued message immediately (stops current execution)                  |
+| `POST`   | `/api/interactive-chats/:id/queue/send-all`      | Combine all queued messages into one prompt and send (400 if empty)            |
 
 #### Settings
 
-| Method | Endpoint                                   | Description                                   |
-| ------ | ------------------------------------------ | --------------------------------------------- |
-| `POST` | `/api/interactive-chats/:id/mode`          | Change permission mode (`{ permissionMode }`)                                  |
-| `POST` | `/api/interactive-chats/:id/model`         | Change Claude model (`{ model }`)                                              |
-| `POST` | `/api/interactive-chats/:id/system-prompt` | Update system prompt (`{ systemPrompt }`)                                      |
-| `POST` | `/api/interactive-chats/:id/max-turns`     | Change max turns (`{ maxTurns }`)                                              |
+| Method | Endpoint                                   | Description                                                                       |
+| ------ | ------------------------------------------ | --------------------------------------------------------------------------------- |
+| `POST` | `/api/interactive-chats/:id/mode`          | Change permission mode (`{ permissionMode }`)                                     |
+| `POST` | `/api/interactive-chats/:id/model`         | Change Claude model (`{ model }`)                                                 |
+| `POST` | `/api/interactive-chats/:id/system-prompt` | Update system prompt (`{ systemPrompt }`)                                         |
+| `POST` | `/api/interactive-chats/:id/max-turns`     | Change max turns (`{ maxTurns }`)                                                 |
 | `POST` | `/api/interactive-chats/:id/effort`        | Change effort level (`{ effort: 'low'\|'medium'\|'high'\|'xhigh'\|'max'\|null }`) |
-| `POST` | `/api/interactive-chats/:id/fast-mode`     | Toggle fast mode (no body; flips `settings.fastMode`)                          |
-| `POST` | `/api/interactive-chats/:id/allowed-tools` | Set allowed tools (`{ allowedTools: string[] \| null }`)                       |
-| `POST` | `/api/interactive-chats/:id/working-dir`   | Set working directory (`{ workingDir: string \| null }`)                       |
+| `POST` | `/api/interactive-chats/:id/fast-mode`     | Toggle fast mode (no body; flips `settings.fastMode`)                             |
+| `POST` | `/api/interactive-chats/:id/allowed-tools` | Set allowed tools (`{ allowedTools: string[] \| null }`)                          |
+| `POST` | `/api/interactive-chats/:id/working-dir`   | Set working directory (`{ workingDir: string \| null }`)                          |
 
 **Mode change:** `permissionMode` must be `"plan"`, `"auto-accept"`, or `"dangerous"`. Cannot escalate from `plan`/`auto-accept` to `dangerous`.
 
@@ -604,11 +603,11 @@ Upload files for use in chats. Stored in `.tmp/devbot-uploads/{chatId}/` directo
 
 Browse, read, and write project files (git-tracked + untracked, skipping node_modules etc.).
 
-| Method | Endpoint            | Description                                                                          |
-| ------ | ------------------- | ------------------------------------------------------------------------------------ |
-| `GET`  | `/api/files/browse` | Search/list files (`?q=query&offset=0&limit=50&workingDir=/abs/path`)                |
-| `GET`  | `/api/files/read`   | Read file contents (`?path=relative/path&workingDir=/abs/path`, max 1MB)             |
-| `PUT`  | `/api/files/write`  | Write file contents (`{ path, content, workingDir? }`)                               |
+| Method | Endpoint            | Description                                                              |
+| ------ | ------------------- | ------------------------------------------------------------------------ |
+| `GET`  | `/api/files/browse` | Search/list files (`?q=query&offset=0&limit=50&workingDir=/abs/path`)    |
+| `GET`  | `/api/files/read`   | Read file contents (`?path=relative/path&workingDir=/abs/path`, max 1MB) |
+| `PUT`  | `/api/files/write`  | Write file contents (`{ path, content, workingDir? }`)                   |
 
 **Browse query params:**
 
@@ -784,13 +783,13 @@ curl -H "X-API-Key: $API_KEY" \
 
 AI-agent-managed company projects. Creating a company scaffolds a project directory, creates a master interactive chat, and kicks off the `devbot-create-project` skill (fire-and-forget).
 
-| Method   | Endpoint                            | Description                                                          |
-| -------- | ----------------------------------- | --------------------------------------------------------------------- |
-| `GET`    | `/api/companies`                    | List non-archived companies (newest first)                            |
-| `GET`    | `/api/companies/:id`                | Get single company                                                    |
-| `POST`   | `/api/companies`                    | Create company (`{ name, idea }`) — both required                     |
-| `DELETE` | `/api/companies/:id`                | Archive company (soft delete)                                         |
-| `GET`    | `/api/companies/:id/feedback/:type` | Get feedback doc (`type` = `user` or `investor`)                      |
+| Method   | Endpoint                            | Description                                                                   |
+| -------- | ----------------------------------- | ----------------------------------------------------------------------------- |
+| `GET`    | `/api/companies`                    | List non-archived companies (newest first)                                    |
+| `GET`    | `/api/companies/:id`                | Get single company                                                            |
+| `POST`   | `/api/companies`                    | Create company (`{ name, idea }`) — both required                             |
+| `DELETE` | `/api/companies/:id`                | Archive company (soft delete)                                                 |
+| `GET`    | `/api/companies/:id/feedback/:type` | Get feedback doc (`type` = `user` or `investor`)                              |
 | `POST`   | `/api/companies/:id/feedback/:type` | Add feedback entry (`{ prompt }`) → appended to `.board/<type>-feedback.json` |
 
 **Company shape:** `{ id, name, directory, masterChatId, status: 'creating'|'active'|'archived', createdAt, updatedAt }`
@@ -801,29 +800,29 @@ AI-agent-managed company projects. Creating a company scaffolds a project direct
 
 Registered directories that chats/sessions can run in. Defaults are seeded from `DEVBOT_PROJECTS_DIR` and the repo root on startup.
 
-| Method   | Endpoint                          | Description                                                  |
-| -------- | --------------------------------- | ------------------------------------------------------------ |
-| `GET`    | `/api/working-directories`        | List all                                                      |
-| `POST`   | `/api/working-directories`        | Add directory (`{ path, label? }`) — must exist; `~` resolved |
-| `POST`   | `/api/working-directories/validate` | Validate a path (`{ path }`) → `{ valid, resolvedPath }`    |
-| `DELETE` | `/api/working-directories/:id`    | Delete (400 if it is a default directory)                     |
+| Method   | Endpoint                            | Description                                                   |
+| -------- | ----------------------------------- | ------------------------------------------------------------- |
+| `GET`    | `/api/working-directories`          | List all                                                      |
+| `POST`   | `/api/working-directories`          | Add directory (`{ path, label? }`) — must exist; `~` resolved |
+| `POST`   | `/api/working-directories/validate` | Validate a path (`{ path }`) → `{ valid, resolvedPath }`      |
+| `DELETE` | `/api/working-directories/:id`      | Delete (400 if it is a default directory)                     |
 
 **Shape:** `{ id, path, label, source: 'env'|'auto'|'user', isDefault, isRootDirectory, createdAt }`
 
 ### 19. Git Worktrees (`/api/worktrees`)
 
-| Method   | Endpoint         | Description                                                          |
-| -------- | ---------------- | --------------------------------------------------------------------- |
-| `GET`    | `/api/worktrees` | List worktrees (`?dir=/abs/path`) → `{ isGitRepo, worktrees }`        |
-| `POST`   | `/api/worktrees` | Create worktree (`{ dir, path, branch, newBranch? }`)                 |
-| `DELETE` | `/api/worktrees` | Remove worktree (`{ dir, path }` in body)                             |
+| Method   | Endpoint         | Description                                                    |
+| -------- | ---------------- | -------------------------------------------------------------- |
+| `GET`    | `/api/worktrees` | List worktrees (`?dir=/abs/path`) → `{ isGitRepo, worktrees }` |
+| `POST`   | `/api/worktrees` | Create worktree (`{ dir, path, branch, newBranch? }`)          |
+| `DELETE` | `/api/worktrees` | Remove worktree (`{ dir, path }` in body)                      |
 
 **Worktree shape:** `{ path, branch, head, isBare, isMain }`
 
 ### 20. Git Status (`/api/git-status`)
 
-| Method | Endpoint          | Description                                  |
-| ------ | ----------------- | --------------------------------------------- |
+| Method | Endpoint          | Description                                    |
+| ------ | ----------------- | ---------------------------------------------- |
 | `GET`  | `/api/git-status` | Repo status for a directory (`?dir=/abs/path`) |
 
 **Response:** `{ isGitRepo, branch, dirtyCount, ahead, behind }`
@@ -832,50 +831,50 @@ Registered directories that chats/sessions can run in. Defaults are seeded from 
 
 Read/write the `CLAUDE.md` file of any directory.
 
-| Method | Endpoint         | Description                                                  |
-| ------ | ---------------- | ------------------------------------------------------------ |
-| `GET`  | `/api/claude-md` | Read (`?dir=/abs/path`) → `{ content, path, exists }`        |
-| `PUT`  | `/api/claude-md` | Write (`{ dir, content }`) → `{ success, path }`             |
+| Method | Endpoint         | Description                                           |
+| ------ | ---------------- | ----------------------------------------------------- |
+| `GET`  | `/api/claude-md` | Read (`?dir=/abs/path`) → `{ content, path, exists }` |
+| `PUT`  | `/api/claude-md` | Write (`{ dir, content }`) → `{ success, path }`      |
 
 ### 22. Hooks (`/api/hooks`)
 
 Manage Claude Code hooks in `~/.claude/settings.json`.
 
-| Method   | Endpoint                   | Description                                                                  |
-| -------- | -------------------------- | ----------------------------------------------------------------------------- |
-| `GET`    | `/api/hooks`               | List hooks → `{ hooks, settingsPath }`                                        |
+| Method   | Endpoint                   | Description                                                                                                  |
+| -------- | -------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `GET`    | `/api/hooks`               | List hooks → `{ hooks, settingsPath }`                                                                       |
 | `POST`   | `/api/hooks`               | Add hook (`{ event, matcher, command }`) — event ∈ PreToolUse, PostToolUse, Notification, Stop, SubagentStop |
-| `DELETE` | `/api/hooks/:event/:index` | Remove hook at index for an event                                             |
+| `DELETE` | `/api/hooks/:event/:index` | Remove hook at index for an event                                                                            |
 
 ### 23. Keybindings (`/api/keybindings`)
 
 Manage `~/.claude/keybindings.json`.
 
-| Method   | Endpoint                  | Description                              |
-| -------- | ------------------------- | ----------------------------------------- |
-| `GET`    | `/api/keybindings`        | List → `{ keybindings, path }`            |
-| `POST`   | `/api/keybindings`        | Add binding (`{ key, command, when? }`)   |
-| `DELETE` | `/api/keybindings/:index` | Remove binding at index                   |
+| Method   | Endpoint                  | Description                             |
+| -------- | ------------------------- | --------------------------------------- |
+| `GET`    | `/api/keybindings`        | List → `{ keybindings, path }`          |
+| `POST`   | `/api/keybindings`        | Add binding (`{ key, command, when? }`) |
+| `DELETE` | `/api/keybindings/:index` | Remove binding at index                 |
 
 ### 24. MCP Servers (`/api/mcp-servers`)
 
 Manage `mcpServers` in `~/.claude/settings.json`.
 
-| Method   | Endpoint                 | Description                                       |
-| -------- | ------------------------ | -------------------------------------------------- |
-| `GET`    | `/api/mcp-servers`       | List → `{ servers, settingsPath }`                 |
+| Method   | Endpoint                 | Description                                         |
+| -------- | ------------------------ | --------------------------------------------------- |
+| `GET`    | `/api/mcp-servers`       | List → `{ servers, settingsPath }`                  |
 | `POST`   | `/api/mcp-servers`       | Add server (`{ name, command, args?, env?, cwd? }`) |
-| `DELETE` | `/api/mcp-servers/:name` | Remove server by name                              |
+| `DELETE` | `/api/mcp-servers/:name` | Remove server by name                               |
 
 ### 25. Memories (`/api/memories`)
 
 Browse and edit Claude Code memory files under `~/.claude/projects/*/memory/`.
 
-| Method   | Endpoint                           | Description                                          |
-| -------- | ---------------------------------- | ----------------------------------------------------- |
-| `GET`    | `/api/memories`                    | List all memory files → `{ memories, basePath }`      |
-| `PUT`    | `/api/memories/:project/:filename` | Update file content (`{ content }`)                   |
-| `DELETE` | `/api/memories/:project/:filename` | Delete memory file                                    |
+| Method   | Endpoint                           | Description                                      |
+| -------- | ---------------------------------- | ------------------------------------------------ |
+| `GET`    | `/api/memories`                    | List all memory files → `{ memories, basePath }` |
+| `PUT`    | `/api/memories/:project/:filename` | Update file content (`{ content }`)              |
+| `DELETE` | `/api/memories/:project/:filename` | Delete memory file                               |
 
 **Memory shape:** `{ project, filename, name, description, type, content }` (parsed from frontmatter; `MEMORY.md` excluded)
 
@@ -883,13 +882,13 @@ Browse and edit Claude Code memory files under `~/.claude/projects/*/memory/`.
 
 Upload images for text extraction; extracted text is saved alongside the image under `.tmp/ocr-uploads/{id}/`. Backed by the `ocr_documents` table.
 
-| Method   | Endpoint            | Description                                                          |
-| -------- | ------------------- | --------------------------------------------------------------------- |
-| `GET`    | `/api/ocr`          | List documents (newest first)                                          |
-| `GET`    | `/api/ocr/:id`      | Get single document                                                    |
+| Method   | Endpoint            | Description                                                                              |
+| -------- | ------------------- | ---------------------------------------------------------------------------------------- |
+| `GET`    | `/api/ocr`          | List documents (newest first)                                                            |
+| `GET`    | `/api/ocr/:id`      | Get single document                                                                      |
 | `POST`   | `/api/ocr/upload`   | Upload image (`multipart/form-data`, field `file`, max 20MB, PNG/JPEG/GIF/WebP/BMP/TIFF) |
-| `PATCH`  | `/api/ocr/:id/text` | Save extracted text (`{ text }`) → writes `.txt` file, status `completed` |
-| `DELETE` | `/api/ocr/:id`      | Delete document + files                                                |
+| `PATCH`  | `/api/ocr/:id/text` | Save extracted text (`{ text }`) → writes `.txt` file, status `completed`                |
+| `DELETE` | `/api/ocr/:id`      | Delete document + files                                                                  |
 
 **Doc shape:** `{ id, original_name, image_path, txt_path, extracted_text, status: 'pending'|'completed', created_at, ... }`
 

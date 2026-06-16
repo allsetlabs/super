@@ -65,7 +65,7 @@ const map = new mapboxgl.Map({ container: '...' });
 // Per-map token (preferred for multi-map setups)
 const map = new mapboxgl.Map({
   accessToken: token,
-  container: '...'
+  container: '...',
 });
 ```
 
@@ -100,7 +100,7 @@ function MapComponent() {
     mapRef.current = new mapboxgl.Map({
       container: mapContainerRef.current,
       center: [-71.05953, 42.3629],
-      zoom: 13
+      zoom: 13,
     });
 
     // CRITICAL: Cleanup to prevent memory leaks
@@ -142,7 +142,7 @@ function MapWithSearch() {
     mapRef.current = new mapboxgl.Map({
       container: mapContainerRef.current,
       center: center,
-      zoom: 13
+      zoom: 13,
     });
 
     return () => {
@@ -159,7 +159,7 @@ function MapWithSearch() {
           right: 0,
           top: 0,
           position: 'absolute',
-          zIndex: 10
+          zIndex: 10,
         }}
       >
         <SearchBox
@@ -209,7 +209,7 @@ Both packages include `@mapbox/search-js-core` as a dependency. Only install `-c
     top: 10,
     right: 10,
     zIndex: 10,
-    width: 300
+    width: 300,
   }}
 >
   <SearchBox {...props} />

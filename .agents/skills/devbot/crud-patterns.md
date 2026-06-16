@@ -1,4 +1,3 @@
-
 # DevBot Backend CRUD Patterns
 
 ## When This Skill Activates

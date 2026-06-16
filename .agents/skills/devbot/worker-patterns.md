@@ -1,4 +1,3 @@
-
 # DevBot Worker Patterns
 
 ## When This Skill Activates

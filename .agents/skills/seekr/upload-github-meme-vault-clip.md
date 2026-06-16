@@ -1,4 +1,3 @@
-
 # Upload GitHub Meme Vault Clip
 
 Upload meme vault clip files to a GitHub repository.

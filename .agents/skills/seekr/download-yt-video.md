@@ -1,4 +1,3 @@
-
 # Download YouTube Video
 
 Download full videos or segments from YouTube.

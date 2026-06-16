@@ -14,7 +14,7 @@
 
 This is a deliberate, scoped carve-out from [0001](0001-docs-live-in-super-repo.md), which keeps module repos to only `AGENTS.md`/`CLAUDE.md` and `README.md`.
 
-Decision records are a different kind of document from what 0001 centralizes (descriptive overviews and API references). ADRs are most useful to someone working directly inside a module's own repo — they explain *why* that module's code looks the way it does, and stay useful even if the module is ever split out of the super repo.
+Decision records are a different kind of document from what 0001 centralizes (descriptive overviews and API references). ADRs are most useful to someone working directly inside a module's own repo — they explain _why_ that module's code looks the way it does, and stay useful even if the module is ever split out of the super repo.
 
 Cross-module and super-repo-level decisions stay centralized per 0001, since those concern conventions that apply across modules and need to be visible without cloning every submodule.
 

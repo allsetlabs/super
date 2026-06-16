@@ -1,4 +1,3 @@
-
 # Add Caption to Video
 
 Burn captions/subtitles into a video file.

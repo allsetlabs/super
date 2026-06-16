@@ -13,33 +13,6 @@
 [submodule "forge-modules/meme-vault"]
 	path = forge-modules/meme-vault
 	url = https://github.com/allsetlabs/meme-vault.git
-[submodule "forge-modules/tn-crime"]
-	path = forge-modules/tn-crime
-	url = https://github.com/allsetlabs/tn-crime-analytics.git
-[submodule "forge-modules/namma"]
-	path = forge-modules/namma
-	url = https://github.com/allsetlabs/namma-tvk.git
-[submodule "forge-modules/why"]
-	path = forge-modules/why
-	url = https://github.com/allsetlabs/why-tvk.git
-[submodule "forge-modules/manifesto"]
-	path = forge-modules/manifesto
-	url = https://github.com/allsetlabs/tvk-manifesto.git
-[submodule "forge-modules/2026"]
-	path = forge-modules/2026
-	url = https://github.com/allsetlabs/tvk-2026.git
-[submodule "forge-modules/tvk/namma"]
-	path = forge-modules/tvk/namma
-	url = https://github.com/allsetlabs/namma-tvk.git
-[submodule "forge-modules/tvk/why"]
-	path = forge-modules/tvk/why
-	url = https://github.com/allsetlabs/why-tvk.git
-[submodule "forge-modules/tvk/manifesto"]
-	path = forge-modules/tvk/manifesto
-	url = https://github.com/allsetlabs/tvk-manifesto.git
-[submodule "forge-modules/tvk/2026"]
-	path = forge-modules/tvk/2026
-	url = https://github.com/allsetlabs/tvk-2026.git
 [submodule "artifacts"]
 	path = artifacts
 	url = https://github.com/allsetlabs/artifacts.git

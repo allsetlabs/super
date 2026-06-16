@@ -12,7 +12,7 @@
 
 ## Why
 
-[0002](0002-per-module-decision-records.md) defined the ADR format and placement rules but only referenced them from module onboarding/auditing — there was no trigger to record a decision *during* normal work, so ADRs were easy to forget in the moment they're made. Splitting the format into its own reference doc lets it be linked from both the onboarding standard and the per-commit checklist without duplication.
+[0002](0002-per-module-decision-records.md) defined the ADR format and placement rules but only referenced them from module onboarding/auditing — there was no trigger to record a decision _during_ normal work, so ADRs were easy to forget in the moment they're made. Splitting the format into its own reference doc lets it be linked from both the onboarding standard and the per-commit checklist without duplication.
 
 ## How it's maintained
 

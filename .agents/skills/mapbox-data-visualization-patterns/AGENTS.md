@@ -60,10 +60,10 @@ map.addLayer({
       50,
       '#7fcdff',
       100,
-      '#0080ff' // High
+      '#0080ff', // High
     ],
-    'fill-opacity': 0.75
-  }
+    'fill-opacity': 0.75,
+  },
 });
 ```
 
@@ -108,10 +108,10 @@ map.addLayer({
       0.8,
       'rgb(239,138,98)',
       1,
-      'rgb(178,24,43)'
+      'rgb(178,24,43)',
     ],
-    'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 0, 2, 15, 20]
-  }
+    'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 0, 2, 15, 20],
+  },
 });
 
 // Show individual points at high zoom
@@ -122,8 +122,8 @@ map.addLayer({
   minzoom: 14,
   paint: {
     'circle-radius': 6,
-    'circle-color': '#ff4444'
-  }
+    'circle-color': '#ff4444',
+  },
 });
 ```
 
@@ -138,7 +138,7 @@ map.addSource('points', {
   data: data,
   cluster: true,
   clusterMaxZoom: 14, // Max zoom to cluster points on
-  clusterRadius: 50 // Radius of each cluster when clustering points (default 50)
+  clusterRadius: 50, // Radius of each cluster when clustering points (default 50)
 });
 
 // Clusters - sized by point count
@@ -149,8 +149,8 @@ map.addLayer({
   filter: ['has', 'point_count'],
   paint: {
     'circle-color': ['step', ['get', 'point_count'], '#51bbd6', 10, '#f1f075', 30, '#f28cb1'],
-    'circle-radius': ['step', ['get', 'point_count'], 20, 10, 30, 30, 40]
-  }
+    'circle-radius': ['step', ['get', 'point_count'], 20, 10, 30, 30, 40],
+  },
 });
 
 // Cluster count labels
@@ -162,8 +162,8 @@ map.addLayer({
   layout: {
     'text-field': ['get', 'point_count_abbreviated'],
     'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-    'text-size': 12
-  }
+    'text-size': 12,
+  },
 });
 
 // Unclustered points
@@ -176,8 +176,8 @@ map.addLayer({
     'circle-color': '#11b4da',
     'circle-radius': 6,
     'circle-stroke-width': 1,
-    'circle-stroke-color': '#fff'
-  }
+    'circle-stroke-color': '#fff',
+  },
 });
 
 // Click to expand clusters
@@ -206,12 +206,32 @@ map.addLayer({
   type: 'circle',
   source: 'data',
   paint: {
-    'circle-radius': ['interpolate', ['exponential', 2], ['get', 'magnitude'], 0, 2, 5, 20, 10, 100],
-    'circle-color': ['interpolate', ['linear'], ['get', 'magnitude'], 0, '#ffffcc', 50, '#78c679', 100, '#006837'],
+    'circle-radius': [
+      'interpolate',
+      ['exponential', 2],
+      ['get', 'magnitude'],
+      0,
+      2,
+      5,
+      20,
+      10,
+      100,
+    ],
+    'circle-color': [
+      'interpolate',
+      ['linear'],
+      ['get', 'magnitude'],
+      0,
+      '#ffffcc',
+      50,
+      '#78c679',
+      100,
+      '#006837',
+    ],
     'circle-opacity': 0.7,
     'circle-stroke-color': '#fff',
-    'circle-stroke-width': 1
-  }
+    'circle-stroke-width': 1,
+  },
 });
 ```
 
@@ -226,7 +246,9 @@ map.addLayer({
 map.on('load', () => {
   // Insert the layer beneath any symbol layer
   const layers = map.getStyle().layers;
-  const labelLayerId = layers.find((layer) => layer.type === 'symbol' && layer.layout['text-field']).id;
+  const labelLayerId = layers.find(
+    (layer) => layer.type === 'symbol' && layer.layout['text-field']
+  ).id;
 
   map.addLayer(
     {
@@ -238,10 +260,26 @@ map.on('load', () => {
       minzoom: 15,
       paint: {
         'fill-extrusion-color': '#aaa',
-        'fill-extrusion-height': ['interpolate', ['linear'], ['zoom'], 15, 0, 15.05, ['get', 'height']],
-        'fill-extrusion-base': ['interpolate', ['linear'], ['zoom'], 15, 0, 15.05, ['get', 'min_height']],
-        'fill-extrusion-opacity': 0.6
-      }
+        'fill-extrusion-height': [
+          'interpolate',
+          ['linear'],
+          ['zoom'],
+          15,
+          0,
+          15.05,
+          ['get', 'height'],
+        ],
+        'fill-extrusion-base': [
+          'interpolate',
+          ['linear'],
+          ['zoom'],
+          15,
+          0,
+          15.05,
+          ['get', 'min_height'],
+        ],
+        'fill-extrusion-opacity': 0.6,
+      },
     },
     labelLayerId
   );
@@ -272,10 +310,10 @@ map.addLayer({
       100,
       '#e64a45',
       200,
-      '#a63e3e'
+      '#a63e3e',
     ],
-    'fill-extrusion-opacity': 0.9
-  }
+    'fill-extrusion-opacity': 0.9,
+  },
 });
 ```
 
@@ -299,9 +337,9 @@ map.addLayer({
       30,
       '#fee08b', // Moderate
       60,
-      '#1a9850' // Free flow
-    ]
-  }
+      '#1a9850', // Free flow
+    ],
+  },
 });
 ```
 
@@ -343,14 +381,14 @@ setInterval(async () => {
 ```javascript
 map.addSource('large-data', {
   type: 'vector',
-  tiles: ['https://example.com/{z}/{x}/{y}.mvt']
+  tiles: ['https://example.com/{z}/{x}/{y}.mvt'],
 });
 
 map.addLayer({
   id: 'data',
   type: 'fill',
   source: 'large-data',
-  'source-layer': 'layer-name'
+  'source-layer': 'layer-name',
 });
 ```
 

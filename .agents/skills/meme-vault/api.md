@@ -4,10 +4,10 @@ Next.js route handlers under `forge-modules/meme-vault/src/app/api/`. Backed by 
 
 ## Connection Details
 
-| Setting      | Value                                                          |
-| ------------ | --------------------------------------------------------------- |
-| **Base URL** | The Next.js app origin (e.g. `http://localhost:3000`)            |
-| **Auth**     | None on the routes themselves; Google login issues a Supabase session token for the UI |
+| Setting      | Value                                                                                                                                                              |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Base URL** | The Next.js app origin (e.g. `http://localhost:3000`)                                                                                                              |
+| **Auth**     | None on the routes themselves; Google login issues a Supabase session token for the UI                                                                             |
 | **Env**      | `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `GITHUB_TOKEN`, `NEXT_PUBLIC_GITHUB_REPO`, `NEXT_PUBLIC_GITHUB_BRANCH`, `INSTAGRAM_ACCESS_TOKEN` in `.env`/`.env.development` |
 
 ## Auth
@@ -66,11 +66,11 @@ Delete a clip everywhere — Supabase row, GitHub assets, Instagram reel (synchr
 
 ## Jobs table (worker contract)
 
-| Field    | Value                                          |
-| -------- | ----------------------------------------------- |
-| `type`   | `create` \| `update`                            |
-| `status` | `pending` → `processing` → `completed`/`failed` |
-| `payload`| CreateJobPayload / UpdateJobPayload (see `src/types/clip.ts`) |
-| `user`   | Requesting user                                 |
+| Field     | Value                                                         |
+| --------- | ------------------------------------------------------------- |
+| `type`    | `create` \| `update`                                          |
+| `status`  | `pending` → `processing` → `completed`/`failed`               |
+| `payload` | CreateJobPayload / UpdateJobPayload (see `src/types/clip.ts`) |
+| `user`    | Requesting user                                               |
 
 The worker (`worker/`) polls `jobs` for `pending` rows and runs the media pipeline locally.

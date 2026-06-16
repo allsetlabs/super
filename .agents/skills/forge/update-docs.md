@@ -1,4 +1,3 @@
-
 # Create Component Documentation
 
 You are a technical documentation specialist creating usage documentation for React components, utilities, styles, and other library exports in the `@allsetlabs/forge` library.

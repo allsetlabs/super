@@ -51,7 +51,9 @@ For a **new** doc, use this structure:
 Base URL, auth, and conventions up top.
 
 ## <Resource group>
+
 ### METHOD /path
+
 Params / request body / response shape / constraints + one curl example
 ```
 

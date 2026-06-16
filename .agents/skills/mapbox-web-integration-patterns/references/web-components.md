@@ -47,14 +47,14 @@ class MapboxMap extends HTMLElement {
       container: this,
       style: mapStyle,
       center: center,
-      zoom: zoom
+      zoom: zoom,
     });
 
     // Dispatch custom event when map loads
     this.map.on('load', () => {
       this.dispatchEvent(
         new CustomEvent('mapload', {
-          detail: { map: this.map }
+          detail: { map: this.map },
         })
       );
     });
@@ -153,8 +153,8 @@ export default {
   methods: {
     handleMapLoad(e) {
       const map = e.detail.map; /* interact */
-    }
-  }
+    },
+  },
 };
 </script>
 ```
@@ -194,7 +194,7 @@ class MapboxMapReactive extends HTMLElement {
       container: this,
       style: this.getAttribute('map-style') || 'mapbox://styles/mapbox/standard',
       center: this.getAttribute('center')?.split(',').map(Number) || [0, 0],
-      zoom: parseFloat(this.getAttribute('zoom')) || 9
+      zoom: parseFloat(this.getAttribute('zoom')) || 9,
     });
   }
 

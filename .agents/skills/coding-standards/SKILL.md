@@ -53,19 +53,19 @@ bg-[#3b82f6]                                 # No arbitrary hex values
 
 ## How to Detect and Auto-Fix Each Rule
 
-| Rule | How to detect | How to fix |
-| --- | --- | --- |
-| **TypeScript strict** | Grep for `: any` and `as any` in `.ts` and `.tsx` files | Replace with the correct specific type (or `unknown` + narrowing) |
-| **Components < 200 lines** | Count lines in all `.tsx` files under `components/` directories; flag any over 200 | Split into smaller sub-components |
-| **Exact package versions** | Check `package.json` files for `^` or `~` in dependency versions | Remove `^` and `~` prefixes to pin exact versions |
-| **No barrel exports** | Grep for `export { ... } from` and `export * from` in `index.ts`/`index.tsx` files | Delete the barrel file. Update all imports to point directly to the source file |
-| **No default exports** | Grep for `export default` in all `.ts` and `.tsx` files | Convert to named export. Update all imports to use named imports. For lazy loading, use `React.lazy(() => import('./Foo').then(m => ({ default: m.Foo })))` |
-| **No native HTML for UI** | Grep for raw `<button`, `<input`, `<dialog`, `<select`, `<textarea` in `.tsx` files (exclude the component library itself) | Replace with the equivalent component from the project's shared component library |
-| **Always paginate lists** | Flag any `.map(` rendering without a pagination wrapper nearby | Wrap in a pagination component |
-| **Filters in URL params** | Grep for `useState` paired with filter/sort/search patterns not using `useSearchParams` | Refactor filter state to use `useSearchParams`/`useRouter` |
-| **TanStack Query for data** | Grep for `useState.*useEffect` fetch patterns not using `useQuery`/`useMutation` | Refactor to `useQuery` for reads and `useMutation` for writes |
-| **No default env vars** | Grep for `process.env.\w+ \|\|`, `process.env.\w+ \?\?`, `os.environ.get\(.*,`, `env.get\(.*,` with fallback values in `.ts`, `.tsx`, `.py` files | Remove the fallback. Add the env var to a startup validation block that exits the process if missing |
-| **Custom colors only** (if palette exists) | Grep for default Tailwind colors: `bg-blue-`, `text-red-`, `border-gray-`, etc. in `.tsx`/`.css` files | Replace with the closest named token from the project's palette |
+| Rule                                       | How to detect                                                                                                                                     | How to fix                                                                                                                                                  |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **TypeScript strict**                      | Grep for `: any` and `as any` in `.ts` and `.tsx` files                                                                                           | Replace with the correct specific type (or `unknown` + narrowing)                                                                                           |
+| **Components < 200 lines**                 | Count lines in all `.tsx` files under `components/` directories; flag any over 200                                                                | Split into smaller sub-components                                                                                                                           |
+| **Exact package versions**                 | Check `package.json` files for `^` or `~` in dependency versions                                                                                  | Remove `^` and `~` prefixes to pin exact versions                                                                                                           |
+| **No barrel exports**                      | Grep for `export { ... } from` and `export * from` in `index.ts`/`index.tsx` files                                                                | Delete the barrel file. Update all imports to point directly to the source file                                                                             |
+| **No default exports**                     | Grep for `export default` in all `.ts` and `.tsx` files                                                                                           | Convert to named export. Update all imports to use named imports. For lazy loading, use `React.lazy(() => import('./Foo').then(m => ({ default: m.Foo })))` |
+| **No native HTML for UI**                  | Grep for raw `<button`, `<input`, `<dialog`, `<select`, `<textarea` in `.tsx` files (exclude the component library itself)                        | Replace with the equivalent component from the project's shared component library                                                                           |
+| **Always paginate lists**                  | Flag any `.map(` rendering without a pagination wrapper nearby                                                                                    | Wrap in a pagination component                                                                                                                              |
+| **Filters in URL params**                  | Grep for `useState` paired with filter/sort/search patterns not using `useSearchParams`                                                           | Refactor filter state to use `useSearchParams`/`useRouter`                                                                                                  |
+| **TanStack Query for data**                | Grep for `useState.*useEffect` fetch patterns not using `useQuery`/`useMutation`                                                                  | Refactor to `useQuery` for reads and `useMutation` for writes                                                                                               |
+| **No default env vars**                    | Grep for `process.env.\w+ \|\|`, `process.env.\w+ \?\?`, `os.environ.get\(.*,`, `env.get\(.*,` with fallback values in `.ts`, `.tsx`, `.py` files | Remove the fallback. Add the env var to a startup validation block that exits the process if missing                                                        |
+| **Custom colors only** (if palette exists) | Grep for default Tailwind colors: `bg-blue-`, `text-red-`, `border-gray-`, etc. in `.tsx`/`.css` files                                            | Replace with the closest named token from the project's palette                                                                                             |
 
 ---
 
@@ -117,10 +117,10 @@ Fix lint errors automatically with `--fix`. Report remaining type errors.
 
 Load the guide matching the task:
 
-| Guide | File | When to load |
-|-------|------|--------------|
-| TypeScript clean code | [typescript.md](typescript.md) | Variables, functions, classes, SOLID, error handling, TS best practices |
-| React clean code | [react.md](react.md) | Component/hook patterns, API integration, state management, anti-patterns |
-| Pagination & filtering | [pagination.md](pagination.md) | Building any list view — pagination strategy, URL-param filters |
-| iOS patterns | [ios-patterns.md](ios-patterns.md) | iOS Safari / Capacitor WebView quirks (date/time pickers, etc.) |
-| Page size (200-line limit) | [page-size.md](page-size.md) | A page/component exceeds 200 lines — extraction strategies |
+| Guide                      | File                               | When to load                                                              |
+| -------------------------- | ---------------------------------- | ------------------------------------------------------------------------- |
+| TypeScript clean code      | [typescript.md](typescript.md)     | Variables, functions, classes, SOLID, error handling, TS best practices   |
+| React clean code           | [react.md](react.md)               | Component/hook patterns, API integration, state management, anti-patterns |
+| Pagination & filtering     | [pagination.md](pagination.md)     | Building any list view — pagination strategy, URL-param filters           |
+| iOS patterns               | [ios-patterns.md](ios-patterns.md) | iOS Safari / Capacitor WebView quirks (date/time pickers, etc.)           |
+| Page size (200-line limit) | [page-size.md](page-size.md)       | A page/component exceeds 200 lines — extraction strategies                |

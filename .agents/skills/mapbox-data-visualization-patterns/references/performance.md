@@ -17,7 +17,7 @@ map.addSource('large-dataset', {
   type: 'vector',
   tiles: ['https://example.com/tiles/{z}/{x}/{y}.mvt'],
   minzoom: 0,
-  maxzoom: 14
+  maxzoom: 14,
 });
 
 map.addLayer({
@@ -27,8 +27,8 @@ map.addLayer({
   'source-layer': 'data-layer-name', // Layer name in the tileset
   paint: {
     'fill-color': ['get', 'color'],
-    'fill-opacity': 0.7
-  }
+    'fill-opacity': 0.7,
+  },
 });
 ```
 
@@ -41,7 +41,7 @@ map.on('load', () => {
   map.addSource('states', {
     type: 'geojson',
     data: statesData,
-    generateId: true // Important for feature state
+    generateId: true, // Important for feature state
   });
 
   map.addLayer({
@@ -53,9 +53,9 @@ map.on('load', () => {
         'case',
         ['boolean', ['feature-state', 'hover'], false],
         '#ff0000', // Hover color
-        '#3b9ddd' // Default color
-      ]
-    }
+        '#3b9ddd', // Default color
+      ],
+    },
   });
 
   let hoveredStateId = null;
@@ -90,7 +90,7 @@ map.on('load', () => {
 map.on('load', () => {
   map.addSource('all-data', {
     type: 'geojson',
-    data: largeDataset
+    data: largeDataset,
   });
 
   map.addLayer({
@@ -100,8 +100,8 @@ map.on('load', () => {
     filter: ['>=', ['get', 'value'], 50], // Only show values >= 50
     paint: {
       'circle-radius': 6,
-      'circle-color': '#ff4444'
-    }
+      'circle-color': '#ff4444',
+    },
   });
 
   // Update filter dynamically
@@ -141,7 +141,7 @@ const visibleData = allData.features.filter((feature) => isFeatureInBounds(featu
 
 map.getSource('data-source').setData({
   type: 'FeatureCollection',
-  features: visibleData
+  features: visibleData,
 });
 
 // Reload on map move with debouncing
@@ -154,7 +154,7 @@ map.on('moveend', () => {
 
     map.getSource('data-source').setData({
       type: 'FeatureCollection',
-      features: visibleData
+      features: visibleData,
     });
   }, 150);
 });

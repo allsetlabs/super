@@ -106,7 +106,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 ```javascript
 // vitest.config.js or jest.config.js
 export default {
-  setupFiles: ['./test/setup.js']
+  setupFiles: ['./test/setup.js'],
 };
 ```
 
@@ -118,10 +118,10 @@ vi.mock('mapbox-gl', () => ({
       on: vi.fn(),
       remove: vi.fn(),
       setCenter: vi.fn(),
-      setZoom: vi.fn()
+      setZoom: vi.fn(),
     })),
-    accessToken: ''
-  }
+    accessToken: '',
+  },
 }));
 ```
 

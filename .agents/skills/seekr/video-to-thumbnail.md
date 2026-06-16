@@ -1,4 +1,3 @@
-
 # Video to Thumbnail
 
 Extract a thumbnail image from a video at a specific timestamp.

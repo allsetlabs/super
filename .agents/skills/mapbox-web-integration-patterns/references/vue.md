@@ -19,7 +19,7 @@ export default {
       container: this.$refs.mapContainer,
       style: 'mapbox://styles/mapbox/standard',
       center: [-71.05953, 42.3629],
-      zoom: 13
+      zoom: 13,
     });
 
     // Assign map instance to component property
@@ -30,7 +30,7 @@ export default {
   unmounted() {
     this.map.remove();
     this.map = null;
-  }
+  },
 };
 </script>
 

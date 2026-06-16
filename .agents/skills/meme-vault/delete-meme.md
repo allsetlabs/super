@@ -1,4 +1,3 @@
-
 # Delete Meme Command
 
 Delete a meme from Meme Vault. This removes the clip from:

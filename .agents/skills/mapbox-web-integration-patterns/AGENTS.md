@@ -69,7 +69,7 @@ function MapComponent() {
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v12',
       center: [-122.4, 37.8],
-      zoom: 12
+      zoom: 12,
     });
 
     return () => map.current.remove();
@@ -116,7 +116,7 @@ export default {
     onMounted(() => {
       map = new mapboxgl.Map({
         container: mapContainer.value,
-        style: 'mapbox://styles/mapbox/streets-v12'
+        style: 'mapbox://styles/mapbox/streets-v12',
       });
     });
 
@@ -125,7 +125,7 @@ export default {
     });
 
     return { mapContainer };
-  }
+  },
 };
 ```
 
@@ -162,7 +162,7 @@ import mapboxgl from 'mapbox-gl';
 
 @Component({
   selector: 'app-map',
-  template: '<div #mapContainer></div>'
+  template: '<div #mapContainer></div>',
 })
 export class MapComponent implements OnInit, OnDestroy {
   @ViewChild('mapContainer', { static: true }) mapContainer!: ElementRef;
@@ -171,7 +171,7 @@ export class MapComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.map = new mapboxgl.Map({
       container: this.mapContainer.nativeElement,
-      style: 'mapbox://styles/mapbox/streets-v12'
+      style: 'mapbox://styles/mapbox/streets-v12',
     });
   }
 

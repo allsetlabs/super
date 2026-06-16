@@ -1,4 +1,3 @@
-
 # Upload Instagram Meme Vault Clip
 
 Upload a meme vault clip to Instagram as a Reel.

@@ -114,8 +114,8 @@ function normalizeData(features, property) {
       ...feature,
       properties: {
         ...feature.properties,
-        normalized: 0.5
-      }
+        normalized: 0.5,
+      },
     }));
   }
 
@@ -123,8 +123,8 @@ function normalizeData(features, property) {
     ...feature,
     properties: {
       ...feature.properties,
-      normalized: (feature.properties[property] - min) / range
-    }
+      normalized: (feature.properties[property] - min) / range,
+    },
   }));
 }
 ```
@@ -148,7 +148,7 @@ map.addLayer({
       '#ef4444',
       'independent',
       '#a855f7',
-      '#94a3b8' // No data
+      '#94a3b8', // No data
     ],
     'fill-opacity': [
       'interpolate',
@@ -157,9 +157,9 @@ map.addLayer({
       0,
       0.3, // Close race: light
       20,
-      0.9 // Landslide: dark
-    ]
-  }
+      0.9, // Landslide: dark
+    ],
+  },
 });
 ```
 
@@ -186,9 +186,9 @@ map.addLayer({
       0.05,
       '#e31a1c',
       0.1,
-      '#b10026'
-    ]
-  }
+      '#b10026',
+    ],
+  },
 });
 ```
 
@@ -200,7 +200,17 @@ map.addLayer({
   type: 'circle',
   source: 'properties',
   paint: {
-    'circle-radius': ['interpolate', ['exponential', 2], ['get', 'price'], 100000, 5, 1000000, 20, 10000000, 50],
+    'circle-radius': [
+      'interpolate',
+      ['exponential', 2],
+      ['get', 'price'],
+      100000,
+      5,
+      1000000,
+      20,
+      10000000,
+      50,
+    ],
     'circle-color': [
       'interpolate',
       ['linear'],
@@ -214,11 +224,11 @@ map.addLayer({
       600,
       '#2c7fb8',
       800,
-      '#253494'
+      '#253494',
     ],
     'circle-opacity': 0.6,
     'circle-stroke-color': '#ffffff',
-    'circle-stroke-width': 1
-  }
+    'circle-stroke-width': 1,
+  },
 });
 ```

@@ -1,4 +1,3 @@
-
 # Google OAuth Authentication
 
 Add Google OAuth authentication to any app using the shared component library pattern.

@@ -12,7 +12,7 @@ let animationId;
 map.on('load', () => {
   map.addSource('hourly-data', {
     type: 'geojson',
-    data: getDataForTime(currentTime)
+    data: getDataForTime(currentTime),
   });
 
   map.addLayer({
@@ -21,8 +21,8 @@ map.on('load', () => {
     source: 'hourly-data',
     paint: {
       'circle-radius': 8,
-      'circle-color': ['get', 'color']
-    }
+      'circle-color': ['get', 'color'],
+    },
   });
 
   // Animation loop
@@ -53,7 +53,7 @@ function getDataForTime(hour) {
   // Fetch or generate data for specific time
   return {
     type: 'FeatureCollection',
-    features: data.filter((d) => d.properties.hour === hour)
+    features: data.filter((d) => d.properties.hour === hour),
   };
 }
 ```
@@ -68,8 +68,8 @@ map.on('load', () => {
     type: 'geojson',
     data: {
       type: 'FeatureCollection',
-      features: []
-    }
+      features: [],
+    },
   });
 
   map.addLayer({
@@ -78,8 +78,8 @@ map.on('load', () => {
     source: 'live-data',
     paint: {
       'circle-radius': 6,
-      'circle-color': '#ff4444'
-    }
+      'circle-color': '#ff4444',
+    },
   });
 
   // Poll for updates every 5 seconds
@@ -118,6 +118,14 @@ function updateVisualization(newData) {
   map.setPaintProperty('data-layer', 'circle-radius', targetRadius);
 
   // Or use expressions for smooth interpolation
-  map.setPaintProperty('data-layer', 'circle-radius', ['interpolate', ['linear'], ['get', 'value'], 0, 2, 100, 20]);
+  map.setPaintProperty('data-layer', 'circle-radius', [
+    'interpolate',
+    ['linear'],
+    ['get', 'value'],
+    0,
+    2,
+    100,
+    20,
+  ]);
 }
 ```

@@ -10,27 +10,35 @@ Recommended structure:
 # <Project Name>
 
 ## Purpose
+
 What this project is for, in 2-4 sentences.
 
 ## Mental Model
+
 How the major pieces work together, including external services and runtime flow.
 
 ## Where Things Go
+
 Short directory guide with ownership/routing rules. Explain why a directory matters; do not paste a full tree unless the structure is unusual.
 
 ## Development Commands
+
 Install, lint, type-check, test, build, and start commands. Include the command agents should run before calling work done.
 
 ## Architecture Conventions
+
 Database patterns, API patterns, component patterns, naming rules, file-size rules, and dependency rules that are easy to violate.
 
 ## Hard Rules
+
 Things agents must always do or must never do. Examples: never restart a live worker, never edit generated files, never write plugin UI in the app shell.
 
 ## Testing Expectations
+
 Automated checks and any required manual/visual checks.
 
 ## Related Docs
+
 Links to deeper docs, API references, or subsystem `AGENTS.md`/`CLAUDE.md` files.
 ```
 

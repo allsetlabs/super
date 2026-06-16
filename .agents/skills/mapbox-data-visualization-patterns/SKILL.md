@@ -32,7 +32,7 @@ map.on('load', () => {
   // Add data source (GeoJSON with properties)
   map.addSource('states', {
     type: 'geojson',
-    data: 'https://example.com/states.geojson' // Features with population property
+    data: 'https://example.com/states.geojson', // Features with population property
   });
 
   // Add fill layer with data-driven color
@@ -54,10 +54,10 @@ map.on('load', () => {
         5000000,
         '#0040bf', // Dark blue for high population
         10000000,
-        '#001f5c'
+        '#001f5c',
       ],
-      'fill-opacity': 0.75
-    }
+      'fill-opacity': 0.75,
+    },
   });
 
   // Add border layer
@@ -67,14 +67,14 @@ map.on('load', () => {
     source: 'states',
     paint: {
       'line-color': '#ffffff',
-      'line-width': 1
-    }
+      'line-width': 1,
+    },
   });
 
   // Add hover effect with reusable popup
   const popup = new mapboxgl.Popup({
     closeButton: false,
-    closeOnClick: false
+    closeOnClick: false,
   });
 
   map.on('mousemove', 'states-layer', (e) => {
@@ -158,15 +158,15 @@ map.on('load', () => {
           type: 'Feature',
           geometry: {
             type: 'Point',
-            coordinates: [-122.4194, 37.7749]
+            coordinates: [-122.4194, 37.7749],
           },
           properties: {
-            intensity: 1
-          }
-        }
+            intensity: 1,
+          },
+        },
         // ... more points
-      ]
-    }
+      ],
+    },
   });
 
   // Add heatmap layer
@@ -196,13 +196,13 @@ map.on('load', () => {
         0.8,
         'rgb(239,138,98)',
         1,
-        'rgb(178,24,43)'
+        'rgb(178,24,43)',
       ],
       // Adjust radius by zoom level
       'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 0, 2, 15, 20],
       // Decrease opacity at higher zoom levels
-      'heatmap-opacity': ['interpolate', ['linear'], ['zoom'], 7, 1, 15, 0]
-    }
+      'heatmap-opacity': ['interpolate', ['linear'], ['zoom'], 7, 1, 15, 0],
+    },
   });
 
   // Add circle layer for individual points at high zoom
@@ -216,8 +216,8 @@ map.on('load', () => {
       'circle-color': '#ff4444',
       'circle-opacity': 0.8,
       'circle-stroke-color': '#fff',
-      'circle-stroke-width': 1
-    }
+      'circle-stroke-width': 1,
+    },
   });
 });
 ```
@@ -250,7 +250,7 @@ const qualitativeScale = ['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00']
 map.on('load', () => {
   map.addSource('data', {
     type: 'geojson',
-    data: dataUrl
+    data: dataUrl,
   });
 
   map.addLayer({
@@ -262,9 +262,9 @@ map.on('load', () => {
         'case',
         ['has', 'value'], // Check if property exists
         ['interpolate', ['linear'], ['get', 'value'], 0, '#f0f0f0', 100, '#0080ff'],
-        '#cccccc' // Default color for missing data
-      ]
-    }
+        '#cccccc', // Default color for missing data
+      ],
+    },
   });
 
   // Handle map errors

@@ -15,11 +15,11 @@ map.on('load', () => {
       type: 'FeatureCollection',
       features: [
         // Your point features
-      ]
+      ],
     },
     cluster: true,
     clusterMaxZoom: 14, // Max zoom to cluster points
-    clusterRadius: 50 // Radius of each cluster (default 50)
+    clusterRadius: 50, // Radius of each cluster (default 50)
   });
 
   // Clustered circles - styled by point count
@@ -32,8 +32,8 @@ map.on('load', () => {
       // Color clusters by count (step expression)
       'circle-color': ['step', ['get', 'point_count'], '#51bbd6', 10, '#f1f075', 30, '#f28cb1'],
       // Size clusters by count
-      'circle-radius': ['step', ['get', 'point_count'], 20, 10, 30, 30, 40]
-    }
+      'circle-radius': ['step', ['get', 'point_count'], 20, 10, 30, 30, 40],
+    },
   });
 
   // Cluster count labels
@@ -45,8 +45,8 @@ map.on('load', () => {
     layout: {
       'text-field': ['get', 'point_count_abbreviated'],
       'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-      'text-size': 12
-    }
+      'text-size': 12,
+    },
   });
 
   // Individual unclustered points
@@ -59,14 +59,14 @@ map.on('load', () => {
       'circle-color': '#11b4da',
       'circle-radius': 6,
       'circle-stroke-width': 1,
-      'circle-stroke-color': '#fff'
-    }
+      'circle-stroke-color': '#fff',
+    },
   });
 
   // Click handler to expand clusters
   map.on('click', 'clusters', (e) => {
     const features = map.queryRenderedFeatures(e.point, {
-      layers: ['clusters']
+      layers: ['clusters'],
     });
     const clusterId = features[0].properties.cluster_id;
 
@@ -76,7 +76,7 @@ map.on('load', () => {
 
       map.easeTo({
         center: features[0].geometry.coordinates,
-        zoom: zoom
+        zoom: zoom,
       });
     });
   });

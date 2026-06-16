@@ -1,4 +1,3 @@
-
 # Video to GIF
 
 Convert a video to an animated GIF with high quality palette optimization.

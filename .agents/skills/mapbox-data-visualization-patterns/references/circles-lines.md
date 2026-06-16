@@ -10,7 +10,7 @@
 map.on('load', () => {
   map.addSource('earthquakes', {
     type: 'geojson',
-    data: 'https://example.com/earthquakes.geojson'
+    data: 'https://example.com/earthquakes.geojson',
   });
 
   // Size by magnitude, color by depth
@@ -35,12 +35,12 @@ map.on('load', () => {
         200,
         '#2c7fb8',
         300,
-        '#253494'
+        '#253494',
       ],
       'circle-stroke-color': '#ffffff',
       'circle-stroke-width': 1,
-      'circle-opacity': 0.75
-    }
+      'circle-opacity': 0.75,
+    },
   });
 
   // Add popup on click
@@ -70,7 +70,7 @@ map.on('load', () => {
 map.on('load', () => {
   map.addSource('traffic', {
     type: 'geojson',
-    data: 'https://example.com/traffic.geojson'
+    data: 'https://example.com/traffic.geojson',
   });
 
   // Traffic flow with data-driven styling
@@ -80,7 +80,17 @@ map.on('load', () => {
     source: 'traffic',
     paint: {
       // Width by traffic volume
-      'line-width': ['interpolate', ['exponential', 2], ['get', 'volume'], 0, 1, 1000, 5, 10000, 15],
+      'line-width': [
+        'interpolate',
+        ['exponential', 2],
+        ['get', 'volume'],
+        0,
+        1,
+        1000,
+        5,
+        10000,
+        15,
+      ],
       // Color by speed (congestion)
       'line-color': [
         'interpolate',
@@ -97,10 +107,10 @@ map.on('load', () => {
         60,
         '#91cf60', // Green: free flow
         75,
-        '#1a9850'
+        '#1a9850',
       ],
-      'line-opacity': 0.8
-    }
+      'line-opacity': 0.8,
+    },
   });
 });
 ```

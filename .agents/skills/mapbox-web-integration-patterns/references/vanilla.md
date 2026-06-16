@@ -21,7 +21,7 @@ function initMap() {
   map = new mapboxgl.Map({
     container: 'map-container',
     center: [-71.05953, 42.3629],
-    zoom: 13
+    zoom: 13,
   });
 
   map.on('load', () => {
@@ -98,7 +98,7 @@ initMap();
         map = new mapboxgl.Map({
           container: 'map-container',
           center: [-71.05953, 42.3629],
-          zoom: 13
+          zoom: 13,
         });
 
         map.on('load', () => {

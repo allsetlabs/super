@@ -1,4 +1,3 @@
-
 # Create Meme - Complete Pipeline
 
 Complete meme creation pipeline from YouTube URL. All steps are mandatory.

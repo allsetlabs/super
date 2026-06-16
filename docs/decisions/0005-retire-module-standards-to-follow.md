@@ -19,4 +19,4 @@
 ## How it's maintained
 
 - This amends [0004](0004-standards-directory.md)'s "How it's maintained" note that `module-standards-to-follow.md` stays as the top-level checklist — it's now retired.
-- New cross-cutting *standards* (things every module must have, checked independently of a sync command) go in `.agents/skills/super/standards/`, with a numbered entry added to root `AGENTS.md`'s `## Standards` list and a row in `SKILL.md`'s reference table. Requirements already covered by a `super` skill operation (like `sync-api`) don't get a separate entry.
+- New cross-cutting _standards_ (things every module must have, checked independently of a sync command) go in `.agents/skills/super/standards/`, with a numbered entry added to root `AGENTS.md`'s `## Standards` list and a row in `SKILL.md`'s reference table. Requirements already covered by a `super` skill operation (like `sync-api`) don't get a separate entry.
