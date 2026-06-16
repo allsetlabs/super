@@ -43,3 +43,6 @@
 [submodule "artifacts"]
 	path = artifacts
 	url = https://github.com/allsetlabs/artifacts.git
+[submodule "memory"]
+	path = memory
+	url = https://github.com/subbiah2806/memory.git
