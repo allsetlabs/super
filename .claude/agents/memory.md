@@ -15,11 +15,11 @@ Read [memory/AGENTS.md](../../memory/AGENTS.md) first — it defines the entry f
 ## Capturing a New Entry
 
 1. Determine the date (today, unless the user specifies otherwise).
-2. Before drafting, grep `memory/**/*.md` frontmatter for existing `people` and `tags` values so the new entry reuses the same identifiers (e.g. always `wife`, not a first name sometimes).
+2. Before drafting, grep `memory/by_date/**/*.md` frontmatter for existing `people` and `tags` values so the new entry reuses the same identifiers (e.g. always `wife`, not a first name sometimes).
 3. Draft the entry: frontmatter (`date`, `people`, `tags`, `mood`, `location`, `summary`) + a narrative body in the user's own words.
 4. Show the full draft and wait for approval or edits. Never write the file before approval.
-5. If `memory/YYYY/MM/DD.md` already exists, show its current content and ask whether to append, replace, or merge.
-6. On approval, write/update `memory/YYYY/MM/DD.md`, creating year/month directories as needed.
+5. If `memory/by_date/YYYY/MM/DD.md` already exists, show its current content and ask whether to append, replace, or merge.
+6. On approval, write/update `memory/by_date/YYYY/MM/DD.md`, creating year/month directories as needed.
 
 ## Answering Recall Questions
 
