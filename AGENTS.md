@@ -27,7 +27,9 @@ If that module has a same-named agent under `.claude/agents/` (e.g. `memory/` �
    1.1 Once the module is added, onboard it per the Standards above, then run the `super` skill operations `sync-api` and `sync-docs` scoped to the newly added module directory.
 2. **Before any git operation** (commit, push, branch, merge) — read and follow the `git-workflow` skill.
 3. **Coding standards** — all rules live in the `coding-standards` skill. Run `/fix-coding-standards` to auto-fix.
-4. **On every code change** — run the relevant module's available validation commands before considering the change done. Linting is centralized at the super repo root (`npm run lint`); many modules intentionally do not have a local `npm run lint`.
-   4.1 **Before committing** — determine whether docs need to sync: if the module's code changed, run the `super` skill's `sync-docs` operation (scoped to that module) to update `docs/<module>/index.md`. If backend/API code was edited, also run `sync-api` to keep that module's skill `api.md` current.
-   4.2 **Before committing** — if this session made a non-obvious, hard-to-reverse decision (architecture, library choice, directory layout, API pattern, cross-module convention), record it as an ADR per the Decision records standard above, before, or in the same commit as, the change that depends on it.
+4. **On every code change**, run these steps before committing:
+   1. `npm run lint` — linting is centralized at the super repo root; many modules do not have a local lint command.
+   2. `sync-docs` (`super` skill) — update `docs/<module>/index.md` for any module whose code changed.
+   3. `sync-api` (`super` skill) — run only if backend or API code was edited, to keep that module's `api.md` current.
+   4. `standards/decision-records.md` (`super` skill) — if this session made a non-obvious, hard-to-reverse decision (architecture, library choice, directory layout, API pattern, cross-module convention), record it as an ADR before or in the same commit as the change.
 5. **Visual testing** — if the change has a visual component (web app, UI), open the page with Chrome MCP tools (`mcp__claude-in-chrome__*`), test it visually, and check the console. If anything looks odd, errors in the console, or doesn't work, fix and re-test — iterate until the goal is reached.
