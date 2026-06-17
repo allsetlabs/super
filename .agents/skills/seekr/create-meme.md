@@ -26,7 +26,7 @@ Complete meme creation pipeline from YouTube URL. All steps are mandatory.
 ## Command
 
 ```bash
-cd forge-modules/meme-vault && npx tsx independent_node_skills/create-meme.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/create-meme.ts \
   --url <youtube-url> --start <seconds> --stop <seconds>
 ```
 
@@ -67,11 +67,11 @@ SUPABASE_ANON_KEY         Supabase anon key
 
 ```bash
 # Basic usage
-cd forge-modules/meme-vault && npx tsx independent_node_skills/create-meme.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/create-meme.ts \
   --url "https://youtube.com/watch?v=abc123" --start 10 --stop 25
 
 # With caption and metadata
-cd forge-modules/meme-vault && npx tsx independent_node_skills/create-meme.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/create-meme.ts \
   --url "https://youtube.com/watch?v=abc123" \
   --start 10 --stop 25 --caption "Ennada!" \
   --name "Funny Clip" --tags "comedy,tamil"

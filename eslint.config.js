@@ -33,12 +33,12 @@ export default tseslint.config(
       globals: globals.browser,
       parserOptions: {
         project: [
-          './forge-modules/*/tsconfig.json',
-          './forge-modules/*/tsconfig.app.json',
-          './forge-modules/*/tsconfig.node.json',
-          './forge-modules/**/*/tsconfig.json',
-          './forge-modules/**/*/tsconfig.app.json',
-          './forge-modules/**/*/tsconfig.node.json',
+          './modules/forge-modules/*/tsconfig.json',
+          './modules/forge-modules/*/tsconfig.app.json',
+          './modules/forge-modules/*/tsconfig.node.json',
+          './modules/forge-modules/**/*/tsconfig.json',
+          './modules/forge-modules/**/*/tsconfig.app.json',
+          './modules/forge-modules/**/*/tsconfig.node.json',
         ],
         tsconfigRootDir: import.meta.dirname,
       },

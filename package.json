@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "workspaces": [
-    "forge-modules/devbot/app",
-    "forge-modules/devbot/backend",
-    "forge-modules/devbot/plugins/*"
+    "modules/forge-modules/devbot/app",
+    "modules/forge-modules/devbot/backend",
+    "modules/forge-modules/devbot/plugins/*"
   ],
   "description": "Personal projects monorepo with shared ESLint and Prettier configs",
   "scripts": {

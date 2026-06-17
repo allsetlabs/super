@@ -263,4 +263,4 @@ function Component() {
 
 ## Reference Implementation
 
-See `forge-modules/meme-vault` for complete working example.
+See `modules/forge-modules/meme-vault` for complete working example.

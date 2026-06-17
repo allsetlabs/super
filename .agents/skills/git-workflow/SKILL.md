@@ -60,7 +60,7 @@ Co-Authored-By: <AI tool and model, e.g. Claude Fable 5 <noreply@anthropic.com>>
 
 **Types** (match branch prefix): `feat`, `fix`, `hotfix`, `refactor`, `chore`, `docs`, `test`, `style`, `perf`, `ci`
 
-**Scope** = module name (the submodule's directory name, e.g. the `<module>` in `forge-modules/<module>`). Omit scope for cross-module changes.
+**Scope** = module name (the submodule's directory name, e.g. the `<module>` in `modules/forge-modules/<module>`). Omit scope for cross-module changes.
 
 ## Execution Steps
 

@@ -23,7 +23,7 @@ Personal assistant mobile app acting as a Claude Code terminal proxy — trigger
 devbot/
 ├── app/         # Web app (terminal UI)
 ├── backend/     # Express session manager + plugin router registry
-├── reusables/   # Nested submodule of allsetlabs/component (forge), pinned older commit
+├── reusables/   # Nested submodule of allsetlabs/forge, pinned older commit
 ├── supabase/    # Local Supabase (session persistence + migrations)
 ├── intro-video/ # Remotion intro video project
 └── plugins/     # Plugin modules (baby-logs, lawn-care)

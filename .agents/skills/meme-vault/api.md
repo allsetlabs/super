@@ -1,6 +1,6 @@
 # Meme Vault API Reference
 
-Next.js route handlers under `forge-modules/meme-vault/src/app/api/`. Backed by Supabase (`clips`, `jobs`, `users` tables). Mutations are mostly **asynchronous**: they queue a job in the `jobs` table that a local worker processes.
+Next.js route handlers under `modules/forge-modules/meme-vault/src/app/api/`. Backed by Supabase (`clips`, `jobs`, `users` tables). Mutations are mostly **asynchronous**: they queue a job in the `jobs` table that a local worker processes.
 
 ## Connection Details
 

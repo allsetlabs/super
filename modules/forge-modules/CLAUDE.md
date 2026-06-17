@@ -4,14 +4,13 @@ All projects here use the `forge` component library (`@allsetlabs/forge`). This 
 
 ## Grouping Rule
 
-Group related projects in subcategories. Flat = standalone only.  
----
+## Group related projects in subcategories. Flat = standalone only.
 
 ## Using Forge Components
 
-**Docs:** `forge-modules/forge/how_to_use_this_library.md`  
-**Styles & colors:** `forge-modules/forge/src/styles/styles.md`  
-**Storybook:** `cd forge-modules/forge && make start`
+**Docs:** `modules/forge-modules/forge/how_to_use_this_library.md`  
+**Styles & colors:** `modules/forge-modules/forge/src/styles/styles.md`  
+**Storybook:** `cd modules/forge-modules/forge && make start`
 
 ### Installing the dep
 
@@ -21,9 +20,9 @@ Group related projects in subcategories. Flat = standalone only.
 
 Adjust depth:
 
-- Flat project (`forge-modules/myapp`): `file:../forge`
-- Group project (`forge-modules/group/myapp`): `file:../../forge`
-- Nested package inside project (`forge-modules/myapp/web`): `file:../../forge`
+- Flat project (`modules/forge-modules/myapp`): `file:../forge`
+- Group project (`modules/forge-modules/group/myapp`): `file:../../forge`
+- Nested package inside project (`modules/forge-modules/myapp/web`): `file:../../forge`
 
 tsconfig.json path alias for IDE:
 
@@ -56,7 +55,7 @@ import { Button } from '@allsetlabs/forge';
 ### 2. Need a component that doesn't exist? Create it in forge first
 
 ```bash
-cd forge-modules/forge
+cd modules/forge-modules/forge
 # Add component to src/components/
 # Export from src/index.ts
 ```
@@ -70,7 +69,7 @@ Then use it from `@allsetlabs/forge`. This way all modules share it.
 > Which modules currently use this component?
 
 ```bash
-grep -r "from '@allsetlabs/forge'" forge-modules/ --include="*.tsx" -l
+grep -r "from '@allsetlabs/forge'" modules/forge-modules/ --include="*.tsx" -l
 ```
 
 **Decision tree:**
@@ -103,10 +102,10 @@ function Button({ label, variant = 'default', newBehavior = false }) { ... }
 
 ## Projects
 
-| Dir             | Repo                          | Stack                                 |
-| --------------- | ----------------------------- | ------------------------------------- |
-| `forge/`        | allsetlabs/component          | React + Storybook                     |
-| `devbot/`       | allsetlabs/devbot             | Vite + React + Node.js                |
-| `portfolio/`    | allsetlabs/portfolio          | Vite + React                          |
-| `seekr/`        | allsetlabs/seekr              | Vite + React + Python FastAPI         |
-| `meme-vault/`   | allsetlabs/meme-vault         | Next.js                               |
+| Dir           | Repo                  | Stack                         |
+| ------------- | --------------------- | ----------------------------- |
+| `forge/`      | allsetlabs/forge      | React + Storybook             |
+| `devbot/`     | allsetlabs/devbot     | Vite + React + Node.js        |
+| `portfolio/`  | allsetlabs/portfolio  | Vite + React                  |
+| `seekr/`      | allsetlabs/seekr      | Vite + React + Python FastAPI |
+| `meme-vault/` | allsetlabs/meme-vault | Next.js                       |

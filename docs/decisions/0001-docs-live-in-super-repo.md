@@ -5,7 +5,7 @@
 
 ## Decision
 
-- Module documentation lives in the super repo at `docs/<module-directory-path>/` (e.g. `docs/forge-modules/devbot/`), not in `docs/` folders inside module repos.
+- Module documentation lives in the super repo at `docs/<module-directory-path>/` (e.g. `docs/modules/forge-modules/devbot/`), not in `docs/` folders inside module repos.
 - API references live in each module's skill at `.agents/skills/<module>/api.md`, not in the module repo.
 - In-module `docs/` folders are deleted; the only docs a module keeps are its `AGENTS.md` (with `CLAUDE.md` symlink), `README.md`, and (per [0002](0002-per-module-decision-records.md)) `docs/decisions/`.
 

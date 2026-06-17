@@ -11,7 +11,7 @@ Download full videos or segments from YouTube.
 ## Command
 
 ```bash
-cd forge-modules/meme-vault && npx tsx independent_node_skills/download-yt-video.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/download-yt-video.ts \
   --url <youtube-url>
 ```
 
@@ -38,15 +38,15 @@ cd forge-modules/meme-vault && npx tsx independent_node_skills/download-yt-video
 
 ```bash
 # Download full video
-cd forge-modules/meme-vault && npx tsx independent_node_skills/download-yt-video.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/download-yt-video.ts \
   --url "https://youtube.com/watch?v=xxx" --output ~/Downloads
 
 # Download segment (30s to 60s)
-cd forge-modules/meme-vault && npx tsx independent_node_skills/download-yt-video.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/download-yt-video.ts \
   --url "https://youtube.com/watch?v=xxx" --start 30 --stop 60
 
 # Download lowest quality
-cd forge-modules/meme-vault && npx tsx independent_node_skills/download-yt-video.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/download-yt-video.ts \
   --url "https://youtube.com/watch?v=xxx" --quality worst
 ```
 

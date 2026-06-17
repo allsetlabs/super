@@ -146,7 +146,7 @@ For each viable idea, create a plan with:
 
 ```bash
 # Get API key and port from .env
-source forge-modules/devbot/.env 2>/dev/null
+source modules/forge-modules/devbot/.env 2>/dev/null
 echo "API_KEY=$API_KEY"
 echo "BACKEND_PORT=${BACKEND_PORT:-3100}"
 ```

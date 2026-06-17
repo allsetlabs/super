@@ -11,7 +11,7 @@ Burn captions/subtitles into a video file.
 ## Command
 
 ```bash
-cd forge-modules/meme-vault && npx tsx independent_node_skills/add-caption-to-video.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/add-caption-to-video.ts \
   --input <video> --output <video> --caption "text"
 ```
 
@@ -31,11 +31,11 @@ cd forge-modules/meme-vault && npx tsx independent_node_skills/add-caption-to-vi
 
 ```bash
 # Basic caption
-cd forge-modules/meme-vault && npx tsx independent_node_skills/add-caption-to-video.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/add-caption-to-video.ts \
   --input ./video.mp4 --output ./captioned.mp4 --caption "Hello World!"
 
 # Large text
-cd forge-modules/meme-vault && npx tsx independent_node_skills/add-caption-to-video.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/add-caption-to-video.ts \
   --input ./video.mp4 --output ./captioned.mp4 --caption "BIG TEXT" --font-size 36
 ```
 

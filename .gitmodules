@@ -1,21 +1,21 @@
 [submodule "forge-modules/forge"]
-	path = forge-modules/forge
-	url = https://github.com/allsetlabs/component.git
+	path = modules/forge-modules/forge
+	url = https://github.com/allsetlabs/forge.git
 [submodule "forge-modules/devbot"]
-	path = forge-modules/devbot
+	path = modules/forge-modules/devbot
 	url = https://github.com/allsetlabs/devbot.git
 [submodule "forge-modules/portfolio"]
-	path = forge-modules/portfolio
+	path = modules/forge-modules/portfolio
 	url = https://github.com/allsetlabs/portfolio.git
 [submodule "forge-modules/seekr"]
-	path = forge-modules/seekr
+	path = modules/forge-modules/seekr
 	url = https://github.com/allsetlabs/seekr.git
 [submodule "forge-modules/meme-vault"]
-	path = forge-modules/meme-vault
+	path = modules/forge-modules/meme-vault
 	url = https://github.com/allsetlabs/meme-vault.git
 [submodule "artifacts"]
-	path = artifacts
+	path = modules/artifacts
 	url = https://github.com/allsetlabs/artifacts.git
 [submodule "memory"]
-	path = memory
+	path = modules/memory
 	url = https://github.com/subbiah2806/memory.git

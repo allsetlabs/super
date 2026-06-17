@@ -7,7 +7,7 @@ You are a technical documentation specialist creating usage documentation for Re
 **If user did not specify what to update, ask them to choose:**
 
 1. **`regenerate-all`** - Regenerate ALL documentation from scratch based on current source code
-   - Reads all source files in `forge-modules/forge/src/`
+   - Reads all source files in `modules/forge-modules/forge/src/`
    - Rewrites all `.md` files with current implementation
    - Use when documentation is outdated or you want to ensure consistency
 
@@ -33,10 +33,10 @@ Generate or update usage documentation for the specified component(s), utilities
 - One `.md` file per component, utility, or module (not per file)
 - For multi-file components (e.g., with provider, context, hooks), create ONE consolidated doc
 - **IMPORTANT - Directory Handling**:
-  - If component is in a directory (e.g., `forge-modules/forge/src/components/form/`), create the `.md` file INSIDE that directory (e.g., `forge-modules/forge/src/components/form/form.md`)
-  - If component is a single file (e.g., `forge-modules/forge/src/components/button.tsx`), create the `.md` file next to it (e.g., `forge-modules/forge/src/components/button.md`)
-  - For utility directories (e.g., `forge-modules/forge/src/lib/`), create `.md` file in the directory (e.g., `forge-modules/forge/src/lib/utils.md`)
-  - For style directories (e.g., `forge-modules/forge/src/styles/`), create `.md` file in the directory (e.g., `forge-modules/forge/src/styles/styles.md`)
+  - If component is in a directory (e.g., `modules/forge-modules/forge/src/components/form/`), create the `.md` file INSIDE that directory (e.g., `modules/forge-modules/forge/src/components/form/form.md`)
+  - If component is a single file (e.g., `modules/forge-modules/forge/src/components/button.tsx`), create the `.md` file next to it (e.g., `modules/forge-modules/forge/src/components/button.md`)
+  - For utility directories (e.g., `modules/forge-modules/forge/src/lib/`), create `.md` file in the directory (e.g., `modules/forge-modules/forge/src/lib/utils.md`)
+  - For style directories (e.g., `modules/forge-modules/forge/src/styles/`), create `.md` file in the directory (e.g., `modules/forge-modules/forge/src/styles/styles.md`)
 - Name pattern: `{file_name}.md`, `{directory_name}.md`, `styles.md`, etc.
 
 ### Content Pattern for Components
@@ -148,7 +148,7 @@ interface ComponentProps {
 
 ### Content Pattern for Utilities
 
-For utility functions (e.g., `forge-modules/forge/src/lib/utils.ts`), keep it extremely simple - just the essentials:
+For utility functions (e.g., `modules/forge-modules/forge/src/lib/utils.ts`), keep it extremely simple - just the essentials:
 
 ```markdown
 # Utilities
@@ -182,7 +182,7 @@ anotherFunction('value', 42)
 
 ### Content Pattern for Styles
 
-For styles (e.g., `forge-modules/forge/src/styles/index.css`), list ONLY consumable classes and CSS variables:
+For styles (e.g., `modules/forge-modules/forge/src/styles/index.css`), list ONLY consumable classes and CSS variables:
 
 ```markdown
 # Global Styles
@@ -288,18 +288,18 @@ Description and duration.
 
 When user chooses `regenerate-all`:
 
-1. Find all source files in `forge-modules/forge/src/` (`.tsx`, `.ts`, `.css`)
+1. Find all source files in `modules/forge-modules/forge/src/` (`.tsx`, `.ts`, `.css`)
 2. For each file/directory, read the source code
 3. Find or create the corresponding `.md` file following the file structure rules
 4. Regenerate the documentation from scratch using the appropriate content pattern
-5. Update `forge-modules/forge/how_to_use_this_library.md` to ensure all docs are listed
+5. Update `modules/forge-modules/forge/how_to_use_this_library.md` to ensure all docs are listed
 6. Report all files regenerated
 
 ### Mode: sync-changes
 
 When user chooses `sync-changes`:
 
-1. Run `git diff --name-only` to find modified files in `forge-modules/forge/src/`
+1. Run `git diff --name-only` to find modified files in `modules/forge-modules/forge/src/`
 2. Filter for source files (`.tsx`, `.ts`, `.css`)
 3. For each changed file:
    - Determine the corresponding `.md` file location
@@ -308,14 +308,14 @@ When user chooses `sync-changes`:
    - Update the documentation following "For EXISTING Documentation" workflow
    - If no `.md` exists, create new doc following "For NEW Documentation" workflow
    - If file is deleted remove the `.md` file of that source file
-4. Update `forge-modules/forge/how_to_use_this_library.md` if needed
+4. Update `modules/forge-modules/forge/how_to_use_this_library.md` if needed
 5. Report which docs were updated based on code changes
 
 ### Mode: resync
 
 When user chooses `resync`:
 
-1. Find all existing `.md` files in `forge-modules/forge/src/`
+1. Find all existing `.md` files in `modules/forge-modules/forge/src/`
 2. For each `.md` file:
    - Read the existing documentation
    - Identify and read the corresponding source file(s)
@@ -327,7 +327,7 @@ When user chooses `resync`:
    - If in sync, skip (report as "up to date")
 3. Find source files without `.md` and create docs following "For NEW Documentation" workflow
 4. Find `.md` file without source file and remove them
-5. Update `forge-modules/forge/how_to_use_this_library.md` if needed
+5. Update `modules/forge-modules/forge/how_to_use_this_library.md` if needed
 6. Report: files updated, files up to date, new files created
 
 ### For NEW Documentation
@@ -337,10 +337,10 @@ When user chooses `resync`:
 3. Create comprehensive usage doc following the pattern
 4. Save the documentation file:
    - **If component is in a directory**: Save as `{directory-name}.md` INSIDE that directory
-     - Example: `forge-modules/forge/src/components/form/` → `forge-modules/forge/src/components/form/form.md`
+     - Example: `modules/forge-modules/forge/src/components/form/` → `modules/forge-modules/forge/src/components/form/form.md`
    - **If component is a single file**: Save as `{file-name}.md` next to the component file
-     - Example: `forge-modules/forge/src/components/button.tsx` → `forge-modules/forge/src/components/button.md`
-5. Update `forge-modules/forge/how_to_use_this_library.md`:
+     - Example: `modules/forge-modules/forge/src/components/button.tsx` → `modules/forge-modules/forge/src/components/button.md`
+5. Update `modules/forge-modules/forge/how_to_use_this_library.md`:
    - Add link to new doc in appropriate section
    - Use format: `- **[ComponentName](./src/path/to/component.md)** - Brief description`
 
@@ -357,17 +357,17 @@ When user chooses `resync`:
 5. Preserve existing good content
 6. Ensure consistency with documentation pattern
 7. Remove content that got deleted in code
-8. Update `forge-modules/forge/how_to_use_this_library.md` if needed
+8. Update `modules/forge-modules/forge/how_to_use_this_library.md` if needed
 
 ## Component Location
 
-Components are located in: `forge-modules/forge/src/`
+Components are located in: `modules/forge-modules/forge/src/`
 
 ## Index Update
 
 After creating/updating docs, ALWAYS update the main index:
 
-File: `forge-modules/forge/how_to_use_this_library.md`
+File: `modules/forge-modules/forge/how_to_use_this_library.md`
 
 Find the appropriate section and add/update the entry:
 
@@ -384,9 +384,9 @@ Reference existing docs as examples:
 
 **Component Documentation:**
 
-- `forge-modules/forge/src/statefulComponents/audio/audio.md`
-- `forge-modules/forge/src/statefulComponents/cursor/cursor.md`
-- `forge-modules/forge/src/statefulComponents/theme/theme.md`
+- `modules/forge-modules/forge/src/statefulComponents/audio/audio.md`
+- `modules/forge-modules/forge/src/statefulComponents/cursor/cursor.md`
+- `modules/forge-modules/forge/src/statefulComponents/theme/theme.md`
 
 These follow the correct component pattern - study them!
 
