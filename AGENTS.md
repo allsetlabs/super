@@ -13,7 +13,6 @@ Generic super repo: every project is a **git submodule** organized under categor
 1. **Module organization** — `super` skill, `standards/how-to-organize-module.md`. Read when adding, categorizing, or moving a module.
 2. **Makefile** — `super` skill, `standards/makefile.md`. Read when onboarding a new module, or auditing an existing one.
 3. **AGENTS.md that teaches judgment** — `super` skill, `standards/agents-md.md`. Read before creating or updating any `AGENTS.md`/`CLAUDE.md`, in this repo or any module. Read when onboarding a new module, or auditing an existing one.
-4. **Decision records** — `super` skill, `standards/decision-records.md`. Read when recording an ADR, or for the pre-commit check on whether one is needed.
 
 ## Before You Start
 
