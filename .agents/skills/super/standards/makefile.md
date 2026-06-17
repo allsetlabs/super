@@ -1,6 +1,6 @@
 # makefile — Makefile Standard
 
-Apply this when onboarding a new module and when auditing existing ones (the `/fix-auto-fixable-standards` command checks this too).
+Apply this when onboarding a new module and when auditing existing ones.
 
 Every module must have a `Makefile` with these targets:
 

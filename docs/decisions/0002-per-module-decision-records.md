@@ -20,6 +20,6 @@ Cross-module and super-repo-level decisions stay centralized per 0001, since tho
 
 ## How it's maintained
 
-- Documented as a module standard in `.agents/skills/super/module-standards-to-follow.md`, checked during onboarding and `/fix-auto-fixable-standards`.
+- Documented as a module standard in `.agents/skills/super/module-standards-to-follow.md`, checked during onboarding.
 - New modules get an empty `docs/decisions/` + `index.md` during onboarding.
 - A module's `AGENTS.md` "Related Docs" section can point to its own `docs/decisions/index.md`.
