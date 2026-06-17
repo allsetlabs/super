@@ -24,7 +24,7 @@ If that module has a same-named agent under `.claude/agents/` (e.g. `memory/` �
 1. **Adding a module** — when the user asks to clone, add, or submodule a repo: **NEVER clone or copy code into this repo — always `git submodule add`.** Categorize and place it per `super` skill, `standards/how-to-organize-module.md`.
    1.1 Once the module is added, onboard it per the Standards above, then run the `super` skill operations `sync-api` and `sync-docs` scoped to the newly added module directory.
 2. **Before any git operation** (commit, push, branch, merge) — read and follow the `git-workflow` skill.
-3. **Coding standards** — all rules live in the `coding-standards` skill. Run `/fix-coding-standards` to auto-fix.
+3. **Coding standards** — read the `coding-standards` skill before making any code change. All rules live there.
 4. **On every code change**, run these steps before committing:
    1. `npm run lint` — linting is centralized at the super repo root; many modules do not have a local lint command.
    2. `sync-docs` (`super` skill) — update `docs/<module>/index.md` for any module whose code changed.
