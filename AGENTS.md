@@ -10,9 +10,8 @@ Generic super repo: every project is a **git submodule** organized under categor
 
 **Important:** every module and subdirectory must follow these standards to be considered part of the super repo.
 
-1. **Module organization** — `super` skill, `standards/how-to-organize-module.md`. Read when adding, categorizing, or moving a module.
-2. **Makefile** — `super` skill, `standards/makefile.md`. Read when onboarding a new module, or auditing an existing one.
-3. **AGENTS.md that teaches judgment** — `super` skill, `standards/agents-md.md`. Read before creating or updating any `AGENTS.md`/`CLAUDE.md`, in this repo or any module. Read when onboarding a new module, or auditing an existing one.
+1. **Makefile** — `super` skill, `standards/makefile.md`. Read when onboarding a new module, or auditing an existing one.
+2. **AGENTS.md that teaches judgment** — `super` skill, `standards/agents-md.md`. Read before creating or updating any `AGENTS.md`/`CLAUDE.md`, in this repo or any module. Read when onboarding a new module, or auditing an existing one.
 
 ## Before You Start
 
@@ -22,7 +21,7 @@ If that module has a same-named agent under `.claude/agents/` (e.g. `memory/` �
 
 ## Rules
 
-1. **Adding a module** — when the user asks to clone, add, or submodule a repo: **NEVER clone or copy code into this repo — always `git submodule add`.** Categorize and place it per the Standards above.
+1. **Adding a module** — when the user asks to clone, add, or submodule a repo: **NEVER clone or copy code into this repo — always `git submodule add`.** Categorize and place it per `super` skill, `standards/how-to-organize-module.md`.
    1.1 Once the module is added, onboard it per the Standards above, then run the `super` skill operations `sync-api` and `sync-docs` scoped to the newly added module directory.
 2. **Before any git operation** (commit, push, branch, merge) — read and follow the `git-workflow` skill.
 3. **Coding standards** — all rules live in the `coding-standards` skill. Run `/fix-coding-standards` to auto-fix.
