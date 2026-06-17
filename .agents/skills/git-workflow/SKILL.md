@@ -1,66 +1,39 @@
 ---
 name: git-workflow
-description: Git workflow with branch protection, naming conventions, and commit standards. Use when performing any git operation (commit, push, branch, merge).
+description: Git workflow with commit standards for committing directly to main. Use when performing any git operation (commit, push, branch, merge).
 ---
 
 # Git Workflow
 
 Read and follow ALL rules below before performing any git operation.
 
-## Branch Protection (CRITICAL)
+## Workflow: Always Commit to `main`
 
-**NEVER work directly on the `main` branch.** The `main` branch is protected by PreToolUse hooks.
-
-### Blocked Actions on `main`:
-
-- `git push` while on main
-- `git commit` while on main
-- `git rebase` / `git reset` on main
-- `git merge` INTO main directly
-- Any destructive operation targeting main
-
-### Allowed on `main`:
-
-- `git pull origin main`
-- `git checkout main` (to branch off)
-- `git checkout -b <new-branch>`
-- `git status`, `git log`, `git diff`
-
-## Branch Naming Convention
-
-| Prefix      | Purpose                              | Example                       |
-| ----------- | ------------------------------------ | ----------------------------- |
-| `feat/`     | New features                         | `feat/add-dark-mode`          |
-| `fix/`      | Bug fixes                            | `fix/login-redirect`          |
-| `hotfix/`   | Urgent production fixes              | `hotfix/crash-on-launch`      |
-| `refactor/` | Code restructuring (no new behavior) | `refactor/split-user-service` |
-| `chore/`    | Maintenance, deps, config            | `chore/update-dependencies`   |
-| `docs/`     | Documentation only                   | `docs/update-readme`          |
-| `test/`     | Adding or updating tests             | `test/add-auth-tests`         |
-| `style/`    | Formatting, UI styling               | `style/fix-nav-alignment`     |
-| `perf/`     | Performance improvements             | `perf/optimize-image-loading` |
-| `ci/`       | CI/CD pipeline changes               | `ci/add-deploy-step`          |
-
-**Rules:**
-
-- Always lowercase with hyphens: `feat/my-feature` (not `feat/My_Feature`)
-- Keep names short but descriptive
-- Include module name when needed: `feat/<module>-add-chat`
-- Match commit prefix to branch prefix: `feat/` branch -> `feat:` commit
+All commits go directly to `main`. No feature branches, no PRs.
 
 ## Commit Message Format
 
 ```
 <type>(<scope>): <short description>
 
-<optional body>
+## Summary
+- <bullet points describing changes>
 
-Co-Authored-By: <AI tool and model, e.g. Claude Fable 5 <noreply@anthropic.com>>
+## Changelog
+- <what changed and why, per file or logical group>
+
+## Test Plan
+- [ ] <testing steps>
+
+## Model
+<AI model that ran this session, e.g. Claude Sonnet 4.6>
+
+Co-Authored-By: <AI tool and model, e.g. Claude Sonnet 4.6 <noreply@anthropic.com>>
 ```
 
-**Types** (match branch prefix): `feat`, `fix`, `hotfix`, `refactor`, `chore`, `docs`, `test`, `style`, `perf`, `ci`
+**Types**: `feat`, `fix`, `hotfix`, `refactor`, `chore`, `docs`, `test`, `style`, `perf`, `ci`
 
-**Scope** = module name (the submodule's directory name, e.g. the `<module>` in `forge-modules/<module>`). Omit scope for cross-module changes.
+**Scope** = module name (the submodule's directory name). Omit scope for cross-module changes.
 
 ## Execution Steps
 
@@ -77,69 +50,53 @@ Run in parallel:
 
 If there are no changes to commit, inform the user and stop.
 
-### Step 2: Branch Check
+### Step 2: Identify Session Files
 
-- **If on a feature branch** (not `main`): continue to Step 3.
-- **If on `main`**: create a new branch based on the changes:
-  - Analyze the diff to determine the appropriate prefix (`feat/`, `fix/`, `chore/`, etc.)
-  - Generate a descriptive branch name from the changes
-  - Run: `git checkout -b <prefix>/<descriptive-name>`
+Only stage files that were **edited in this session**. The model must track which files it touched during the conversation and pass only those to `git add`. Do NOT stage all modified files blindly.
+
+- List the files edited during this session explicitly
+- Stage only those files: `git add <file1> <file2> ...`
+- Never use `git add .` or `git add -A`
 
 ### Step 3: Commit
 
-1. Stage specific changed files (avoid `git add .` — list files explicitly)
-2. Draft a commit message following the format above
-3. Commit using HEREDOC format:
+Draft and commit using HEREDOC format:
 
 ```bash
 git commit -m "$(cat <<'EOF'
 <type>(<scope>): <short description>
 
-<optional body>
-
-Co-Authored-By: <AI tool and model, e.g. Claude Fable 5 <noreply@anthropic.com>>
-EOF
-)"
-```
-
-### Step 4: Push & Create PR
-
-1. Push the branch: `git push -u origin <branch-name>`
-2. Create a PR to main:
-
-```bash
-gh pr create --title "<type>(<scope>): <short description>" --body "$(cat <<'EOF'
 ## Summary
 - <bullet points describing changes>
+
+## Changelog
+- <what changed and why, per file or logical group>
 
 ## Test Plan
 - [ ] <testing steps>
 
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
+## Model
+<AI model name, e.g. Claude Sonnet 4.6>
+
+Co-Authored-By: <AI model name, e.g. Claude Sonnet 4.6 <noreply@anthropic.com>>
 EOF
 )"
 ```
 
-3. Show the PR URL to the user.
+### Step 4: Push to Main
 
-### Step 5: Merge Decision
-
-- **If user explicitly said "merge" or "merge to main"** in their original message (`$ARGUMENTS`): auto-merge immediately using squash, then pull main.
-- **Otherwise**: Ask the user if they want to auto-merge the PR.
-
-To merge:
+Push directly to main:
 
 ```bash
-gh pr merge <pr-number> --squash --delete-branch
-git checkout main && git pull origin main
+git push origin main
 ```
 
-After merge, confirm to the user that the PR was merged and main is up to date.
+Confirm to the user that the commit was pushed to main.
 
 ### Important Notes
 
 - **NEVER** use `--no-verify` flag
 - **NEVER** use `git add .` or `git add -A` — always stage specific files
-- PR title follows commit message format
-- Keep PR title under 70 chars
-- Default merge strategy is `--squash` unless user specifies otherwise
+- Only stage files edited in this session
+- Commit message title under 70 chars
+- Default push target is always `main`
