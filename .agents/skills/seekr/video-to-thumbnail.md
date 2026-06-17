@@ -11,7 +11,7 @@ Extract a thumbnail image from a video at a specific timestamp.
 ## Command
 
 ```bash
-cd forge-modules/meme-vault && npx tsx independent_node_skills/video-to-thumbnail.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/video-to-thumbnail.ts \
   --input <video> --output <image>
 ```
 
@@ -29,15 +29,15 @@ cd forge-modules/meme-vault && npx tsx independent_node_skills/video-to-thumbnai
 
 ```bash
 # Thumbnail at start
-cd forge-modules/meme-vault && npx tsx independent_node_skills/video-to-thumbnail.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/video-to-thumbnail.ts \
   --input ./video.mp4 --output ./thumb.png
 
 # Thumbnail at 5 seconds
-cd forge-modules/meme-vault && npx tsx independent_node_skills/video-to-thumbnail.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/video-to-thumbnail.ts \
   --input ./video.mp4 --output ./thumb.png --time 5
 
 # Smaller thumbnail
-cd forge-modules/meme-vault && npx tsx independent_node_skills/video-to-thumbnail.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/video-to-thumbnail.ts \
   --input ./video.mp4 --output ./thumb.png --time 3 --width 320
 ```
 

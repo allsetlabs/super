@@ -1,16 +1,16 @@
 # Seekr Backend API Reference
 
-Python FastAPI backend for resume management, AI resume chat, and TTS/STT. Source: `forge-modules/seekr/backend/`.
+Python FastAPI backend for resume management, AI resume chat, and TTS/STT. Source: `modules/forge-modules/seekr/backend/`.
 
 ## Connection Details
 
 | Setting      | Value                                                                                              |
 | ------------ | -------------------------------------------------------------------------------------------------- |
-| **Base URL** | `http://<BACKEND_HOST>:<BACKEND_PORT>` — both required in `forge-modules/seekr/.env` (no defaults) |
+| **Base URL** | `http://<BACKEND_HOST>:<BACKEND_PORT>` — both required in `modules/forge-modules/seekr/.env` (no defaults) |
 | **Auth**     | `Authorization: Bearer <JWT>` (from `/api/auth/google-login`, or `/api/auth/login` in development) |
 | **Docs**     | Swagger at `/docs`, ReDoc at `/redoc` (FastAPI auto-generated)                                     |
 
-Always read `forge-modules/seekr/.env` for current values. Never hardcode secrets.
+Always read `modules/forge-modules/seekr/.env` for current values. Never hardcode secrets.
 
 ## Health
 

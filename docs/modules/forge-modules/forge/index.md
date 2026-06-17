@@ -1,5 +1,5 @@
 ---
-module: forge-modules/forge
+module: modules/forge-modules/forge
 last_synced_commit: f2d2e661529663d8e31dbb41636edb3e2d712d1a
 last_synced: 2026-06-10
 ---
@@ -42,6 +42,6 @@ Consumers must wrap their app in `InitializeForgeChunks`, extend the library's T
 
 ## Links
 
-- Module [AGENTS.md](../../../forge-modules/forge/AGENTS.md)
-- [Forge skill](../../../.agents/skills/forge/SKILL.md) (component/CSS standards, Google OAuth, docs maintenance)
+- Module [AGENTS.md](../../../../modules/forge-modules/forge/AGENTS.md)
+- [Forge skill](../../../../.agents/skills/forge/SKILL.md) (component/CSS standards, Google OAuth, docs maintenance)
 - Usage guide: `forge-modules/forge/how_to_use_this_library.md`

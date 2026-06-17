@@ -5,9 +5,9 @@ description: Forge component library skill — enforces component and CSS standa
 
 # Forge Component & CSS Standards
 
-All modules under `forge-modules/` use the forge component library (`@allsetlabs/forge`; some modules alias it as `@allsetlabs/forge`). These rules apply to every `.tsx` file in every module.
+All modules under `modules/forge-modules/` use the forge component library (`@allsetlabs/forge`; some modules alias it as `@allsetlabs/forge`). These rules apply to every `.tsx` file in every module.
 
-**Library docs:** `forge-modules/forge/how_to_use_this_library.md` · **Colors/styles:** `forge-modules/forge/src/styles/styles.md`
+**Library docs:** `modules/forge-modules/forge/how_to_use_this_library.md` · **Colors/styles:** `modules/forge-modules/forge/src/styles/styles.md`
 
 ## Topic Files
 
@@ -32,7 +32,7 @@ All modules under `forge-modules/` use the forge component library (`@allsetlabs
 
 ### 2. No Default Tailwind Colors
 
-**NEVER** use default Tailwind color utilities. Only use custom theme colors from `forge-modules/forge/src/styles/styles.md`.
+**NEVER** use default Tailwind color utilities. Only use custom theme colors from `modules/forge-modules/forge/src/styles/styles.md`.
 
 ```
 FORBIDDEN: bg-blue-500, text-red-600, border-gray-300, bg-slate-100, etc.
@@ -70,7 +70,7 @@ Before creating any new UI element, check if it exists in the forge library:
 - `DataFetchWrapper` - Loading/error states
 - `Tabs`, `Accordion` - Layout
 
-If a needed component or variant doesn't exist, create it first in `forge-modules/forge/` (additive, non-breaking — see `forge-modules/CLAUDE.md` isolation check), then use it.
+If a needed component or variant doesn't exist, create it first in `modules/forge-modules/forge/` (additive, non-breaking — see `modules/forge-modules/CLAUDE.md` isolation check), then use it.
 
 ## Verification Checklist
 

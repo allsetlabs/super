@@ -1,6 +1,6 @@
 # Super Repo
 
-Generic super repo: every project is a **git submodule** organized under category directories (e.g. `forge-modules/` for projects built on the `forge` component library). No code lives in this repo itself.
+Generic super repo: every project is a **git submodule** living under the top-level `modules/` directory, grouped into category subdirectories (e.g. `modules/forge-modules/` for projects built on the `forge` component library). No code lives in this repo itself.
 
 ## Skills
 

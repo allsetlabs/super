@@ -29,7 +29,7 @@ help:
 	@echo "  make tree-list                 - List all worktrees"
 	@echo ""
 	@echo "$(YELLOW)To run a module:$(NC)"
-	@echo "  cd forge-modules/<module> && make start"
+	@echo "  cd modules/forge-modules/<module> && make start"
 	@echo ""
 
 # ============================================================================

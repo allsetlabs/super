@@ -1,5 +1,5 @@
 ---
-module: memory
+module: modules/memory
 last_synced_commit: 5003821829de483bc498672881f03354c2d102e2
 last_synced: 2026-06-13
 ---
@@ -22,7 +22,7 @@ memory/
 └── docs/decisions/     # ADRs for memory conventions
 ```
 
-Each entry is YAML frontmatter (`date`, `people`, `tags`, `mood`, `location`, `summary`) followed by a markdown narrative. Search works by grepping frontmatter across `**/*.md` rather than a separate index — see [ADR 0001](../../memory/docs/decisions/0001-entry-layout-and-metadata.md).
+Each entry is YAML frontmatter (`date`, `people`, `tags`, `mood`, `location`, `summary`) followed by a markdown narrative. Search works by grepping frontmatter across `**/*.md` rather than a separate index — see [ADR 0001](../../../modules/memory/docs/decisions/0001-entry-layout-and-metadata.md).
 
 ## How to Run
 
@@ -35,5 +35,5 @@ Each entry is YAML frontmatter (`date`, `people`, `tags`, `mood`, `location`, `s
 
 ## Links
 
-- Module [AGENTS.md](../../memory/AGENTS.md)
-- [Decision records](../../memory/docs/decisions/index.md)
+- Module [AGENTS.md](../../../modules/memory/AGENTS.md)
+- [Decision records](../../../modules/memory/docs/decisions/index.md)

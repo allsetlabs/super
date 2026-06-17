@@ -1,5 +1,5 @@
 ---
-module: forge-modules/portfolio
+module: modules/forge-modules/portfolio
 last_synced_commit: 0703539a6b42ba31a42061634d58cd39a610a6e9
 last_synced: 2026-06-10
 ---
@@ -39,4 +39,4 @@ No backend. Resume and project content live in `src/data/`.
 
 ## Links
 
-- Module [AGENTS.md](../../../forge-modules/portfolio/AGENTS.md)
+- Module [AGENTS.md](../../../../modules/forge-modules/portfolio/AGENTS.md)

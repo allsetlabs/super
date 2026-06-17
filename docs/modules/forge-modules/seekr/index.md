@@ -1,5 +1,5 @@
 ---
-module: forge-modules/seekr
+module: modules/forge-modules/seekr
 last_synced_commit: c6a92cc0412ebd32c547557b10ba449ed008191a
 last_synced: 2026-06-10
 ---
@@ -26,7 +26,7 @@ seekr/
 └── backend/    # FastAPI + PostgreSQL (auth, resumes, settings, chat, TTS/STT)
 ```
 
-API reference: [seekr skill api.md](../../../.agents/skills/seekr/api.md) — auth (Google OAuth + dev email/password), resumes, user settings, AI chat, TTS/STT.
+API reference: [seekr skill api.md](../../../../.agents/skills/seekr/api.md) — auth (Google OAuth + dev email/password), resumes, user settings, AI chat, TTS/STT.
 
 ## How to Run
 
@@ -40,5 +40,5 @@ API reference: [seekr skill api.md](../../../.agents/skills/seekr/api.md) — au
 
 ## Links
 
-- Module [AGENTS.md](../../../forge-modules/seekr/AGENTS.md)
-- [Seekr skill](../../../.agents/skills/seekr/SKILL.md) (video/meme tooling + API reference)
+- Module [AGENTS.md](../../../../modules/forge-modules/seekr/AGENTS.md)
+- [Seekr skill](../../../../.agents/skills/seekr/SKILL.md) (video/meme tooling + API reference)

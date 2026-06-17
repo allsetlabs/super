@@ -7,7 +7,7 @@ Apply pending Supabase migrations to the local DevBot database **without resetti
 ### 1. Check current migration status
 
 ```bash
-cd forge-modules/devbot && supabase migration list
+cd modules/forge-modules/devbot && supabase migration list
 ```
 
 Review the output. Migrations marked as `Applied` are already in the database. Only `Not Applied` migrations will be run.
@@ -15,7 +15,7 @@ Review the output. Migrations marked as `Applied` are already in the database. O
 ### 2. Apply pending migrations
 
 ```bash
-cd forge-modules/devbot && supabase db push
+cd modules/forge-modules/devbot && supabase db push
 ```
 
 `supabase db push` applies **only** unapplied migrations in order. It does NOT reset the database or drop existing tables/data. This is the safe upgrade path.
@@ -23,7 +23,7 @@ cd forge-modules/devbot && supabase db push
 ### 3. Verify the upgrade
 
 ```bash
-cd forge-modules/devbot && supabase migration list
+cd modules/forge-modules/devbot && supabase migration list
 ```
 
 Confirm all migrations now show as `Applied`.
@@ -54,10 +54,10 @@ Report the results to the user: which migrations were applied and what schema ch
 When adding new tables or altering existing schema:
 
 ```bash
-cd forge-modules/devbot && supabase migration new <descriptive_name>
+cd modules/forge-modules/devbot && supabase migration new <descriptive_name>
 ```
 
-This creates a new timestamped file in `forge-modules/devbot/supabase/migrations/`. Write your SQL there, then run `supabase db push` to apply it.
+This creates a new timestamped file in `modules/forge-modules/devbot/supabase/migrations/`. Write your SQL there, then run `supabase db push` to apply it.
 
 ### Migration naming convention
 
@@ -85,7 +85,7 @@ ADD COLUMN IF NOT EXISTS archived_at TIMESTAMPTZ DEFAULT NULL;
 If a migration partially applies and fails, fix the SQL, then:
 
 ```bash
-cd forge-modules/devbot && supabase db push
+cd modules/forge-modules/devbot && supabase db push
 ```
 
 If the migration is stuck (already marked applied but schema is wrong), you may need to manually repair:
@@ -99,15 +99,15 @@ psql postgresql://postgres:postgres@127.0.0.1:54422/postgres \
 ### Supabase is not running
 
 ```bash
-cd forge-modules/devbot && supabase start
+cd modules/forge-modules/devbot && supabase start
 ```
 
 Then retry the upgrade.
 
 ## Reference
 
-- **Migrations dir:** `forge-modules/devbot/supabase/migrations/`
-- **Config:** `forge-modules/devbot/supabase/config.toml`
+- **Migrations dir:** `modules/forge-modules/devbot/supabase/migrations/`
+- **Config:** `modules/forge-modules/devbot/supabase/config.toml`
 - **DB port:** `54422` (PostgreSQL)
 - **API port:** `54421`
 - **Studio:** `http://127.0.0.1:54423`

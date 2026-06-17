@@ -15,7 +15,7 @@ Before running the command, you MUST:
 1. **Find available env files** using Glob:
 
    ```
-   Glob pattern: forge-modules/meme-vault/.env*
+   Glob pattern: modules/forge-modules/meme-vault/.env*
    ```
 
 2. **Ask user to select an env file** using AskUserQuestion with header "Environment" and options for each found env file (e.g., `.env` for prod, `.env.development` for dev)
@@ -25,7 +25,7 @@ Before running the command, you MUST:
 ## Command
 
 ```bash
-cd forge-modules/meme-vault && npx tsx independent_node_skills/upload-instagram.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/upload-instagram.ts \
   --url <video-url> --caption <text> --env-path <selected-env-file>
 ```
 
@@ -60,13 +60,13 @@ Loaded from the selected env file.
 
 ```bash
 # Upload video from GitHub to Instagram (with prod env)
-cd forge-modules/meme-vault && npx tsx independent_node_skills/upload-instagram.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/upload-instagram.ts \
   --url "https://raw.githubusercontent.com/user/repo/main/clip/video.mp4" \
   --caption "Check this out!" \
   --env-path .env
 
 # Upload with dev env
-cd forge-modules/meme-vault && npx tsx independent_node_skills/upload-instagram.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/upload-instagram.ts \
   --url "https://example.com/video.mp4" \
   --caption "New meme alert! #memes #funny" \
   --env-path .env.development

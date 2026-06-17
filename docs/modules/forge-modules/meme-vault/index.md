@@ -1,5 +1,5 @@
 ---
-module: forge-modules/meme-vault
+module: modules/forge-modules/meme-vault
 last_synced_commit: d1e40b804eb273d41a99ad5907e08bd65892aeb4
 last_synced: 2026-06-10
 ---
@@ -26,7 +26,7 @@ meme-vault/
 └── independent_node_skills/  # Standalone media-processing scripts
 ```
 
-API reference: [meme-vault skill api.md](../../../.agents/skills/meme-vault/api.md) — clips CRUD with async job queue, Google login.
+API reference: [meme-vault skill api.md](../../../../.agents/skills/meme-vault/api.md) — clips CRUD with async job queue, Google login.
 
 ## How to Run
 
@@ -40,6 +40,6 @@ API reference: [meme-vault skill api.md](../../../.agents/skills/meme-vault/api.
 
 ## Links
 
-- Module [AGENTS.md](../../../forge-modules/meme-vault/AGENTS.md)
-- [Meme Vault skill](../../../.agents/skills/meme-vault/SKILL.md) (delete-meme, API reference)
-- Creation tooling lives in the [seekr skill](../../../.agents/skills/seekr/SKILL.md)
+- Module [AGENTS.md](../../../../modules/forge-modules/meme-vault/AGENTS.md)
+- [Meme Vault skill](../../../../.agents/skills/meme-vault/SKILL.md) (delete-meme, API reference)
+- Creation tooling lives in the [seekr skill](../../../../.agents/skills/seekr/SKILL.md)

@@ -2,7 +2,7 @@
 
 All projects as git submodules. No code lives here.
 
-Modules are organized under category directories (e.g. `forge-modules/` for projects built on the `forge` component library, with subgroups for related projects). The authoritative module list is `.gitmodules` — or run:
+Modules live under the top-level `modules/` directory, organized into category subdirectories (e.g. `modules/forge-modules/` for projects built on the `forge` component library, with subgroups for related projects). The authoritative module list is `.gitmodules` — or run:
 
 ```bash
 git submodule status

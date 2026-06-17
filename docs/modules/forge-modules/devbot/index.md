@@ -1,5 +1,5 @@
 ---
-module: forge-modules/devbot
+module: modules/forge-modules/devbot
 last_synced_commit: 3760714da939f9ead5fc9511d1b0f47f67e7f4f0
 last_synced: 2026-06-10
 ---
@@ -29,7 +29,7 @@ devbot/
 └── plugins/     # Plugin modules (baby-logs, lawn-care)
 ```
 
-API reference: [devbot skill api.md](../../../.agents/skills/devbot/api.md) — full endpoint catalog (sessions, schedulers, interactive chats, companies, plugins, files, OCR, Claude Code config).
+API reference: [devbot skill api.md](../../../../.agents/skills/devbot/api.md) — full endpoint catalog (sessions, schedulers, interactive chats, companies, plugins, files, OCR, Claude Code config).
 
 Key rules: never restart DevBot without explicit permission; every table carries `created_by/updated_by/settings` columns; optional fields go in the JSON `settings` column to avoid migrations.
 
@@ -49,5 +49,5 @@ Key rules: never restart DevBot without explicit permission; every table carries
 
 ## Links
 
-- Module [AGENTS.md](../../../forge-modules/devbot/AGENTS.md)
-- [DevBot skill](../../../.agents/skills/devbot/SKILL.md) (API reference, CRUD patterns, worker patterns, plugin install, db-upgrade)
+- Module [AGENTS.md](../../../../modules/forge-modules/devbot/AGENTS.md)
+- [DevBot skill](../../../../.agents/skills/devbot/SKILL.md) (API reference, CRUD patterns, worker patterns, plugin install, db-upgrade)
