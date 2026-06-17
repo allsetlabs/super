@@ -25,7 +25,7 @@ Analyze source files for duplicate code patterns, extract reusable utilities, an
 ### If module is specified in arguments:
 
 ```
-/dedup <module>             -> $MODULE = "<category>/<module>" (e.g. forge-modules/<module>)
+/dedup <module>             -> $MODULE = "<category>/<module>" (e.g. module./modules/forge-modules/<module>)
 /dedup <module>/<workspace> -> $MODULE = "<category>/<module>/<workspace>"
 ```
 
@@ -39,7 +39,7 @@ Use AskUserQuestion: "Which module should I analyze for duplicate code?"
 
 ```bash
 # Show available modules
-find ./forge-modules -maxdepth 3 -type f \( -name "package.json" -o -name "pyproject.toml" \) | xargs -I {} dirname {} | sort -u
+find ./modules/forge-modules -maxdepth 3 -type f \( -name "package.json" -o -name "pyproject.toml" \) | xargs -I {} dirname {} | sort -u
 ```
 
 ---
@@ -50,7 +50,7 @@ Scan the module's source directory for analyzable files.
 
 ```bash
 # Find all TypeScript/JavaScript source files (exclude node_modules, dist, tests, stories)
-Glob: "forge-modules/$MODULE/src/**/*.{ts,tsx,js,jsx}" (exclude node_modules, dist, .test., .spec., .stories.)
+Glob: "module./modules/forge-modules/$MODULE/src/**/*.{ts,tsx,js,jsx}" (exclude node_modules, dist, .test., .spec., .stories.)
 ```
 
 Group files by type:
@@ -249,10 +249,10 @@ For each file that contained duplicates:
 
 ```bash
 # Lint check
-cd forge-modules/$MODULE && npm run lint 2>&1 | tail -20
+cd module./modules/forge-modules/$MODULE && npm run lint 2>&1 | tail -20
 
 # Type check
-cd forge-modules/$MODULE && npm run type-check 2>&1 | tail -20
+cd module./modules/forge-modules/$MODULE && npm run type-check 2>&1 | tail -20
 ```
 
 ### 6.2 Fix Issues

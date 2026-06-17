@@ -18,7 +18,7 @@
 - [ ] Tested in browser (if UI change)
 - [ ] No forge component changes that break other modules
 
-## Forge Impact (if touching `forge-modules/forge`)
+## Forge Impact (if touching `modules/forge-modules/forge`)
 
 - [ ] Change is additive / backwards compatible
 - [ ] OR: new prop added with default to isolate change

@@ -15,7 +15,7 @@ Before running the command, you MUST:
 1. **Find available env files** using Glob:
 
    ```
-   Glob pattern: forge-modules/meme-vault/.env*
+   Glob pattern: modules/forge-modules/meme-vault/.env*
    ```
 
 2. **Ask user to select an env file** using AskUserQuestion with header "Environment" and options for each found env file (e.g., `.env` for prod, `.env.development` for dev)
@@ -25,7 +25,7 @@ Before running the command, you MUST:
 ## Command
 
 ```bash
-cd forge-modules/meme-vault && npx tsx independent_node_skills/upload-github.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/upload-github.ts \
   --clip-id <id> --dir <path> --env-path <selected-env-file>
 ```
 
@@ -60,11 +60,11 @@ Loaded from the selected env file.
 
 ```bash
 # Upload all clip assets (with prod env)
-cd forge-modules/meme-vault && npx tsx independent_node_skills/upload-github.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/upload-github.ts \
   --clip-id abc123_20240101_120000 --dir ./output --env-path .env
 
 # Upload specific files only (with dev env)
-cd forge-modules/meme-vault && npx tsx independent_node_skills/upload-github.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/upload-github.ts \
   --clip-id abc123 --dir ./meme --files video.mp4,thumbnail.png --env-path .env.development
 ```
 

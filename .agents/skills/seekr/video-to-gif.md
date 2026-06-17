@@ -11,7 +11,7 @@ Convert a video to an animated GIF with high quality palette optimization.
 ## Command
 
 ```bash
-cd forge-modules/meme-vault && npx tsx independent_node_skills/video-to-gif.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/video-to-gif.ts \
   --input <video> --output <gif>
 ```
 
@@ -32,19 +32,19 @@ cd forge-modules/meme-vault && npx tsx independent_node_skills/video-to-gif.ts \
 
 ```bash
 # Basic conversion
-cd forge-modules/meme-vault && npx tsx independent_node_skills/video-to-gif.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/video-to-gif.ts \
   --input ./video.mp4 --output ./output.gif
 
 # Higher quality
-cd forge-modules/meme-vault && npx tsx independent_node_skills/video-to-gif.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/video-to-gif.ts \
   --input ./video.mp4 --output ./output.gif --fps 15 --colors 128
 
 # Partial video (first 5 seconds)
-cd forge-modules/meme-vault && npx tsx independent_node_skills/video-to-gif.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/video-to-gif.ts \
   --input ./video.mp4 --output ./output.gif --start 0 --duration 5
 
 # Fast mode for quick preview
-cd forge-modules/meme-vault && npx tsx independent_node_skills/video-to-gif.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/video-to-gif.ts \
   --input ./video.mp4 --output ./output.gif --fast
 ```
 

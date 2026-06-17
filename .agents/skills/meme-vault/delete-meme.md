@@ -19,7 +19,7 @@ Format: `{videoId}_{timestamp}` (e.g., `dQw4w9WgXcQ_20240115_143022`)
 If the user provided a clip ID, verify it:
 
 ```bash
-cd forge-modules/meme-vault && npx tsx -e "
+cd modules/forge-modules/meme-vault && npx tsx -e "
 const { createClient } = require('@supabase/supabase-js');
 require('dotenv').config();
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
@@ -35,7 +35,7 @@ supabase.from('clips').select('id,name,insta_reel_link').eq('id', '<CLIP_ID>').s
 Run the delete-meme script:
 
 ```bash
-cd forge-modules/meme-vault && npx tsx independent_node_skills/delete-meme.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/delete-meme.ts \
   --clip-id "<CLIP_ID>" \
   --env-path .env
 ```
@@ -45,7 +45,7 @@ cd forge-modules/meme-vault && npx tsx independent_node_skills/delete-meme.ts \
 If you want to keep the Instagram reel:
 
 ```bash
-cd forge-modules/meme-vault && npx tsx independent_node_skills/delete-meme.ts \
+cd modules/forge-modules/meme-vault && npx tsx independent_node_skills/delete-meme.ts \
   --clip-id "<CLIP_ID>" \
   --env-path .env \
   --skip-instagram

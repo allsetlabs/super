@@ -1,6 +1,6 @@
 ---
 name: meme-vault
-description: Meme Vault module skill — manage memes stored across Supabase, GitHub, and Instagram, plus API reference for the clips/auth routes. Use when working in forge-modules/meme-vault, integrating with its APIs, or when the user asks to delete or manage memes.
+description: Meme Vault module skill — manage memes stored across Supabase, GitHub, and Instagram, plus API reference for the clips/auth routes. Use when working in modules/forge-modules/meme-vault, integrating with its APIs, or when the user asks to delete or manage memes.
 ---
 
 # Meme Vault

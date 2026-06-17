@@ -29,7 +29,7 @@ help:
 	@echo "  make tree-list                 - List all worktrees"
 	@echo ""
 	@echo "$(YELLOW)To run a module:$(NC)"
-	@echo "  cd forge-modules/<module> && make start"
+	@echo "  cd modules/forge-modules/<module> && make start"
 	@echo ""
 
 # ============================================================================
@@ -67,8 +67,8 @@ submodules:
 
 clean:
 	@echo "$(YELLOW)Removing node_modules across all modules...$(NC)"
-	@find forge-modules -name "node_modules" -type d -prune -exec rm -rf {} + 2>/dev/null || true
-	@find forge-modules -name "package-lock.json" -not -path "*/node_modules/*" -delete 2>/dev/null || true
+	@find modules/forge-modules -name "node_modules" -type d -prune -exec rm -rf {} + 2>/dev/null || true
+	@find modules/forge-modules -name "package-lock.json" -not -path "*/node_modules/*" -delete 2>/dev/null || true
 	@echo "$(GREEN)Clean complete!$(NC)"
 
 claude:

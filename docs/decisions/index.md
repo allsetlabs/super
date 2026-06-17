@@ -4,6 +4,7 @@ Why the super repo is organized the way it is. One file per decision, newest fir
 
 | #    | Decision                                                                                                                                            | Date       |
 | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| 0007 | [All submodules moved under `modules/` top-level directory](0007-all-submodules-under-modules-dir.md)                                               | 2026-06-16 |
 | 0006 | [`how-to-organize-module.md` moved into `standards/`, referenced from AGENTS.md's Standards section](0006-how-to-organize-module-into-standards.md) | 2026-06-11 |
 | 0005 | [`module-standards-to-follow.md` retired; Makefile standard moved to `standards/`](0005-retire-module-standards-to-follow.md)                       | 2026-06-11 |
 | 0004 | [AGENTS.md guidance extracted into a `standards/` directory, with a repo-wide Standards section](0004-standards-directory.md)                       | 2026-06-11 |
