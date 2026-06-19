@@ -4,11 +4,11 @@ Python FastAPI backend for resume management, AI resume chat, and TTS/STT. Sourc
 
 ## Connection Details
 
-| Setting      | Value                                                                                              |
-| ------------ | -------------------------------------------------------------------------------------------------- |
+| Setting      | Value                                                                                                      |
+| ------------ | ---------------------------------------------------------------------------------------------------------- |
 | **Base URL** | `http://<BACKEND_HOST>:<BACKEND_PORT>` — both required in `modules/forge-modules/seekr/.env` (no defaults) |
-| **Auth**     | `Authorization: Bearer <JWT>` (from `/api/auth/google-login`, or `/api/auth/login` in development) |
-| **Docs**     | Swagger at `/docs`, ReDoc at `/redoc` (FastAPI auto-generated)                                     |
+| **Auth**     | `Authorization: Bearer <JWT>` (from `/api/auth/google-login`, or `/api/auth/login` in development)         |
+| **Docs**     | Swagger at `/docs`, ReDoc at `/redoc` (FastAPI auto-generated)                                             |
 
 Always read `modules/forge-modules/seekr/.env` for current values. Never hardcode secrets.
 

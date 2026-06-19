@@ -19,3 +19,7 @@ git submodule update --init --recursive
 ## Adding a module
 
 Onboard the module per the Standards section in this repo's root `AGENTS.md`.
+
+## Contributors
+
+- Subbiah Chandramouli

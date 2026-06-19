@@ -21,6 +21,7 @@ If that module has a same-named agent under `.claude/agents/` (e.g. `memory/` �
 
 ## Rules
 
+0. **Memory capture** — at natural stopping points or session end, invoke the `memory` agent (via the Agent tool) to draft a journal entry for anything worth remembering from the session (personal or work). Do it autonomously — don't ask first.
 1. **Adding a module** — when the user asks to clone, add, or submodule a repo: **NEVER clone or copy code into this repo — always `git submodule add`.** Categorize and place it per `super` skill, `standards/how-to-organize-module.md`.
    1.1 Once the module is added, onboard it per the Standards above, then run the `super` skill operations `sync-api` and `sync-docs` scoped to the newly added module directory.
 2. **Before any git operation** (commit, push, branch, merge) — read and follow the `git-workflow` skill.
@@ -31,3 +32,4 @@ If that module has a same-named agent under `.claude/agents/` (e.g. `memory/` �
    3. `sync-api` (`super` skill) — run only if backend or API code was edited, to keep that module's `api.md` current.
    4. `standards/decision-records.md` (`super` skill) — if this session made a non-obvious, hard-to-reverse decision (architecture, library choice, directory layout, API pattern, cross-module convention), record it as an ADR before or in the same commit as the change.
 5. **Visual testing** — if the change has a visual component (web app, UI), open the page with Chrome MCP tools (`mcp__claude-in-chrome__*`), test it visually, and check the console. If anything looks odd, errors in the console, or doesn't work, fix and re-test — iterate until the goal is reached.
+6. **Never commit in the super repo itself.** This top-level repo only tracks submodule pointers — it holds no real work, so its commits aren't yours to make. Commit inside the relevant module submodule (per the `git-workflow` skill) when the user asks, but leave the super repo's own changes (updated submodule pointers, `docs/`, `api.md`, ADRs) staged and uncommitted. The user reviews and commits everything at the super-repo level once per day. This applies even when the user says "commit" — that means commit the module, not the super repo, unless they explicitly name the super repo.

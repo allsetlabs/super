@@ -1,6 +1,6 @@
 # DevBot Backend API
 
-The DevBot backend is a Node.js Express server that manages terminal sessions, scheduled tasks, interactive chats, companies, baby logs/profiles, lawn profiles/plans/photos, weather data, remotion videos, file browse/read/write, uploads, OCR documents, plans, logs, birth times, working directories, git worktrees/status, and Claude Code configuration (CLAUDE.md, hooks, keybindings, MCP servers, memories). It uses Drizzle + SQLite for persistence and spawns Claude Code CLI processes for AI tasks.
+The DevBot backend is a Node.js Express server that manages terminal sessions, scheduled tasks, interactive chats, companies, baby logs/profiles, lawn profiles/plans/photos, weather data, remotion videos, file browse/read/write, uploads, OCR documents, plans, logs, birth times, working directories, git worktrees, and Claude Code configuration (CLAUDE.md, hooks, keybindings, MCP servers, memories). It uses Drizzle + SQLite for persistence and spawns Claude Code CLI processes for AI tasks.
 
 ## Connection Details
 
@@ -819,15 +819,7 @@ Registered directories that chats/sessions can run in. Defaults are seeded from 
 
 **Worktree shape:** `{ path, branch, head, isBare, isMain }`
 
-### 20. Git Status (`/api/git-status`)
-
-| Method | Endpoint          | Description                                    |
-| ------ | ----------------- | ---------------------------------------------- |
-| `GET`  | `/api/git-status` | Repo status for a directory (`?dir=/abs/path`) |
-
-**Response:** `{ isGitRepo, branch, dirtyCount, ahead, behind }`
-
-### 21. CLAUDE.md (`/api/claude-md`)
+### 20. CLAUDE.md (`/api/claude-md`)
 
 Read/write the `CLAUDE.md` file of any directory.
 
@@ -836,7 +828,7 @@ Read/write the `CLAUDE.md` file of any directory.
 | `GET`  | `/api/claude-md` | Read (`?dir=/abs/path`) → `{ content, path, exists }` |
 | `PUT`  | `/api/claude-md` | Write (`{ dir, content }`) → `{ success, path }`      |
 
-### 22. Hooks (`/api/hooks`)
+### 21. Hooks (`/api/hooks`)
 
 Manage Claude Code hooks in `~/.claude/settings.json`.
 
@@ -846,7 +838,7 @@ Manage Claude Code hooks in `~/.claude/settings.json`.
 | `POST`   | `/api/hooks`               | Add hook (`{ event, matcher, command }`) — event ∈ PreToolUse, PostToolUse, Notification, Stop, SubagentStop |
 | `DELETE` | `/api/hooks/:event/:index` | Remove hook at index for an event                                                                            |
 
-### 23. Keybindings (`/api/keybindings`)
+### 22. Keybindings (`/api/keybindings`)
 
 Manage `~/.claude/keybindings.json`.
 
@@ -856,7 +848,7 @@ Manage `~/.claude/keybindings.json`.
 | `POST`   | `/api/keybindings`        | Add binding (`{ key, command, when? }`) |
 | `DELETE` | `/api/keybindings/:index` | Remove binding at index                 |
 
-### 24. MCP Servers (`/api/mcp-servers`)
+### 23. MCP Servers (`/api/mcp-servers`)
 
 Manage `mcpServers` in `~/.claude/settings.json`.
 
@@ -866,7 +858,7 @@ Manage `mcpServers` in `~/.claude/settings.json`.
 | `POST`   | `/api/mcp-servers`       | Add server (`{ name, command, args?, env?, cwd? }`) |
 | `DELETE` | `/api/mcp-servers/:name` | Remove server by name                               |
 
-### 25. Memories (`/api/memories`)
+### 24. Memories (`/api/memories`)
 
 Browse and edit Claude Code memory files under `~/.claude/projects/*/memory/`.
 
@@ -878,7 +870,7 @@ Browse and edit Claude Code memory files under `~/.claude/projects/*/memory/`.
 
 **Memory shape:** `{ project, filename, name, description, type, content }` (parsed from frontmatter; `MEMORY.md` excluded)
 
-### 26. OCR Documents (`/api/ocr`)
+### 25. OCR Documents (`/api/ocr`)
 
 Upload images for text extraction; extracted text is saved alongside the image under `.tmp/ocr-uploads/{id}/`. Backed by the `ocr_documents` table.
 
@@ -894,7 +886,7 @@ Upload images for text extraction; extracted text is saved alongside the image u
 
 **Static serving:** OCR uploads are served at `/ocr-uploads/` (chat uploads at `/uploads/`).
 
-### 27. Health Check
+### 26. Health Check
 
 | Method | Endpoint  | Description                      |
 | ------ | --------- | -------------------------------- |
