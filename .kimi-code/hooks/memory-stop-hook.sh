@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Kimi Stop hook: once per substantive session, remind the main agent to invoke
-# the memory agent before ending. Mirrors the intent of .claude/hooks/journal-reminder.sh.
+# Kimi Stop hook: once per substantive session, remind the main agent to run
+# both session-end agents (memory + decision-records) before ending.
+# Mirrors .claude/hooks/memory-reminder.sh.
 
 set -e
 
-# Read JSON event payload from stdin.
 input=$(cat)
 session_id=$(printf '%s' "$input" | /usr/bin/python3 -c 'import sys,json; print(json.load(sys.stdin).get("session_id",""))')
 
@@ -12,8 +12,8 @@ if [ -z "$session_id" ]; then
   exit 0
 fi
 
-# Only run in projects that have the Kimi memory agent reference.
-if [ ! -e ".kimi-code/agents/memory.md" ]; then
+# Only run in projects that have the claude agents directory.
+if [ ! -e ".claude/agents/memory.md" ]; then
   exit 0
 fi
 
@@ -38,12 +38,13 @@ if [ -n "$wire_file" ] && [ -f "$wire_file" ]; then
   fi
 fi
 
-# Mark that we have nagged for this session.
 touch "$marker"
 
-# Block the Stop event and append a reminder to the main agent's context.
 cat <<'REMINDER'
-Before ending this session: if anything worth remembering came up — personal life or work — capture it by reading .kimi-code/agents/memory.md and dispatching a coder sub-agent with that prompt. If nothing is journal-worthy, end the session silently.
+Before ending this session, run both session-end agents:
+1. Memory: if anything worth remembering came up — personal life or work — capture it by spawning a coder sub-agent using the prompt from .claude/agents/memory.md.
+2. Decision records: check whether this session made any non-obvious or hard-to-reverse decisions and write an ADR by spawning a coder sub-agent using the prompt from .claude/agents/decision-records.md.
+If neither applies, end the session silently.
 REMINDER
 
 exit 2

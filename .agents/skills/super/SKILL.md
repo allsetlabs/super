@@ -26,4 +26,3 @@ These are the **Standards** referenced from the super repo's `AGENTS.md`: compli
 - **Organize / add modules** — [standards/how-to-organize-module.md](standards/how-to-organize-module.md). Adding a submodule, cloning a repo into the super repo, categorizing or moving modules.
 - **Makefile standard** — [standards/makefile.md](standards/makefile.md). Onboarding a new module or auditing an existing one.
 - **AGENTS.md that teaches judgment** — [standards/agents-md.md](standards/agents-md.md). Creating or updating any `AGENTS.md`/`CLAUDE.md`, in this repo or any module.
-- **Decision records** — [standards/decision-records.md](standards/decision-records.md). Recording an ADR, or the pre-commit check for whether one is needed.

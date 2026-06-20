@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Stop hook: once per substantive session, prompt the agent to capture any
-# un-captured personal/work content to the memory module before ending.
+# Stop hook: once per substantive session, prompt the agent to run both
+# session-end agents (memory + decision-records) before ending.
 input=$(cat)
 read -r session_id stop_active tpath < <(printf '%s' "$input" | /usr/bin/python3 -c \
   'import sys,json;d=json.load(sys.stdin);print(d.get("session_id",""),d.get("stop_hook_active",False),d.get("transcript_path",""))')
@@ -16,4 +16,4 @@ marker="/tmp/claude-memory-reminder-${session_id}"
 [ -n "$tpath" ] && [ -f "$tpath" ] && [ "$(wc -c <"$tpath")" -lt 20000 ] && exit 0
 
 touch "$marker"
-printf '%s' '{"decision":"block","reason":"Before ending: if this session surfaced anything worth remembering — personal (events, people, feelings, plans) or work (what you built/changed, decisions, which module) — invoke the memory agent to append a timestamped entry to today'"'"'s by_date file and show it for approval. If nothing is memory-worthy, stop silently without saying anything."}'
+printf '%s' '{"decision":"block","reason":"Before ending: (1) If this session surfaced anything worth remembering — personal (events, people, feelings, plans) or work (what you built/changed, decisions, which module) — invoke the memory agent (.claude/agents/memory.md) to append a timestamped entry to today'\''s by_date file. (2) Invoke the decision-records agent (.claude/agents/decision-records.md) to check whether this session made any non-obvious or hard-to-reverse decisions and write an ADR if so. If neither applies, stop silently without saying anything."}'
