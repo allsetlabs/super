@@ -1,7 +1,7 @@
 ---
 module: modules/memory
-last_synced_commit: 5003821829de483bc498672881f03354c2d102e2
-last_synced: 2026-06-16
+last_synced_commit: aa1dd10e2ecd718f64940b23013103d5643f3523
+last_synced: 2026-06-20
 ---
 
 # Memory
@@ -30,8 +30,26 @@ Each daily file is YAML frontmatter holding the **day's union** of `date`/`peopl
 
 ## Recent Changes
 
-- `5003821` docs: onboard journal module with AGENTS.md and entry conventions
-- `cd0696f` Initial commit
+- `aa1dd10` memory: record Forge Dialog mobile viewport fix
+- `3bc4f0d` memory: record DevBot STT pipeline using local Ollama
+- `a23f285` memory: record DevBot chat progress and summary integration
+- `9d2b4ea` memory: record chat-summary rename to summarize-chat
+- `c0fad92` memory: record stop-hook rename
+- `3ed823f` memory: record journal-to-memory stop-hook rename
+- `77d7e2a` memory: record shared STT learning file move
+- `f18b0ca` memory: record DevBot session progress tracking
+- `0b99b29` memory: record Kimi and Claude migration work
+- `74eb3cd` memory: record DevBot chat-header cleanup
+- `6d2969c` memory: record DevBot code-changes indicator
+- `fd5dc56` memory: correct land deed entry
+- `4122418` memory: record land deed review
+- `0b23cda` memory: record DevBot dirty-code indicator design
+- `cd3d5e2` memory: record DevBot pause and resume UI cleanup
+- `8115123` memory: record cross-platform memory-agent investigation
+- `5f7d7c7` docs: add work memories and timestamped multi-entry conventions
+- `0917c35` memory: record DevBot voice-triggered send feature
+- `40b4b30` docs: update memory decision index
+- `0198994` chore: move daily entries under `by_date/`
 
 ## Links
 

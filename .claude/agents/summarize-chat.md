@@ -45,20 +45,25 @@ model: haiku
 
    ```markdown
    ## What You Asked
+
    - <concise bullet describing the user's request or goal>
 
    ## What Was Done
+
    - <specific file changed or feature built>
    - <another concrete action — function names, route paths, commands run>
 
    ## What's Remaining
+
    - <pending work or next step>
    - <another item if applicable>
 
    ## Blockers
+
    - <any error, blocker, or open question preventing progress>
 
    ## Notes
+
    - <any other informative point worth remembering from this session>
    ```
 
