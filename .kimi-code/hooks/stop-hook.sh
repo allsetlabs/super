@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Kimi Stop hook: once per substantive session, remind the main agent to run
 # both session-end agents (memory + decision-records) before ending.
-# Mirrors .claude/hooks/memory-reminder.sh.
+# Mirrors .claude/hooks/stop-hook.sh.
 
 set -e
 
@@ -18,7 +18,7 @@ if [ ! -e ".claude/agents/memory.md" ]; then
 fi
 
 # Only nag once per session.
-marker="/tmp/kimi-memory-reminder-${session_id}"
+marker="/tmp/kimi-stop-hook-${session_id}"
 if [ -f "$marker" ]; then
   exit 0
 fi
@@ -41,10 +41,11 @@ fi
 touch "$marker"
 
 cat <<'REMINDER'
-Before ending this session, run both session-end agents:
+Before ending this session, run all session-end agents:
 1. Memory: if anything worth remembering came up — personal life or work — capture it by spawning a coder sub-agent using the prompt from .claude/agents/memory.md.
 2. Decision records: check whether this session made any non-obvious or hard-to-reverse decisions and write an ADR by spawning a coder sub-agent using the prompt from .claude/agents/decision-records.md.
-If neither applies, end the session silently.
+3. Summarize chat: always spawn a coder sub-agent using the prompt from .claude/agents/summarize-chat.md — it writes .tmp/summarize-chat/$CLAUDE_CODE_SESSION_ID.json.
+After completing all applicable agents, stop silently without saying anything.
 REMINDER
 
 exit 2

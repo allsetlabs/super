@@ -25,11 +25,13 @@ If that module has a same-named agent under `.claude/agents/` (e.g. `memory/` �
 
 ## Rules
 
-0. **On execution stop** — before ending any substantive session, run both agents below autonomously — don't ask first.
+0. **On execution stop** — before ending any substantive session, run all agents below autonomously — don't ask first.
    - **Memory capture**: invoke the `memory` agent (`.claude/agents/memory.md`) to draft a journal entry for anything worth remembering from the session (personal or work).
      - **Kimi**: spawn a `coder` sub-agent with the full prompt from `.claude/agents/memory.md`.
    - **Decision records**: invoke the `decision-records` agent (`.claude/agents/decision-records.md`) to check whether this session made any non-obvious, hard-to-reverse decisions and write the ADR if so.
      - **Kimi**: spawn a `coder` sub-agent with the full prompt from `.claude/agents/decision-records.md`.
+   - **Summarize chat**: invoke the `summarize-chat` agent (`.claude/agents/summarize-chat.md`) to write `.tmp/summarize-chat/$CLAUDE_CODE_SESSION_ID.json` with `progress` and `summary` fields (what was asked, done, current state, pending).
+     - **Kimi**: spawn a `coder` sub-agent with the full prompt from `.claude/agents/summarize-chat.md`.
 
 1. **Before commit** — always run in this order before any `git commit`:
    1. `npm run lint` — linting is centralized at the super repo root; many modules do not have a local lint command.

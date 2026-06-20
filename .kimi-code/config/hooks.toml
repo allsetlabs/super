@@ -2,7 +2,7 @@
 [[hooks]]
 event = "Stop"
 matcher = ""
-command = ".kimi-code/hooks/memory-stop-hook.sh"
+command = ".kimi-code/hooks/stop-hook.sh"
 timeout = 10
 
 [[hooks]]
