@@ -4,6 +4,9 @@ Why the super repo is organized the way it is. One file per decision, newest fir
 
 | #    | Decision                                                                                                                                            | Date       |
 | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| 0013 | [Hooks as sole trigger for session-end skills](0013-hooks-as-sole-trigger-for-session-end-skills.md)                                                 | 2026-06-20 |
+| 0012 | [Session-end tasks as skills, not agents](0012-session-end-tasks-as-skills-not-agents.md)                                                           | 2026-06-20 |
+| 0011 | [Inline execution for session-end tasks (memory, decision-records, summarize-chat)](0011-inline-execution-for-session-end-tasks.md)                 | 2026-06-20 |
 | 0010 | [Asymmetric stop hook implementations across Claude and Kimi](0010-asymmetric-stop-hook-implementations.md)                                        | 2026-06-20 |
 | 0009 | [Rename session-end agent from `chat-summary` to `summarize-chat`](0009-rename-summarize-chat-agent.md)                                             | 2026-06-20 |
 | 0008 | [Rename session-end hooks to `stop-hook`](0008-rename-stop-hooks.md)                                                                                | 2026-06-20 |

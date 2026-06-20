@@ -6,13 +6,7 @@ command = ".kimi-code/hooks/stop-hook.sh"
 timeout = 10
 
 [[hooks]]
-event = "PreToolUse"
-matcher = "Bash"
-command = ".kimi-code/hooks/pre-tool-use.sh"
-timeout = 5
-
-[[hooks]]
 event = "PostToolUse"
-matcher = "Edit|Write"
+matcher = "Bash"
 command = ".kimi-code/hooks/post-tool-use.sh"
-timeout = 5
+timeout = 10

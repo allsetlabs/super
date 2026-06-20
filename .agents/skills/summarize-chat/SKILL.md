@@ -1,11 +1,9 @@
 ---
 name: summarize-chat
 description: Progress scribe for Claude Code sessions. At session end, checks what changed and writes .tmp/summarize-chat/{CLAUDE_CODE_SESSION_ID}.json with progress and a structured markdown summary. Runs autonomously — no approval needed.
-tools: Read, Write, Bash
-model: haiku
 ---
 
-# Summarize Chat Agent
+# Summarize Chat Skill
 
 **Role**: Write a progress JSON file for the current chat session so devbot can display status.
 **Scope**: Writes `.tmp/summarize-chat/$CLAUDE_CODE_SESSION_ID.json`. Always runs — `CLAUDE_CODE_SESSION_ID` is set by Claude Code in every session.

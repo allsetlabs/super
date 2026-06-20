@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Kimi Stop hook: once per substantive session, remind the main agent to run
-# both session-end agents (memory + decision-records) before ending.
+# the session-end skills (memory, decision-records, summarize-chat) before ending.
 # Mirrors .claude/hooks/stop-hook.sh.
 
 set -e
@@ -12,8 +12,8 @@ if [ -z "$session_id" ]; then
   exit 0
 fi
 
-# Only run in projects that have the claude agents directory.
-if [ ! -e ".claude/agents/memory.md" ]; then
+# Only run in projects that have the memory skill.
+if [ ! -e ".agents/skills/memory/SKILL.md" ]; then
   exit 0
 fi
 
@@ -42,10 +42,10 @@ touch "$marker"
 
 cat <<'REMINDER'
 Before ending this session, run these in order:
-1. Memory (only if worth remembering — personal: events, people, feelings, plans; work: what you built/changed, decisions, which module): spawn a coder sub-agent using the prompt from .claude/agents/memory.md to append a timestamped entry to today's by_date file.
-2. Decision records (only when irreversible changes were made — new architecture, deleted data, major config, public API changes): spawn a coder sub-agent using the prompt from .claude/agents/decision-records.md to write the ADR.
-3. Summarize chat (always): spawn a coder sub-agent using the prompt from .claude/agents/summarize-chat.md — it writes .tmp/summarize-chat/$CLAUDE_CODE_SESSION_ID.json.
-After completing all applicable agents, stop silently without saying anything.
+1. Memory (only if worth remembering — personal: events, people, feelings, plans; work: what you built/changed, decisions, which module): invoke the Skill tool with skill="memory".
+2. Decision records (only when irreversible changes were made — new architecture, deleted data, major config, public API changes): invoke the Skill tool with skill="decision-records".
+3. Summarize chat (always): invoke the Skill tool with skill="summarize-chat" — it writes .tmp/summarize-chat/$CLAUDE_CODE_SESSION_ID.json.
+After completing all applicable tasks, stop silently without saying anything.
 REMINDER
 
 exit 2

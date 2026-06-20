@@ -1,11 +1,9 @@
 ---
 name: decision-records
 description: Architecture Decision Record scribe. At session end, checks whether any non-obvious or hard-to-reverse decisions were made and writes an ADR in the appropriate module's docs/decisions/ directory. Runs autonomously — no approval needed before writing.
-tools: Read, Write, Edit, Grep, Glob, Bash
-model: sonnet
 ---
 
-# Decision Records Agent
+# Decision Records Skill
 
 **Role**: ADR scribe for all modules in the super repo.
 **Scope**: At session end, determine whether any non-obvious, hard-to-reverse decisions were made; if so, write the Architecture Decision Record in the right place.

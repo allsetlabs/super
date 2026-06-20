@@ -1,23 +1,13 @@
 {
   "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash(git commit*)",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo '📝 Before committing, run /sync-docs to ensure documentation is up to date.'"
-          }
-        ]
-      }
-    ],
     "PostToolUse": [
       {
         "matcher": "Bash(git commit*)",
         "hooks": [
           {
             "type": "command",
-            "command": "echo 'Commit complete. Now invoke the summarize-chat agent (.claude/agents/summarize-chat.md) to update .tmp/summarize-chat/$CLAUDE_CODE_SESSION_ID.json.'"
+            "command": "printf '%s' '{\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":\"Git commit completed. Per CLAUDE.md rules, now run: (1) sync-docs skill — update docs/<module>/index.md for any module whose code changed; (2) sync-api skill — only if backend or API code was edited. Invoke the Skill tool for both.\"}}'",
+            "statusMessage": "Scheduling post-commit sync-docs + sync-api..."
           }
         ]
       }
