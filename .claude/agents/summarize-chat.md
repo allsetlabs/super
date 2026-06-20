@@ -10,6 +10,15 @@ model: haiku
 **Role**: Write a progress JSON file for the current chat session so devbot can display status.
 **Scope**: Writes `.tmp/summarize-chat/$CLAUDE_CODE_SESSION_ID.json`. Always runs — `CLAUDE_CODE_SESSION_ID` is set by Claude Code in every session.
 
+## Context vs. Git State
+
+You are always invoked with a **context block** describing what happened in the session. **Trust that context first.** Only run git commands to fill gaps the context doesn't cover.
+
+- If the context says "committed and pushed" → `progress = done`. Do not run git to verify.
+- If the context says "PR #N was opened" → `progress = pr #N`. Do not run `gh pr view`.
+- If the context says "changes are staged but not committed" → `progress = dirty`.
+- Only run git commands when the context is ambiguous or silent about the final state.
+
 ## Steps
 
 1. Get the session ID and working directory:
@@ -19,25 +28,25 @@ model: haiku
    pwd
    ```
 
-2. Check git state:
+2. **Only if the context does not clearly state the final git state**, check:
 
    ```bash
    git status --short
-   git diff --name-only HEAD 2>/dev/null || git diff --name-only
    git log --oneline origin/HEAD..HEAD 2>/dev/null || true
-   gh pr list --state open --json number,title --limit 5 2>/dev/null || true
    ```
+
+   Do NOT run `gh pr list` or `gh pr view` unless the context explicitly mentions a PR was opened this session.
 
 3. **Exclusive scope rule** — determine which changes count:
    - If any changed files are inside `modules/` subdirectories, scope only to those module(s). Ignore super-repo-level changes (top-level `docs/`, `AGENTS.md`, submodule pointer changes, etc.).
    - If all changed files are at the super-repo level (no `modules/` paths), scope to the super repo only.
    - Never mix module changes with super-repo-level changes in the same assessment.
 
-4. Determine the `progress` value from scoped changes:
-   - **`done`** — all scoped changes committed and pushed (`git log origin/HEAD..HEAD` is empty).
-   - **`pr #<number>`** — a PR is open for this work.
-   - **`dirty`** — there are uncommitted or unpushed changes in scope.
-   - **`question`** — the most recent assistant turn ended with a direct question to the user.
+4. Determine the `progress` value — **prefer context over git commands**:
+   - **`done`** — context says committed and pushed, OR git confirms nothing unpushed.
+   - **`pr #<number>`** — context explicitly says a PR was opened this session with that number. Never infer a PR from `gh pr list`; only use a PR number the caller gave you.
+   - **`dirty`** — context says staged/uncommitted, or git shows uncommitted/unpushed changes.
+   - **`question`** — the session ended with a direct question to the user.
    - Any short plain text — one sentence max for any other meaningful state (e.g. `"failed: lint errors in devbot"`).
    - If multiple modules are touched, prefix with all of them: `"dirty: devbot, seekr"`.
 
@@ -91,5 +100,5 @@ model: haiku
 - Do not commit the summary file.
 - Do not ask the user for anything.
 - Overwrite the file if it already exists (latest state wins).
-- Never fabricate work — derive everything from actual git state and this session's context.
+- Never fabricate work — base everything on the context you were given and git state only when needed.
 - Use the Write tool to write the file so JSON escaping is handled correctly.
