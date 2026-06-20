@@ -41,10 +41,10 @@ fi
 touch "$marker"
 
 cat <<'REMINDER'
-Before ending this session, run all session-end agents:
-1. Memory: if anything worth remembering came up — personal life or work — capture it by spawning a coder sub-agent using the prompt from .claude/agents/memory.md.
-2. Decision records: check whether this session made any non-obvious or hard-to-reverse decisions and write an ADR by spawning a coder sub-agent using the prompt from .claude/agents/decision-records.md.
-3. Summarize chat: always spawn a coder sub-agent using the prompt from .claude/agents/summarize-chat.md — it writes .tmp/summarize-chat/$CLAUDE_CODE_SESSION_ID.json.
+Before ending this session, run these in order:
+1. Memory (only if worth remembering — personal: events, people, feelings, plans; work: what you built/changed, decisions, which module): spawn a coder sub-agent using the prompt from .claude/agents/memory.md to append a timestamped entry to today's by_date file.
+2. Decision records (only when irreversible changes were made — new architecture, deleted data, major config, public API changes): spawn a coder sub-agent using the prompt from .claude/agents/decision-records.md to write the ADR.
+3. Summarize chat (always): spawn a coder sub-agent using the prompt from .claude/agents/summarize-chat.md — it writes .tmp/summarize-chat/$CLAUDE_CODE_SESSION_ID.json.
 After completing all applicable agents, stop silently without saying anything.
 REMINDER
 

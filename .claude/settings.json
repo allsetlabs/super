@@ -13,29 +13,11 @@
     ],
     "PostToolUse": [
       {
-        "matcher": "Edit(*)",
+        "matcher": "Bash(git commit*)",
         "hooks": [
           {
             "type": "command",
-            "command": "echo '✅ Code modified. Remember to run: npm run lint && npm run type-check'"
-          }
-        ]
-      },
-      {
-        "matcher": "Write(*)",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo '✅ File created. Remember to run: npm run lint && npm run type-check'"
-          }
-        ]
-      },
-      {
-        "matcher": "MultiEdit(*)",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo '✅ Multiple files modified. Remember to run: npm run lint && npm run type-check'"
+            "command": "echo 'Commit complete. Now invoke the summarize-chat agent (.claude/agents/summarize-chat.md) to update .tmp/summarize-chat/$CLAUDE_CODE_SESSION_ID.json.'"
           }
         ]
       }
