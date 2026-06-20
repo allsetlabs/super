@@ -22,7 +22,7 @@ Read [modules/memory/AGENTS.md](../../modules/memory/AGENTS.md) first — it def
    ```bash
    cd modules/memory
    git add by_date/
-   git commit -m "journal: <date> <H:MM AM/PM> — <one-line summary>"
+   git commit -m "memory: <date> <H:MM AM/PM> — <one-line summary>"
    git push
    ```
 
