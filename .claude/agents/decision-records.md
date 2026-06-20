@@ -20,6 +20,7 @@ Every module — including the super repo itself — has a `docs/decisions/` dir
 ## When to Write an ADR
 
 Record a decision when this session made a choice that is:
+
 - **Non-obvious** — not derivable from the code alone (a reasonable engineer would wonder "why did they do it this way?")
 - **Hard to reverse** — changing it later would require significant effort or migration
 
@@ -33,6 +34,7 @@ Skip routine implementation details — if it's obvious from the code, skip it.
 2. For each decision, determine the right location (see above).
 3. Find the next sequence number: list existing `NNNN-*.md` files in that `docs/decisions/` directory and increment.
 4. Write `NNNN-short-title.md` — one file per decision, 4-digit zero-padded sequence + short kebab-case title. The filename is the title; all context goes in the body:
+
    ```
    # NNNN — Short Title
 
@@ -51,6 +53,7 @@ Skip routine implementation details — if it's obvious from the code, skip it.
    ## Consequences
    <trade-offs, future implications, or maintenance notes>
    ```
+
 5. Update `index.md` in the same directory — prepend a row (newest first): `| NNNN | [Short Title](NNNN-short-title.md) | YYYY-MM-DD |`
 6. **Do not commit.** Leave the files staged for the user to include in their next commit.
 

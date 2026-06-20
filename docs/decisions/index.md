@@ -4,7 +4,7 @@ Why the super repo is organized the way it is. One file per decision, newest fir
 
 | #    | Decision                                                                                                                                            | Date       |
 | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| 0009 | [Rename session-end agent from `chat-summary` to `summarize-chat`](0009-rename-summarize-chat-agent.md)                                              | 2026-06-20 |
+| 0009 | [Rename session-end agent from `chat-summary` to `summarize-chat`](0009-rename-summarize-chat-agent.md)                                             | 2026-06-20 |
 | 0008 | [Rename session-end hooks to `stop-hook`](0008-rename-stop-hooks.md)                                                                                | 2026-06-20 |
 | 0007 | [All modules nested under a top-level `modules/` directory](0007-modules-top-level-directory.md)                                                    | 2026-06-16 |
 | 0006 | [`how-to-organize-module.md` moved into `standards/`, referenced from AGENTS.md's Standards section](0006-how-to-organize-module-into-standards.md) | 2026-06-11 |
