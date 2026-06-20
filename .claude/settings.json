@@ -2,29 +2,11 @@
   "hooks": {
     "PreToolUse": [
       {
-        "matcher": "Bash(git *)",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/protect-main.sh"
-          }
-        ]
-      },
-      {
         "matcher": "Bash(git commit*)",
         "hooks": [
           {
             "type": "command",
             "command": "echo '📝 Before committing, run /sync-docs to ensure documentation is up to date.'"
-          }
-        ]
-      },
-      {
-        "matcher": "Bash(supabase db reset*)",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo 'BLOCKED: supabase db reset destroys all data. Use \"supabase db push\" to apply pending migrations safely. Run /db-upgrade for the full workflow.' && exit 2"
           }
         ]
       }

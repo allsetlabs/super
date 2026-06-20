@@ -1,0 +1,18 @@
+
+[[hooks]]
+event = "Stop"
+matcher = ""
+command = ".kimi-code/hooks/memory-stop-hook.sh"
+timeout = 10
+
+[[hooks]]
+event = "PreToolUse"
+matcher = "Bash"
+command = ".kimi-code/hooks/pre-tool-use.sh"
+timeout = 5
+
+[[hooks]]
+event = "PostToolUse"
+matcher = "Edit|Write"
+command = ".kimi-code/hooks/post-tool-use.sh"
+timeout = 5
