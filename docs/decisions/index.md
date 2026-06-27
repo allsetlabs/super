@@ -4,6 +4,12 @@ Why the super repo is organized the way it is. One file per decision, newest fir
 
 | #    | Decision                                                                                                                                            | Date       |
 | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| 0019 | [Codex hooks live in project-local `.codex/`](0019-codex-hooks-live-in-project-local-dot-codex.md)                                                   | 2026-06-27 |
+| 0018 | [Two-tier memory: hot cache + deep `context/` directory](0018-two-tier-memory-context-directory.md)                                                   | 2026-06-27 |
+| 0017 | [`index.md` as canonical skill file, `SKILL.md` as symlink](0017-skill-index-md-canonical-with-skill-symlink.md)                                      | 2026-06-27 |
+| 0016 | [Super repo made public at github.com/allsetlabs/super](0016-super-repo-made-public.md)                                                              | 2026-06-27 |
+| 0015 | [Copilot hooks live in `.copilot-code/`, following the Kimi pattern](0015-copilot-hooks-in-copilot-code-directory.md)                                | 2026-06-27 |
+| 0014 | [Progress file-driven scheduler tasks](0014-progress-file-driven-scheduler-tasks.md)                                                                 | 2026-06-20 |
 | 0013 | [Hooks as sole trigger for session-end skills](0013-hooks-as-sole-trigger-for-session-end-skills.md)                                                 | 2026-06-20 |
 | 0012 | [Session-end tasks as skills, not agents](0012-session-end-tasks-as-skills-not-agents.md)                                                           | 2026-06-20 |
 | 0011 | [Inline execution for session-end tasks (memory, decision-records, summarize-chat)](0011-inline-execution-for-session-end-tasks.md)                 | 2026-06-20 |

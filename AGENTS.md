@@ -12,7 +12,7 @@ Generic super repo: every project is a **git submodule** living under the top-le
 
 1. **Makefile** — `super` skill, `standards/makefile.md`. Read when onboarding a new module, or auditing an existing one.
 2. **AGENTS.md that teaches judgment** — `super` skill, `standards/agents-md.md`. Read before creating or updating any `AGENTS.md`/`CLAUDE.md`, in this repo or any module. Read when onboarding a new module, or auditing an existing one.
-3. **Hook sync** — whenever you add, modify, or remove a hook in `.claude/hooks/` or `.claude/settings.json`, add its equivalent to `.kimi-code/hooks/` (and vice versa), adapting to each platform's syntax. The two hook directories must always mirror each other in intent.
+3. **Hook sync** — whenever you add, modify, or remove a hook in `.claude/hooks/` or `.claude/settings.json`, add its equivalent to `.kimi-code/hooks/`, `.copilot-code/hooks/`, and `.codex/hooks/` plus `.codex/config.toml` (and vice versa), adapting to each platform's syntax. All four hook surfaces must always mirror each other in intent.
 
 ## Before You Start
 

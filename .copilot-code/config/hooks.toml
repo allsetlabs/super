@@ -1,0 +1,11 @@
+[[hooks]]
+event = "Stop"
+matcher = ""
+command = ".copilot-code/hooks/stop-hook.sh"
+timeout = 10
+
+[[hooks]]
+event = "PostToolUse"
+matcher = "Bash"
+command = ".copilot-code/hooks/post-tool-use.sh"
+timeout = 10

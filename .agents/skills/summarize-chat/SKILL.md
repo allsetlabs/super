@@ -1,12 +1,12 @@
 ---
 name: summarize-chat
-description: Progress scribe for Claude Code sessions. At session end, checks what changed and writes .tmp/summarize-chat/{CLAUDE_CODE_SESSION_ID}.json with progress and a structured markdown summary. Runs autonomously — no approval needed.
+description: Progress scribe for agent sessions. At session end, checks what changed and writes .tmp/summarize-chat/{session_id}.json with progress and a structured markdown summary. Runs autonomously — no approval needed.
 ---
 
 # Summarize Chat Skill
 
 **Role**: Write a progress JSON file for the current chat session so devbot can display status.
-**Scope**: Writes `.tmp/summarize-chat/$CLAUDE_CODE_SESSION_ID.json`. Always runs — `CLAUDE_CODE_SESSION_ID` is set by Claude Code in every session.
+**Scope**: Writes `.tmp/summarize-chat/<session-id>.json`, where the session id is `CLAUDE_CODE_SESSION_ID` in Claude Code or `CODEX_THREAD_ID` in Codex.
 
 ## Context vs. Git State
 
@@ -22,9 +22,12 @@ You are always invoked with a **context block** describing what happened in the 
 1. Get the session ID and working directory:
 
    ```bash
-   echo "$CLAUDE_CODE_SESSION_ID"
+   SESSION_ID="${CLAUDE_CODE_SESSION_ID:-$CODEX_THREAD_ID}"
+   echo "$SESSION_ID"
    pwd
    ```
+
+   If `SESSION_ID` is empty, stop and report that the current agent session id is unavailable.
 
 2. **Only if the context does not clearly state the final git state**, check:
 
@@ -84,7 +87,7 @@ You are always invoked with a **context block** describing what happened in the 
    - If `$DEVBOT_PROJECTS_DIR` is set, write to `$DEVBOT_PROJECTS_DIR/.tmp/summarize-chat/`.
    - Otherwise write to `.tmp/summarize-chat/` relative to the current working directory.
    - Run `mkdir -p <dir>` first, then write the file using the Write tool.
-   - Path: `<dir>/$CLAUDE_CODE_SESSION_ID.json`
+   - Path: `<dir>/$SESSION_ID.json`
    - Format — the `summary` value is a JSON string with `\n` for newlines:
      ```json
      {
